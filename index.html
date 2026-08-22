@@ -375,6 +375,27 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
 }
 </style>
 
+
+<style id="easc-bottom-account-controls">
+.easc-bottom-account-controls{
+ position:fixed;left:0;bottom:0;width:260px;z-index:100;
+ display:grid;grid-template-columns:1fr 48px;gap:7px;padding:8px;
+ background:rgba(2,6,23,.97);border-top:1px solid rgba(34,211,238,.28);
+ backdrop-filter:blur(12px)
+}
+.easc-account-btn,.easc-settings-btn{
+ min-height:44px;border:1px solid rgba(34,211,238,.28);border-radius:10px;
+ background:rgba(15,23,42,.9);color:inherit;cursor:pointer
+}
+.easc-account-btn{display:flex;align-items:center;gap:8px;padding:5px 8px;text-align:left}
+.easc-account-btn img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid rgba(34,211,238,.45)}
+.easc-account-name{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.easc-account-sub{font-size:9px;opacity:.65}
+.easc-settings-btn{font-size:18px}
+.easc-account-btn:hover,.easc-settings-btn:hover{border-color:rgba(34,211,238,.75)}
+@media(max-width:768px){.easc-bottom-account-controls{width:100%;max-width:280px}}
+</style>
+
 </head>
 <body class="h-full flex flex-col bg-cyber-bg text-cyber-text bg-grid select-none easc-theme-dark">
 
@@ -3090,6 +3111,81 @@ window.addEventListener('DOMContentLoaded', async function(){
   // ---------- ANALYTICS ----------
   window.renderEascAnalytics=function(){const completed=[1,2,3,4,5,6].filter(i=>state.progress[i]?.completed).length;const scores=[1,2,3,4,5,6].map(i=>state.progress[i]?.score||0);const avg=scores.reduce((a,b)=>a+b,0)/6;document.getElementById('analyticsSummary').innerHTML=`<div class="space-y-2"><div><b>Learner:</b> ${esc(state.userName)}</div><div><b>Modules completed:</b> ${completed}/6</div><div><b>Average module score:</b> ${avg.toFixed(1)}%</div><div><b>Tools explored:</b> ${state.featureData.visitedTools.length}</div><div><b>CSV analyses:</b> ${state.featureData.csvRuns||0}</div><div><b>CI simulations:</b> ${state.featureData.ciRuns||0}</div><div><b>Practice problems generated:</b> ${state.featureData.practiceRuns||0}</div></div>`}
   window.printEascAnalytics=function(){const old=document.body.innerHTML;const c=document.getElementById('analyticsSummary')?.innerHTML||'';const w=window.open('','_blank');if(!w)return;w.document.write(`<html><head><title>EAS•C Learning Analytics</title><style>body{font-family:Arial;padding:30px}table{border-collapse:collapse}td{padding:8px;border:1px solid #ccc}</style></head><body><h1>EAS•C Learning Analytics</h1>${c}<h2>Module Results</h2><table>${[1,2,3,4,5,6].map(i=>`<tr><td>Module ${i}</td><td>${state.progress[i].completed?'Completed':'In progress/locked'}</td><td>${state.progress[i].score||0}%</td></tr>`).join('')}</table><script>window.print()<\/script>
+
+
+<script id="easc-all-modules-unlocked">
+(function(){
+  const modules = ['module1','module2','module3','module4','module5','module6'];
+  function unlockAll(){
+    try{
+      modules.forEach(m=>{
+        localStorage.setItem('easc_module_unlocked_'+m,'true');
+        localStorage.setItem('module_'+m+'_unlocked','true');
+      });
+      if(window.moduleUnlocks) modules.forEach(m=>window.moduleUnlocks[m]=true);
+      document.querySelectorAll('[data-module-lock], .module-lock, .locked-module').forEach(el=>{
+        el.classList.remove('module-lock','locked-module');
+        el.removeAttribute('data-module-lock');
+      });
+    }catch(e){}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',unlockAll);
+  else unlockAll();
+})();
+</script>
+
+
+<div id="eascBottomAccountControls" class="easc-bottom-account-controls">
+  <button type="button" class="easc-account-btn" onclick="eascChangeAccount()" title="Change Account">
+    <img id="eascSidebarProfileImage" alt="Learner">
+    <span style="min-width:0">
+      <span id="eascSidebarProfileName" class="easc-account-name">Learner Profile</span>
+      <span class="easc-account-sub">Change Account</span>
+    </span>
+  </button>
+  <button type="button" class="easc-settings-btn" onclick="eascOpenSettings()" title="Settings" aria-label="Settings">⚙</button>
+</div>
+
+
+<script id="easc-account-settings-functions">
+(function(){
+ function profile(){
+   const keys=['easc_current_profile','eascCurrentProfile','currentProfile','easc_profile'];
+   for(const k of keys){try{const v=JSON.parse(localStorage.getItem(k)||'null');if(v)return v}catch(e){}}
+   try{
+     const list=JSON.parse(localStorage.getItem('easc_profiles')||'[]');
+     const id=localStorage.getItem('easc_active_profile');
+     return list.find(p=>String(p.id)===String(id))||list[0]||{};
+   }catch(e){return {}}
+ }
+ function refresh(){
+   const p=profile(), name=p.name||p.fullName||p.learnerName||'Learner Profile';
+   const img=p.photo||p.image||p.profilePicture||p.avatar||'';
+   const n=document.getElementById('eascSidebarProfileName'), i=document.getElementById('eascSidebarProfileImage');
+   if(n)n.textContent=name;
+   if(i){
+     if(img)i.src=img;
+     else i.src='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><rect width='100%' height='100%' fill='#0f172a'/><text x='50%' y='58%' text-anchor='middle' font-size='36'>👤</text></svg>");
+   }
+ }
+ window.eascChangeAccount=function(){
+   const fns=['showProfileSelector','openProfileSelector','selectProfile','switchProfile','changeProfile'];
+   for(const f of fns) if(typeof window[f]==='function'){window[f]();return}
+   const ids=['profileSelector','profile-screen','profileScreen','profileModal'];
+   for(const id of ids){const e=document.getElementById(id);if(e){e.style.display='flex';e.classList.remove('hidden');return}}
+   alert('Profile selector is not available in this build.');
+ };
+ window.eascOpenSettings=function(){
+   const fns=['showSettings','openSettings','goToSettings','renderSettings'];
+   for(const f of fns) if(typeof window[f]==='function'){window[f]();return}
+   const e=Array.from(document.querySelectorAll('button,a,[role="button"]')).find(x=>/settings/i.test((x.textContent||'')));
+   if(e)e.click();
+ };
+ document.addEventListener('DOMContentLoaded',refresh);
+ window.addEventListener('eascProfileChanged',refresh);
+ window.addEventListener('storage',refresh);
+})();
+</script>
 
 </body></html>`);w.document.close()}
 
