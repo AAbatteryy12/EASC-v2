@@ -376,27 +376,12 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
 </style>
 
 
-<style id="easc-bottom-account-controls">
-.easc-bottom-account-controls{
- position:fixed;left:0;bottom:0;width:260px;z-index:100;
- display:grid;grid-template-columns:1fr 48px;gap:7px;padding:8px;
- background:rgba(2,6,23,.97);border-top:1px solid rgba(34,211,238,.28);
- backdrop-filter:blur(12px)
-}
-.easc-account-btn,.easc-settings-btn{
- min-height:44px;border:1px solid rgba(34,211,238,.28);border-radius:10px;
- background:rgba(15,23,42,.9);color:inherit;cursor:pointer
-}
-.easc-account-btn{display:flex;align-items:center;gap:8px;padding:5px 8px;text-align:left}
-.easc-account-btn img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid rgba(34,211,238,.45)}
-.easc-account-name{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.easc-account-sub{font-size:9px;opacity:.65}
-.easc-settings-btn{font-size:18px}
-.easc-account-btn:hover,.easc-settings-btn:hover{border-color:rgba(34,211,238,.75)}
-@media(max-width:768px){.easc-bottom-account-controls{width:100%;max-width:280px}}
-</style>
 
-</head>
+
+<style id="easc-profile-hover-fix">
+.easc-side-profile-btn:hover{background:rgba(34,211,238,.06)!important;border-radius:10px}
+.easc-side-profile button:hover{border-color:rgba(34,211,238,.65)}
+</style></head>
 <body class="h-full flex flex-col bg-cyber-bg text-cyber-text bg-grid select-none easc-theme-dark">
 
     <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
@@ -500,12 +485,15 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
                 <button class="easc-side-btn" data-view="stats" onclick="showSidebarView('stats')"><i class="fas fa-flask"></i><span>STATS LAB</span></button>
                 <button class="easc-side-btn" data-view="settings" onclick="showSidebarView('settings')"><i class="fas fa-cog"></i><span>SETTINGS</span></button>
             </nav>
-            <div class="easc-side-profile">
-                <div id="sideAvatar" class="easc-side-avatar"><i class="fas fa-user"></i></div>
-                <div class="min-w-0">
-                    <div id="sideName" class="font-orbitron text-[10px] truncate">Student</div>
-                    <div class="text-[9px] easc-muted">LOCAL PROFILE</div>
-                </div>
+            <div class="easc-side-profile" style="display:grid;grid-template-columns:1fr 42px;gap:6px;align-items:center;">
+                <button type="button" class="easc-side-profile-btn" onclick="showProfileChooser()" title="Change Account" style="display:flex;align-items:center;gap:8px;min-width:0;width:100%;text-align:left;background:transparent;border:0;color:inherit;cursor:pointer;">
+                    <div id="sideAvatar" class="easc-side-avatar"><i class="fas fa-user"></i></div>
+                    <div class="min-w-0">
+                        <div id="sideName" class="font-orbitron text-[10px] truncate">Student</div>
+                        <div class="text-[9px] easc-muted">CHANGE ACCOUNT</div>
+                    </div>
+                </button>
+                <button type="button" onclick="showSidebarView('settings')" title="Settings" aria-label="Settings" style="height:42px;border:1px solid rgba(34,211,238,.28);border-radius:10px;background:rgba(15,23,42,.85);color:inherit;cursor:pointer;font-size:16px;">⚙</button>
             </div>
         </aside>
 
@@ -520,7 +508,7 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
                 <button onclick="showSidebarView('settings')" class="easc-quick-card"><i class="fas fa-cog"></i><b>SETTINGS</b><span>Change theme, sound, particles, learner profile, and data options.</span></button>
             </div>
             <div class="cyber-card rounded-2xl p-5 mt-4">
-                <div class="flex items-center justify-between"><div><div class="font-orbitron font-bold">LEARNING PATH</div><div class="text-xs easc-muted">Complete each comprehension check to unlock the next module.</div></div><div id="homeProgressPercent" class="font-orbitron text-xl" style="color:var(--easc-accent)">0%</div></div>
+                <div class="flex items-center justify-between"><div><div class="font-orbitron font-bold">LEARNING PATH</div><div class="text-xs easc-muted">All modules are available from the start. Use comprehension checks to measure learning.</div></div><div id="homeProgressPercent" class="font-orbitron text-xl" style="color:var(--easc-accent)">0%</div></div>
                 <div class="h-3 rounded-full mt-4" style="background:var(--easc-card2);border:1px solid var(--easc-border)"><div id="homeProgressBar" class="h-full rounded-full" style="width:0%;background:var(--easc-accent);transition:width .3s"></div></div>
             </div>
         </section>
@@ -2714,8 +2702,7 @@ function renderModule1(container) {
         };
 
         function moduleIsUnlocked(num) {
-            const rule = MODULE_UNLOCK_RULES[num];
-            return !rule.required || !!state.progress[rule.required].completed;
+            return true;
         }
 
         function createDropdownQuestion(id, item) {
@@ -2839,12 +2826,6 @@ function renderModule1(container) {
         }
 
         function openModule(moduleNum) {
-            if(!moduleIsUnlocked(moduleNum)){
-                const req=MODULE_UNLOCK_RULES[moduleNum].required;
-                alertBox(`Module 0${moduleNum} is locked. Complete Module 0${req} with at least 3/5 comprehension answers first.`);
-                playSound('fail');
-                return;
-            }
             playSound('click');
             state.currentModule=moduleNum;
             document.getElementById('stageMenu').classList.add('hidden');
@@ -3135,57 +3116,7 @@ window.addEventListener('DOMContentLoaded', async function(){
 </script>
 
 
-<div id="eascBottomAccountControls" class="easc-bottom-account-controls">
-  <button type="button" class="easc-account-btn" onclick="eascChangeAccount()" title="Change Account">
-    <img id="eascSidebarProfileImage" alt="Learner">
-    <span style="min-width:0">
-      <span id="eascSidebarProfileName" class="easc-account-name">Learner Profile</span>
-      <span class="easc-account-sub">Change Account</span>
-    </span>
-  </button>
-  <button type="button" class="easc-settings-btn" onclick="eascOpenSettings()" title="Settings" aria-label="Settings">⚙</button>
-</div>
 
-
-<script id="easc-account-settings-functions">
-(function(){
- function profile(){
-   const keys=['easc_current_profile','eascCurrentProfile','currentProfile','easc_profile'];
-   for(const k of keys){try{const v=JSON.parse(localStorage.getItem(k)||'null');if(v)return v}catch(e){}}
-   try{
-     const list=JSON.parse(localStorage.getItem('easc_profiles')||'[]');
-     const id=localStorage.getItem('easc_active_profile');
-     return list.find(p=>String(p.id)===String(id))||list[0]||{};
-   }catch(e){return {}}
- }
- function refresh(){
-   const p=profile(), name=p.name||p.fullName||p.learnerName||'Learner Profile';
-   const img=p.photo||p.image||p.profilePicture||p.avatar||'';
-   const n=document.getElementById('eascSidebarProfileName'), i=document.getElementById('eascSidebarProfileImage');
-   if(n)n.textContent=name;
-   if(i){
-     if(img)i.src=img;
-     else i.src='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><rect width='100%' height='100%' fill='#0f172a'/><text x='50%' y='58%' text-anchor='middle' font-size='36'>👤</text></svg>");
-   }
- }
- window.eascChangeAccount=function(){
-   const fns=['showProfileSelector','openProfileSelector','selectProfile','switchProfile','changeProfile'];
-   for(const f of fns) if(typeof window[f]==='function'){window[f]();return}
-   const ids=['profileSelector','profile-screen','profileScreen','profileModal'];
-   for(const id of ids){const e=document.getElementById(id);if(e){e.style.display='flex';e.classList.remove('hidden');return}}
-   alert('Profile selector is not available in this build.');
- };
- window.eascOpenSettings=function(){
-   const fns=['showSettings','openSettings','goToSettings','renderSettings'];
-   for(const f of fns) if(typeof window[f]==='function'){window[f]();return}
-   const e=Array.from(document.querySelectorAll('button,a,[role="button"]')).find(x=>/settings/i.test((x.textContent||'')));
-   if(e)e.click();
- };
- document.addEventListener('DOMContentLoaded',refresh);
- window.addEventListener('eascProfileChanged',refresh);
- window.addEventListener('storage',refresh);
-})();
-</script>
 
 </body></html>`);w.document.close()}
 
