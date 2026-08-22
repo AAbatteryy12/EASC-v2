@@ -119,6 +119,12 @@
             background: var(--cyber-accent);
         }
 
+        /* Scrollbar fix: prevent duplicate/nested page scrolling. */
+        html { overflow-y: scroll; overflow-x: hidden; }
+        body { overflow-y: visible; overflow-x: hidden; }
+        #stageModule, #moduleContainer { overflow-y: visible !important; }
+        #moduleContainer { max-height: none !important; height: auto !important; }
+
         @keyframes cyberPulse {
             0%, 100% { opacity: 0.8; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.03); }
@@ -732,7 +738,7 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
             </div>
 
             <!-- MODULE CONTENT CONTAINER -->
-            <div id="moduleContainer" class="flex-1 cyber-card rounded-2xl p-4 md:p-6 overflow-y-auto">
+            <div id="moduleContainer" class="flex-1 cyber-card rounded-2xl p-4 md:p-6">
                 <!-- Dynamically populated module components -->
             </div>
         </div>
