@@ -368,7 +368,7 @@ body.easc-theme-dark #bgCanvas{opacity:.35!important}
 
 
 <style id="easc-video-system">
-.easc-video-wrap{margin:1.25rem 0}.easc-video-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:14px;border:1px solid rgba(34,211,238,.35);background:#020617}.easc-video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.easc-video-suggestions{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem;margin-top:.75rem}.easc-video-suggestion{border:1px solid rgba(34,211,238,.22);border-radius:12px;padding:.8rem;background:rgba(15,23,42,.72);color:inherit;text-align:left}.easc-video-suggestion .sv-icon{font-size:1.3rem}.easc-video-suggestion .sv-title{font-weight:700;font-size:.78rem}.easc-video-suggestion .sv-note{font-size:.68rem;opacity:.72;margin-top:.2rem}.easc-video-status{font-size:.7rem;opacity:.75;margin-top:.55rem}
+.easc-video-wrap{margin:1.25rem 0}.easc-video-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:14px;border:1px solid rgba(34,211,238,.35);background:#020617}.easc-video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.easc-video-status{font-size:.7rem;opacity:.75;margin-top:.55rem}
 </style>
 
 <style id="easc-portrait-default">
@@ -515,7 +515,7 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
                 <button onclick="showSidebarView('settings')" class="easc-quick-card"><i class="fas fa-cog"></i><b>SETTINGS</b><span>Change theme, sound, particles, learner profile, and data options.</span></button>
             </div>
             <div class="cyber-card rounded-2xl p-5 mt-4">
-                <div class="flex items-center justify-between"><div><div class="font-orbitron font-bold">LEARNING PATH</div><div class="text-xs easc-muted">Complete each comprehension check to unlock the next module.</div></div><div id="homeProgressPercent" class="font-orbitron text-xl" style="color:var(--easc-accent)">0%</div></div>
+                <div class="flex items-center justify-between"><div><div class="font-orbitron font-bold">LEARNING PATH</div><div class="text-xs easc-muted">All learning modules are available from the start.</div></div><div id="homeProgressPercent" class="font-orbitron text-xl" style="color:var(--easc-accent)">0%</div></div>
                 <div class="h-3 rounded-full mt-4" style="background:var(--easc-card2);border:1px solid var(--easc-border)"><div id="homeProgressBar" class="h-full rounded-full" style="width:0%;background:var(--easc-accent);transition:width .3s"></div></div>
             </div>
         </section>
@@ -1092,11 +1092,11 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
                     title: 'DISCUSSION: INTRODUCTION TO HYPOTHESIS TESTING',
                     intro: 'Hypothesis testing is a decision-making process for evaluating claims about a population. It is also physically testing an assumption that we can make about a population. A hypothesis is an assumption or conjecture about a population parameter which may or may not be true.',
                     steps: [
-                        ['1. Define hypothesis testing', 'It is a decision-making process for evaluating claims about a population and for testing an assumption that we can make about a population.'],
-                        ['2. Define a hypothesis', 'A hypothesis is an assumption or conjecture about a population parameter which may or may not be true.'],
-                        ['3. Example: Grade 11 mean height', 'Is the mean height of Grade 11 students different from 66 inches? This asks whether the population mean differs from a specific value.'],
-                        ['4. Example: Senior male and female height', 'Is the proportion of senior male students whose height is significantly higher than the senior female students? This asks whether a population difference is significant.'],
-                        ['5. Form H₀ and H₁', 'The null hypothesis is the initial claim. The alternative hypothesis states the significant difference, effect, change, or relationship being investigated.']
+                        ['Define hypothesis testing', 'It is a decision-making process for evaluating claims about a population and for testing an assumption that we can make about a population.'],
+                        ['Define a hypothesis', 'A hypothesis is an assumption or conjecture about a population parameter which may or may not be true.'],
+                        ['Example: Grade 11 mean height', 'Is the mean height of Grade 11 students different from 66 inches? This asks whether the population mean differs from a specific value.'],
+                        ['Example: Senior male and female height', 'Is the proportion of senior male students whose height is significantly higher than the senior female students? This asks whether a population difference is significant.'],
+                        ['Form H₀ and H₁', 'The null hypothesis is the initial claim. The alternative hypothesis states the significant difference, effect, change, or relationship being investigated.']
                     ],
                     formula: '$$H_0:\\text{Null Hypothesis}\\qquad H_1:\\text{Alternative Hypothesis}$$',
                     takeaway: 'Start with the population claim, identify the parameter, then state the null hypothesis and alternative hypothesis clearly.'
@@ -1105,11 +1105,11 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
                     title: 'DISCUSSION: LEVEL OF SIGNIFICANCE (α)',
                     intro: 'The level of significance, written as α, is the maximum probability of rejecting a true null hypothesis that the researcher is willing to tolerate. It is selected before the hypothesis test is evaluated.',
                     steps: [
-                        ['1. Set α', 'Common choices are 0.10, 0.05, and 0.01. A smaller α requires stronger evidence against H₀.'],
-                        ['2. Understand Type I error', 'Rejecting a true H₀ is a Type I error. The significance level α controls this error rate.'],
-                        ['3. Connect α to the tail', 'For a two-tailed test, the total α is divided between both tails. For a one-tailed test, the rejection region is placed in one tail.'],
-                        ['4. Use critical values or p-values', 'A test statistic beyond the critical boundary, or a p-value less than or equal to α, provides evidence for rejecting H₀.'],
-                        ['5. State the decision', 'Say “reject H₀” or “fail to reject H₀.” Avoid saying that H₀ is proven true.']
+                        ['Set α', 'Common choices are 0.10, 0.05, and 0.01. A smaller α requires stronger evidence against H₀.'],
+                        ['Understand Type I error', 'Rejecting a true H₀ is a Type I error. The significance level α controls this error rate.'],
+                        ['Connect α to the tail', 'For a two-tailed test, the total α is divided between both tails. For a one-tailed test, the rejection region is placed in one tail.'],
+                        ['Use critical values or p-values', 'A test statistic beyond the critical boundary, or a p-value less than or equal to α, provides evidence for rejecting H₀.'],
+                        ['State the decision', 'Say “reject H₀” or “fail to reject H₀.” Avoid saying that H₀ is proven true.']
                     ],
                     formula: '$$p\\text{-value} \\le \\alpha \\;\\Rightarrow\\; \\text{Reject }H_0$$',
                     takeaway: 'α is a decision threshold, not the probability that H₀ is true.'
@@ -1118,11 +1118,11 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
                     title: 'DISCUSSION: HYPOTHESIS TESTING',
                     intro: 'A hypothesis test uses sample evidence to decide whether a population claim is sufficiently inconsistent with the null hypothesis. The calculation and decision should follow a clear sequence.',
                     steps: [
-                        ['1. State H₀ and H₁', 'Translate the research problem into mathematical hypotheses and identify the test direction.'],
-                        ['2. Choose α', 'Use the significance level given in the problem, commonly 0.05.'],
-                        ['3. Select the test statistic', 'Use a Z procedure when its assumptions are appropriate; use a t procedure when population variability is estimated from the sample under the stated conditions.'],
-                        ['4. Calculate the statistic', 'Standardize the sample result by comparing it with the hypothesized population value.'],
-                        ['5. Decide and conclude', 'Compare the statistic with the critical region or compare the p-value with α, then write the conclusion in the context of the original problem.']
+                        ['State H₀ and H₁', 'Translate the research problem into mathematical hypotheses and identify the test direction.'],
+                        ['Choose α', 'Use the significance level given in the problem, commonly 0.05.'],
+                        ['Select the test statistic', 'Use a Z procedure when its assumptions are appropriate; use a t procedure when population variability is estimated from the sample under the stated conditions.'],
+                        ['Calculate the statistic', 'Standardize the sample result by comparing it with the hypothesized population value.'],
+                        ['Decide and conclude', 'Compare the statistic with the critical region or compare the p-value with α, then write the conclusion in the context of the original problem.']
                     ],
                     formula: '$$Z=\\frac{\\bar{x}-\\mu_0}{\\sigma/\\sqrt{n}}\\qquad t=\\frac{\\bar{x}-\\mu_0}{s/\\sqrt{n}}$$',
                     takeaway: 'A statistical decision is only meaningful when it is followed by a plain-language conclusion tied to the research question.'
@@ -1131,11 +1131,11 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
                     title: 'DISCUSSION: CORRELATION ANALYSIS',
                     intro: 'Correlation describes the direction and strength of a linear relationship between two quantitative variables. Pearson’s correlation coefficient r ranges from -1 to +1.',
                     steps: [
-                        ['1. Inspect the variables', 'Identify X and Y and consider whether a linear relationship is reasonable.'],
-                        ['2. Read the sign', 'A positive r indicates that larger values of one variable tend to accompany larger values of the other; a negative r indicates the opposite direction.'],
-                        ['3. Read the magnitude', 'Values of r closer to ±1 indicate stronger linear association; values closer to 0 indicate weaker linear association.'],
-                        ['4. Interpret in context', 'Describe both direction and strength using the variables in the problem.'],
-                        ['5. Remember causation', 'Correlation alone does not establish that one variable causes the other.']
+                        ['Inspect the variables', 'Identify X and Y and consider whether a linear relationship is reasonable.'],
+                        ['Read the sign', 'A positive r indicates that larger values of one variable tend to accompany larger values of the other; a negative r indicates the opposite direction.'],
+                        ['Read the magnitude', 'Values of r closer to ±1 indicate stronger linear association; values closer to 0 indicate weaker linear association.'],
+                        ['Interpret in context', 'Describe both direction and strength using the variables in the problem.'],
+                        ['Remember causation', 'Correlation alone does not establish that one variable causes the other.']
                     ],
                     formula: '$$r=\\frac{\\sum (x-\\bar{x})(y-\\bar{y})}{\\sqrt{\\sum(x-\\bar{x})^2\\sum(y-\\bar{y})^2}}$$',
                     takeaway: 'Do not interpret the sign without the magnitude, and do not turn correlation into a causal claim.'
@@ -1144,11 +1144,11 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
                     title: 'DISCUSSION: SCATTER PLOT & LINE OF BEST FIT',
                     intro: 'A scatter plot displays paired observations and helps us see the form, direction, and strength of a relationship. A line of best fit summarizes a linear trend and can be used for prediction within an appropriate context.',
                     steps: [
-                        ['1. Plot the data', 'Place the explanatory variable on X and the response variable on Y.'],
-                        ['2. Look for a pattern', 'Check whether points generally rise, fall, or show little linear structure.'],
-                        ['3. Interpret the slope', 'In the model Y = mx + b, m describes the expected change in Y for a one-unit increase in X.'],
-                        ['4. Interpret the intercept', 'b is the predicted Y value when X = 0, if X = 0 is meaningful for the context.'],
-                        ['5. Use prediction carefully', 'Predictions are most defensible within the observed range; extrapolation beyond the data can be unreliable.']
+                        ['Plot the data', 'Place the explanatory variable on X and the response variable on Y.'],
+                        ['Look for a pattern', 'Check whether points generally rise, fall, or show little linear structure.'],
+                        ['Interpret the slope', 'In the model Y = mx + b, m describes the expected change in Y for a one-unit increase in X.'],
+                        ['Interpret the intercept', 'b is the predicted Y value when X = 0, if X = 0 is meaningful for the context.'],
+                        ['Use prediction carefully', 'Predictions are most defensible within the observed range; extrapolation beyond the data can be unreliable.']
                     ],
                     formula: '$$Y=mx+b$$',
                     takeaway: 'A regression equation summarizes a trend; it does not automatically prove causation.'
@@ -1157,11 +1157,11 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
                     title: 'DISCUSSION: ASSESSMENT & COURSE REVIEW',
                     intro: 'This assessment checks whether you can connect the major ideas from the courseware: hypotheses, significance levels, testing decisions, correlation, and regression.',
                     steps: [
-                        ['1. Read carefully', 'Identify the parameter, claim, and direction before selecting an answer.'],
-                        ['2. Recall the decision rule', 'Keep α, critical values, and p-values conceptually separate and apply the rule requested by the problem.'],
-                        ['3. Interpret r correctly', 'Use both sign and magnitude when describing correlation.'],
-                        ['4. Interpret Y = mx + b', 'Know what the slope and intercept mean in the given context.'],
-                        ['5. Review after submission', 'Use the result to identify which concept needs another pass before attempting the assessment again.']
+                        ['Read carefully', 'Identify the parameter, claim, and direction before selecting an answer.'],
+                        ['Recall the decision rule', 'Keep α, critical values, and p-values conceptually separate and apply the rule requested by the problem.'],
+                        ['Interpret r correctly', 'Use both sign and magnitude when describing correlation.'],
+                        ['Interpret Y = mx + b', 'Know what the slope and intercept mean in the given context.'],
+                        ['Review after submission', 'Use the result to identify which concept needs another pass before attempting the assessment again.']
                     ],
                     formula: '$$\\text{Evidence}\\;\\longrightarrow\\;\\text{Statistical decision}\\;\\longrightarrow\\;\\text{Contextual conclusion}$$',
                     takeaway: 'The goal is not just to calculate. The goal is to explain what the statistical result means.'
@@ -1373,7 +1373,11 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
               5:['What variable belongs on the X-axis?','What does the slope m tell you?','What does the intercept b tell you?','Why is prediction within the observed X-range safer?','What is extrapolation and why should it be treated cautiously?']
             };
             const qs=banks[num]||[];
-            return `<div class="mt-4 p-5 rounded-2xl border" style="background:var(--easc-card);border-color:var(--easc-border)"><div class="font-orbitron font-bold text-base mb-3" style="color:var(--easc-accent)"><i class="fas fa-question-circle mr-2"></i>5 GUIDE QUESTIONS</div><div class="space-y-2">${qs.map((q,i)=>`<div class="easc-guide-question p-3 rounded-lg" style="background:var(--easc-card2);border:1px solid var(--easc-border)"><b>${i+1}.</b> ${q}</div>`).join('')}</div></div>`;
+            return `<div id="activityGuideCard${num}" class="mt-4 p-5 rounded-2xl border" style="background:var(--easc-card);border-color:var(--easc-border)">
+              <div class="font-orbitron font-bold text-base mb-3" style="color:var(--easc-accent)"><i class="fas fa-question-circle mr-2"></i>5 GUIDE QUESTIONS</div>
+              <p class="text-xs easc-muted mb-3">Write your own answer in each text box. Use the interactive activity and lesson discussion as your guide.</p>
+              <div class="space-y-3">${qs.map((q,i)=>`<div class="p-3 rounded-lg" style="background:var(--easc-card2);border:1px solid var(--easc-border)"><label for="guide${num}_${i+1}" class="block font-semibold text-sm mb-2">${i+1}. ${q}</label><textarea id="guide${num}_${i+1}" rows="3" placeholder="Type your answer here..." class="w-full rounded-lg border p-3 text-sm easc-input" style="background:var(--easc-card);border-color:var(--easc-border);color:var(--easc-text)"></textarea></div>`).join('')}</div>
+            </div>`;
         }
 
         function funActivityCard(num) {
@@ -1471,15 +1475,6 @@ function renderModule1(container) {
 
     </div>
     <div class="easc-video-status">▶ The video plays inside EAS•C. Internet access is required for YouTube streaming.</div>
-    <div class="mt-4">
-      <div class="flex items-center justify-between mb-2"><h4 class="font-orbitron text-cyan-300 font-bold text-xs">💡 SUGGESTED VIDEOS</h4><span class="text-[10px] text-cyan-400/60">Inside the player</span></div>
-      <div class="easc-video-suggestions">
-        <div class="easc-video-suggestion"><div class="sv-icon">🧪</div><div class="sv-title">Hypothesis Testing</div><div class="sv-note">Current Module 1 video</div></div>
-        <div class="easc-video-suggestion"><div class="sv-icon">H₀ / H₁</div><div class="sv-title">Null &amp; Alternative Hypothesis</div><div class="sv-note">Related YouTube videos appear in the player</div></div>
-        <div class="easc-video-suggestion"><div class="sv-icon">⚠️</div><div class="sv-title">Type I &amp; Type II Errors</div><div class="sv-note">Related YouTube videos appear in the player</div></div>
-        <div class="easc-video-suggestion"><div class="sv-icon">📊</div><div class="sv-title">Z-Test &amp; Hypothesis Testing</div><div class="sv-note">Related YouTube videos appear in the player</div></div>
-      </div>
-    </div>
   </div>
 </div>
 ` + funActivityCard(1) + activityGuideCard(1) + `
@@ -2532,7 +2527,7 @@ function renderModule1(container) {
         /* ================================================================
            EAS•C 2.2c LEARNING-GATE / INTERACTIVE-GUIDE ENHANCEMENT
            - Sequential module unlocking
-           - Five-question comprehension gate per module
+           - Ten-item assessment / comprehension check for Modules 1–5; Module 6 is assessment-only
            - Dropdown guide questions for interactive visualizations
            - Fixed Module 05 regression canvas
         ================================================================= */
@@ -2543,46 +2538,64 @@ function renderModule1(container) {
 
         const COMPREHENSION_BANK = {
             1: [
-                ['A researcher asks whether the mean height of Grade 11 students differs from 66 inches. Which pair correctly represents the hypotheses?', 'a', ['H₀: μ = 66 and H₁: μ ≠ 66','H₀: μ ≠ 66 and H₁: μ = 66','H₀: μ > 66 and H₁: μ = 66']],
-                ['Which statement best describes the null hypothesis in this lesson?', 'b', ['It always states that the research claim is true','It is the initial claim and represents no significant difference, no change, or no relationship','It can only use a greater-than symbol']],
-                ['A school investigates whether a new teaching method has an effect on students’ test scores. Which statement belongs in the alternative hypothesis?', 'c', ['The independent variable has no effect on the dependent variable','There is no change in the dependent variable','The independent variable has an effect on the dependent variable']],
-                ['Which symbols can be used for the alternative hypothesis when the research claim states that a parameter is different, greater, or less than a specific value?', 'a', ['≠, >, or <','Only =','Only ≤ and ≥']],
-                ['Which statement correctly distinguishes Type I and Type II errors?', 'c', ['Type I means failing to reject a false H₀; Type II means rejecting a true H₀','Both errors mean rejecting a true H₀','Type I means rejecting a true H₀; Type II means failing to reject a false H₀']]
+                ['What is the main purpose of hypothesis testing?', 'a', ['To evaluate a claim about a population', 'To guarantee a claim is true', 'To describe only one sample', 'To calculate r']],
+                ['Which symbol represents the null hypothesis?', 'b', ['H₁', 'H₀', 'α', 'r']],
+                ['Which symbol is commonly included in H₀?', 'c', ['Only >', 'Only <', 'An equality relationship', 'Only ≠']],
+                ['Which alternative hypothesis matches a claim that a mean is greater than 75?', 'b', ['H₁: μ = 75', 'H₁: μ > 75', 'H₁: μ < 75', 'H₁: μ = 0']],
+                ['Which alternative hypothesis matches “different from 2.76”?', 'd', ['μ = 2.76', 'μ > 2.76', 'μ < 2.76', 'μ ≠ 2.76']],
+                ['What does the alternative hypothesis usually describe?', 'a', ['A difference, effect, change, or relationship', 'The sample size only', 'The probability of H₀', 'The population label only']],
+                ['What is a Type I error?', 'a', ['Rejecting a true H₀', 'Failing to reject a false H₀', 'Changing α after testing', 'Using a large sample']],
+                ['What is a Type II error?', 'b', ['Rejecting a true H₀', 'Failing to reject a false H₀', 'Rejecting H₁ when H₁ is true', 'Using a two-tailed test']],
+                ['Which phrase signals a two-tailed alternative?', 'c', ['At most', 'Greater than', 'Different from', 'Less than']],
+                ['What should be identified before writing H₀ and H₁?', 'a', ['The population parameter and research claim', 'The final answer first', 'The certificate score', 'The graph color']]
             ],
             2: [
-                ['What does α represent?', 'b', ['sample size','significance level / Type I error threshold','correlation strength']],
-                ['For a two-tailed α = 0.05 test, how is α distributed?', 'c', ['5% in the center','95% in the tails','2.5% in each tail']],
-                ['What happens when α becomes smaller?', 'a', ['stronger evidence is required to reject H₀','the sample automatically becomes larger','H₀ becomes true']],
-                ['At α = 0.05, the confidence level is usually what?', 'b', ['5%','95%','50%']],
-                ['Which result supports rejection of H₀?', 'c', ['p-value > α','p-value = 1','p-value ≤ α']]
+                ['What does α represent?', 'a', ['The maximum tolerated Type I error probability', 'The sample mean', 'The correlation coefficient', 'The population size']],
+                ['Which is a common significance level?', 'b', ['0.50', '0.05', '5.00', '50']],
+                ['What happens when α is made smaller?', 'c', ['Less evidence is needed', 'The sample changes automatically', 'Stronger evidence is required to reject H₀', 'H₀ becomes false']],
+                ['In a two-tailed test, how is α = 0.05 distributed?', 'b', ['0.05 in each tail', '0.025 in each tail', '0.95 in each tail', '0.50 in each tail']],
+                ['Where is the rejection region for a right-tailed test?', 'a', ['Right tail', 'Left tail', 'Center only', 'Both tails equally']],
+                ['Where is the rejection region for a left-tailed test?', 'b', ['Right tail', 'Left tail', 'Center only', 'No tail']],
+                ['What decision is supported when p ≤ α?', 'c', ['Fail to reject H₀', 'Increase α', 'Reject H₀', 'Change the sample']],
+                ['At α = 0.05 for a two-tailed Z test, what are the critical values?', 'c', ['±1.00', '±1.645', '±1.96', '±2.58']],
+                ['What does the rejection region represent?', 'a', ['Results sufficiently extreme under the decision rule', 'All possible sample means', 'The population parameter itself', 'The confidence level only']],
+                ['When should α normally be selected?', 'b', ['After seeing the result', 'Before evaluating the hypothesis test', 'After writing the conclusion', 'Only after rejecting H₀']]
             ],
             3: [
-                ['What is the purpose of a test statistic?', 'a', ['standardize the sample result relative to H₀','calculate the participant name','draw a pie chart']],
-                ['Which formula is the Z statistic used in this courseware?', 'b', ['Z = (x̄ + μ₀)/(σ√n)','Z = (x̄ − μ₀)/(σ/√n)','Z = σ/(x̄ − μ₀)']],
-                ['At α = 0.05 for a two-tailed Z test, what are the critical values?', 'c', ['±1.00','±2.58','±1.96']],
-                ['If |Z| is beyond the critical boundary, what is the decision?', 'a', ['Reject H₀','Accept H₀ as proven','Ignore the sample']],
-                ['What should follow the statistical decision?', 'b', ['a conclusion in the context of the problem','a new unrelated hypothesis','a change in sample size']]
+                ['What is the purpose of a Z-test statistic?', 'a', ['To standardize a sample result relative to a hypothesized value', 'To measure correlation', 'To calculate α automatically', 'To draw a scatter plot']],
+                ['Which formula is the one-sample Z statistic used here?', 'b', ['Z=(x̄+μ₀)/(σ/√n)', 'Z=(x̄−μ₀)/(σ/√n)', 'Z=σ/(x̄−μ₀)', 'Z=(x̄−μ₀)/(σ√n)']],
+                ['What does x̄ represent?', 'c', ['Population standard deviation', 'Significance level', 'Sample mean', 'Correlation coefficient']],
+                ['What does μ₀ represent?', 'a', ['The hypothesized population mean', 'The sample size', 'The p-value', 'The regression slope']],
+                ['What does σ represent in the Z formula?', 'b', ['Sample mean', 'Population standard deviation', 'Intercept', 'Alpha']],
+                ['What does n represent?', 'd', ['The critical value', 'The correlation', 'The intercept', 'Sample size']],
+                ['At α = 0.05 for a two-tailed test, when is H₀ rejected?', 'a', ['When |Z| ≥ 1.96', 'When Z = 0', 'When |Z| < 1.96', 'When n = 1']],
+                ['If Z = 1.20 in a two-tailed test at α = 0.05, what is the decision?', 'b', ['Reject H₀', 'Fail to reject H₀', 'Reject H₁', 'Change α']],
+                ['What should follow the statistical decision?', 'c', ['A new sample automatically', 'A different hypothesis', 'A conclusion stated in context', 'A changed data value']],
+                ['Why is the direction of H₁ important?', 'a', ['It determines the appropriate tail and decision region', 'It determines the student name', 'It removes the need for α', 'It changes the sample size']]
             ],
             4: [
-                ['What range can Pearson’s r take?', 'c', ['0 to 100','−100 to +100','−1 to +1']],
-                ['What does a positive r indicate?', 'a', ['a positive linear direction','a negative linear direction','no possible relationship']],
-                ['What does |r| close to 1 indicate?', 'b', ['weak linear association','strong linear association','proof of causation']],
-                ['What does r close to 0 indicate?', 'c', ['perfect positive correlation','perfect negative correlation','little or no linear correlation']],
-                ['Does correlation by itself prove causation?', 'a', ['No','Yes','Only when r is positive']]
+                ['What does Pearson’s r measure?', 'a', ['Direction and strength of a linear relationship', 'The sample size only', 'The significance level', 'The regression intercept']],
+                ['What is the possible range of r?', 'b', ['0 to 1', '−1 to +1', '−100 to +100', '0 to +∞']],
+                ['What does a positive r indicate?', 'c', ['A negative direction', 'No relationship at all', 'A positive linear direction', 'Causation']],
+                ['What does a negative r indicate?', 'a', ['A negative linear direction', 'A positive linear direction', 'A perfect mean', 'A Type I error']],
+                ['What does |r| close to 1 suggest?', 'd', ['No linear relationship', 'A weak relationship', 'A causal relationship', 'A strong linear association']],
+                ['What does r close to 0 generally suggest?', 'b', ['Perfect correlation', 'Little or no linear association', 'Strong negative correlation', 'Causation']],
+                ['Which part of r indicates direction?', 'a', ['Its sign', 'Its denominator', 'Its sample size', 'Its graph title']],
+                ['Which part of r indicates strength?', 'c', ['The variable names', 'The axis units', 'The magnitude |r|', 'The sample label']],
+                ['Does correlation by itself prove causation?', 'b', ['Yes', 'No', 'Only when r > 0', 'Only when r < 0']],
+                ['What should an interpretation of r include?', 'a', ['Direction and strength in context', 'Only the sign', 'Only the magnitude', 'Only the sample size']]
             ],
             5: [
-                ['In Y = mx + b, what does m represent?', 'b', ['the intercept','the slope','the sample size']],
-                ['In Y = mx + b, what does b represent?', 'a', ['the Y-intercept','the slope','the correlation coefficient']],
-                ['What does a positive slope mean?', 'c', ['Y decreases as X increases','there is no relationship','predicted Y tends to increase as X increases']],
-                ['Where is a regression prediction generally safest?', 'b', ['far outside the observed data','within the observed X range','only at X = 0']],
-                ['Does a best-fit line automatically prove causation?', 'a', ['No','Yes','Only if the slope is large']]
-            ],
-            6: [
-                ['Which hypothesis represents the null hypothesis?', 'b', ['H₁','H₀','α']],
-                ['What does α = 0.05 mean?', 'a', ['a 5% Type I error threshold','a 95% Type I error threshold','a 5% sample size']],
-                ['What is the range of Pearson’s r?', 'c', ['0 to 1','−100 to 100','−1 to +1']],
-                ['What does m represent in Y = mx + b?', 'b', ['intercept','slope','p-value']],
-                ['For a two-tailed Z test at α = 0.05, when is H₀ rejected?', 'a', ['when |Z| ≥ 1.96','when Z = 0','when |Z| < 1.96']]
+                ['Where is the explanatory variable usually placed in a scatter plot?', 'a', ['X-axis', 'Y-axis', 'Title', 'Legend only']],
+                ['Where is the response variable usually placed?', 'b', ['X-axis', 'Y-axis', 'Title', 'Outside the graph']],
+                ['What does the slope m represent in Y = mx + b?', 'c', ['The intercept', 'The sample size', 'The expected change in Y for a one-unit increase in X', 'The p-value']],
+                ['What does b represent?', 'a', ['The predicted Y when X = 0, if meaningful', 'The slope', 'The correlation coefficient', 'The significance level']],
+                ['What does a positive slope mean?', 'd', ['Y tends to decrease as X increases', 'There is no trend', 'X becomes zero', 'Y tends to increase as X increases']],
+                ['What does a negative slope mean?', 'b', ['Y tends to increase as X increases', 'Y tends to decrease as X increases', 'The intercept is positive', 'r must equal −1']],
+                ['What does a one-unit increase in X do in the model?', 'a', ['Changes predicted Y by m units', 'Changes predicted Y by b units', 'Changes α by m', 'Changes n by b']],
+                ['Where are regression predictions generally safest?', 'c', ['Far outside the observed range', 'Only at X = 0', 'Within the observed X range', 'Only when r = 0']],
+                ['What is extrapolation?', 'b', ['Predicting within the observed data range', 'Predicting beyond the observed data range', 'Calculating r', 'Finding α']],
+                ['Does a best-fit line automatically prove causation?', 'a', ['No', 'Yes', 'Only when the slope is positive', 'Only when r = 1']]
             ]
         };
 
@@ -2654,23 +2667,22 @@ function renderModule1(container) {
         }
 
         function appendComprehension(mod) {
+            if (mod === 6) return;
             const container = document.getElementById('moduleContainer');
             if (!container || document.getElementById(`comprehension${mod}`)) return;
-            const bank = COMPREHENSION_BANK[mod];
+            const bank = COMPREHENSION_BANK[mod] || [];
             const wrap = document.createElement('div');
             wrap.id = `comprehension${mod}`;
             wrap.className = 'p-4 rounded-xl bg-cyan-950/40 border border-cyan-400/50 space-y-3 mt-5';
             wrap.innerHTML = `<div class="flex items-center justify-between gap-3">
-                    <h4 class="font-orbitron font-bold text-cyan-200 text-sm"><i class="fas fa-brain text-cyan-400 mr-2"></i>5-QUESTION COMPREHENSION CHECK</h4>
-                    <span id="compScore${mod}" class="font-orbitron text-xs text-cyan-400">0 / 5</span>
+                    <h4 class="font-orbitron font-bold text-cyan-200 text-sm"><i class="fas fa-brain text-cyan-400 mr-2"></i>10-ITEM ASSESSMENT / COMPREHENSION CHECK</h4>
+                    <span id="compScore${mod}" class="font-orbitron text-xs text-cyan-400">0 / 10</span>
                 </div>
-                <p class="text-[11px] text-cyan-300/80">Answer all 5 questions and review the feedback for each one. A score of at least 3/5 marks the module complete. All modules are available from the start.</p>
-                <div class="space-y-2">${bank.map((q,i)=>createDropdownQuestion(`comp${mod}_${i+1}`,q)).join('')}</div>
-                <button onclick="checkComprehension(${mod})" class="btn-cyber font-orbitron text-xs px-5 py-2 rounded text-cyan-100">CHECK COMPREHENSION</button>
+                <p class="text-[11px] text-cyan-300/80">Answer all 10 questions. A score of at least 6/10 marks the module complete.</p>
+                <div class="space-y-2">${bank.slice(0,10).map((q,i)=>createDropdownQuestion(`comp${mod}_${i+1}`,q)).join('')}</div>
+                <button onclick="checkComprehension(${mod})" class="btn-cyber font-orbitron text-xs px-5 py-2 rounded text-cyan-100">CHECK ASSESSMENT</button>
                 <div id="compFeedback${mod}" class="text-xs font-orbitron"></div>`;
-            const completion = container.querySelector('[onclick^="markModuleComplete"]');
-            if (completion) completion.parentElement.insertBefore(wrap, completion);
-            else container.appendChild(wrap);
+            container.appendChild(wrap);
         }
 
         function checkInteractiveGuide(mod) {
@@ -2709,15 +2721,15 @@ function renderModule1(container) {
             const scoreEl=document.getElementById(`compScore${mod}`);
             const fb=document.getElementById(`compFeedback${mod}`);
             if(scoreEl) scoreEl.innerText=`${score} / 5`;
-            const PASS_SCORE=3;
-            state.progress[mod].score=score*20;
+            const PASS_SCORE=6;
+            state.progress[mod].score=score*10;
             if(score>=PASS_SCORE){
                 state.progress[mod].completed=true;
                 if(fb){fb.className='text-xs leading-relaxed';fb.innerHTML=`<div class="p-3 rounded-lg bg-emerald-950/40 border border-emerald-500/30"><div class="text-emerald-300 font-bold"><i class="fas fa-unlock mr-1"></i>${score}/5 — Module completed. All modules are already unlocked.</div>${feedback.join('')}</div>`;}
                 playSound('success'); updateUIProgress(); updateModuleLocks();
             }else{
                 state.progress[mod].completed=false;
-                if(fb){fb.className='text-xs leading-relaxed';fb.innerHTML=`<div class="p-3 rounded-lg bg-amber-950/30 border border-amber-500/30"><div class="text-amber-200 font-bold"><i class="fas fa-info-circle mr-1"></i>${score}/5 — At least 3/5 is needed to complete this module.</div>${feedback.join('')}</div>`;}
+                if(fb){fb.className='text-xs leading-relaxed';fb.innerHTML=`<div class="p-3 rounded-lg bg-amber-950/30 border border-amber-500/30"><div class="text-amber-200 font-bold"><i class="fas fa-info-circle mr-1"></i>${score}/5 — At least 6/10 is needed to complete this module.</div>${feedback.join('')}</div>`;}
                 playSound('fail'); updateUIProgress();
             }
             if(window.EASC_saveProgress) window.EASC_saveProgress(false);
@@ -2729,6 +2741,61 @@ function renderModule1(container) {
                 card.classList.remove('opacity-60','grayscale');
                 card.querySelector('.module-lock-badge')?.remove();
             });
+        }
+
+        function moduleCompetenciesCard(num){
+            const data={
+              1:['Identify a population claim and parameter.','Distinguish H₀ from H₁.','Write appropriate equality and inequality hypotheses.','Recognize Type I and Type II errors.'],
+              2:['Define the level of significance α.','Explain how α controls Type I error.','Identify rejection regions for one- and two-tailed tests.','Use critical values and p-values for decisions.'],
+              3:['Explain the purpose of a hypothesis-test statistic.','Calculate a one-sample Z statistic using the given formula.','Compare a test statistic with a critical value.','State a statistical decision and contextual conclusion.'],
+              4:['Define Pearson’s correlation coefficient r.','Interpret the sign of r as direction.','Interpret |r| as strength.','Explain why correlation does not establish causation.'],
+              5:['Identify explanatory and response variables on a scatter plot.','Interpret the slope and intercept of Y = mx + b.','Use a regression line for prediction.','Distinguish interpolation from extrapolation.']
+            };
+            return `<section class="module-section module-competencies p-5 rounded-2xl border mb-5" style="background:var(--easc-card2);border-color:var(--easc-border)"><h3 class="font-orbitron font-bold text-base md:text-lg mb-3" style="color:var(--easc-accent)"><i class="fas fa-bullseye mr-2"></i>LEARNING COMPETENCIES</h3><ul class="list-disc pl-6 space-y-2 text-sm text-cyan-100/90">${(data[num]||[]).map(x=>`<li>${x}</li>`).join('')}</ul></section>`;
+        }
+
+        function moduleVideoLesson(num){
+            const ids={1:'8IxJaU06qJA',2:'D3qFmPn1pgM',3:'vR2LfIhiqLc',4:'mbkamYEAF9M',5:'PpzugZS3x9s'};
+            const titles={1:'Introduction to Hypothesis Testing',2:'Level of Significance',3:'Hypothesis Testing',4:'Correlation Analysis',5:'Scatter Plot and Regression'};
+            if(!ids[num]) return '';
+            return `<section class="module-section module-video easc-video-wrap mb-5"><div class="cyber-card rounded-xl p-4 border border-cyan-500/30"><div class="flex items-center justify-between gap-3 mb-3"><div><h3 class="font-orbitron text-cyan-300 font-bold text-sm md:text-base">🎬 VIDEO LESSON — MODULE ${String(num).padStart(2,'0')}</h3><p class="text-xs text-cyan-200/75 mt-1">${titles[num]}</p></div><span class="text-[10px] uppercase tracking-widest text-cyan-400/70">YouTube</span></div><div class="easc-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${ids[num]}?rel=0" title="${titles[num]}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="easc-video-status">▶ The video plays inside EAS•C. Internet access is required for YouTube streaming.</div></div></section>`;
+        }
+
+        function removeOldGuideBlocks(container){
+            [...container.querySelectorAll('h4')].forEach(h=>{
+                const t=(h.textContent||'').trim().toUpperCase();
+                if(t.includes('GUIDE QUESTIONS & COMPREHENSION CHECK')) h.closest('.p-4.rounded-xl')?.remove();
+            });
+        }
+
+        function arrangeModuleContent(num){
+            if(num===6) return;
+            const container=document.getElementById('moduleContainer');
+            if(!container) return;
+            removeOldGuideBlocks(container);
+            container.querySelectorAll('.easc-video-wrap').forEach(v=>v.remove());
+            const nodes=[...container.children];
+            const discussion=document.createElement('section'); discussion.className='module-section module-discussion mb-5';
+            discussion.innerHTML='<div class="module-section-heading"><span>DISCUSSION / CONTENT / LESSON OVERVIEW</span></div>';
+            const activity=document.createElement('section'); activity.className='module-section module-activity mb-5';
+            activity.innerHTML='<div class="module-section-heading"><span>INTERACTIVE ACTIVITY</span></div>';
+            const guide=document.createElement('section'); guide.className='module-section module-guide mb-5';
+            guide.innerHTML='<div class="module-section-heading"><span>5 GUIDE QUESTIONS</span></div>';
+            const assessment=document.createElement('section'); assessment.className='module-section module-assessment mb-5';
+            assessment.innerHTML='<div class="module-section-heading"><span>10-ITEM ASSESSMENT / COMPREHENSION CHECK</span></div>';
+            nodes.forEach(el=>{
+                if(el===discussion||el===activity||el===guide||el===assessment) return;
+                if(el.id===`comprehension${num}`){assessment.appendChild(el);return;}
+                if(el.id===`activityGuideCard${num}`){guide.appendChild(el);return;}
+                if(el.classList.contains('easc-activity-card')){activity.appendChild(el);return;}
+                if(el.querySelector?.('[onclick^="markModuleComplete"]') || el.getAttribute?.('onclick')?.includes('markModuleComplete')){assessment.appendChild(el);return;}
+                discussion.appendChild(el);
+            });
+            const competency=document.createElement('div'); competency.innerHTML=moduleCompetenciesCard(num); const comp=competency.firstElementChild;
+            const video=document.createElement('div'); video.innerHTML=moduleVideoLesson(num); const vid=video.firstElementChild;
+            container.innerHTML='';
+            container.append(comp,discussion,vid,activity,guide,assessment);
+            renderAllMath();
         }
 
         function openModule(moduleNum) {
@@ -2746,8 +2813,10 @@ playSound('click');
             else if(moduleNum===5){titleHeader.innerText='MODULE 05: SCATTER PLOT & REGRESSION';renderModule5(container);}
             else if(moduleNum===6){titleHeader.innerText='MODULE 06: ASSESSMENT QUIZ';renderModule6(container);}
             setTimeout(()=>{
-                appendInteractiveGuide(moduleNum);
-                appendComprehension(moduleNum);
+                if(moduleNum !== 6){
+                    appendComprehension(moduleNum);
+                    arrangeModuleContent(moduleNum);
+                }
                 renderAllMath();
                 if(moduleNum===5) drawM5Regression();
             },80);
@@ -2756,14 +2825,14 @@ playSound('click');
 
         function markModuleComplete(modNum) {
             const scoreEl=document.getElementById(`compScore${modNum}`);
-            const score=parseInt((scoreEl?.innerText||'0 / 5').split('/')[0],10)||0;
-            const PASS_SCORE=3;
-            if(score<PASS_SCORE){alertBox(`Module 0${modNum} needs at least ${PASS_SCORE}/5 on the comprehension check.`);playSound('fail');return;}
+            const score=parseInt((scoreEl?.innerText||'0 / 10').split('/')[0],10)||0;
+            const PASS_SCORE=6;
+            if(score<PASS_SCORE){alertBox(`Module 0${modNum} needs at least ${PASS_SCORE}/10 on the comprehension check.`);playSound('fail');return;}
             state.progress[modNum].completed=true;
-            state.progress[modNum].score=score*20;
+            state.progress[modNum].score=score*10;
             playSound('success'); updateUIProgress(); updateModuleLocks();
             if(window.EASC_saveProgress) window.EASC_saveProgress(false);
-            alertBox(`Module 0${modNum}: Completed successfully with ${score}/5 comprehension.`);
+            alertBox(`Module 0${modNum}: Completed successfully with ${score}/10 assessment.`);
         }
 
         function drawM5Regression() {
