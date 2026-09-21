@@ -1,1075 +1,83 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
-<meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EAS•C - Enhancing Activities in Statistics Courseware</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Orbitron & Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- KaTeX for Math Equation Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderAllMath()"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cyber: {
-                            bg: 'var(--cyber-bg, #040b14)',
-                            card: 'var(--cyber-card, #0a1728)',
-                            border: 'var(--cyber-border, #00e5ff33)',
-                            accent: 'var(--cyber-accent, #00f0ff)',
-                            glow: 'var(--cyber-glow, #0088ff)',
-                            dark: 'var(--cyber-dark, #030810)',
-                            text: 'var(--cyber-text, #c2e9ff)'
-                        }
-                    },
-                    fontFamily: {
-                        orbitron: ['Orbitron', 'sans-serif'],
-                        inter: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        :root {
-            --cyber-bg: #040b14;
-            --cyber-card: #0a1728;
-            --cyber-border: rgba(0, 229, 255, 0.2);
-            --cyber-accent: #00f0ff;
-            --cyber-glow: #0088ff;
-            --cyber-dark: #030810;
-            --cyber-text: #c2e9ff;
-        }
-
-        body {
-            background-color: var(--cyber-bg);
-            color: var(--cyber-text);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .font-orbitron {
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .cyber-card {
-            background: linear-gradient(135deg, rgba(10, 23, 40, 0.85) 0%, rgba(6, 15, 27, 0.95) 100%);
-            border: 1px solid var(--cyber-border);
-            box-shadow: 0 0 15px var(--cyber-border), inset 0 0 15px rgba(0, 229, 255, 0.03);
-            backdrop-filter: blur(8px);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        .cyber-card:hover {
-            border-color: var(--cyber-accent);
-            box-shadow: 0 0 25px var(--cyber-border), inset 0 0 20px rgba(0, 229, 255, 0.1);
-            transform: translateY(-3px);
-        }
-
-        .btn-cyber {
-            background: linear-gradient(180deg, var(--cyber-glow) 0%, var(--cyber-dark) 100%);
-            border: 1px solid var(--cyber-accent);
-            box-shadow: 0 0 12px var(--cyber-border), inset 0 0 8px rgba(0, 240, 255, 0.2);
-            text-shadow: 0 0 8px var(--cyber-accent);
-            transition: all 0.2s ease;
-        }
-
-        .btn-cyber:hover {
-            background: linear-gradient(180deg, var(--cyber-accent) 0%, var(--cyber-glow) 100%);
-            box-shadow: 0 0 22px var(--cyber-accent), inset 0 0 12px rgba(0, 240, 255, 0.4);
-            transform: scale(1.02);
-        }
-
-        .cyber-text-glow {
-            text-shadow: 0 0 10px var(--cyber-accent), 0 0 20px var(--cyber-glow);
-        }
-
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--cyber-bg);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--cyber-glow);
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--cyber-accent);
-        }
-
-        @keyframes cyberPulse {
-            0%, 100% { opacity: 0.8; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.03); }
-        }
-        .animate-cyber-pulse {
-            animation: cyberPulse 3s infinite ease-in-out;
-        }
-
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            #modalCertificate, #modalCertificate * {
-                visibility: visible;
-            }
-            #modalCertificate {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                background: white !important;
-                color: black !important;
-            }
-            #btnPrintCert, #modalCertificate button, #certNameInput {
-                display: none !important;
-            }
-        }
-    
-/* EAS•C 2.6 — sidebar-only navigation and compact courseware header */
-.easc-header-mark{width:42px;height:42px;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font:900 1.25rem Orbitron,sans-serif;background:var(--easc-card2);border:1px solid var(--easc-border);color:var(--easc-accent);box-shadow:var(--easc-shadow)}
-/* EAS•C 2.5 — desktop sidebar + right content workspace */
-#bottomNav{display:none!important}
-#eascSidebar{position:fixed;left:0;top:0;width:220px;height:100vh;min-height:100vh;padding:.8rem;border:1px solid var(--easc-border);border-radius:1rem;background:var(--easc-card);box-shadow:var(--easc-shadow);z-index:20}
-.easc-side-brand{display:flex;align-items:center;gap:.65rem;padding:.55rem .35rem .9rem;border-bottom:1px solid var(--easc-border);margin-bottom:.7rem}
-.easc-side-logo{width:38px;height:38px;border-radius:.65rem;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;background:var(--easc-card2);border:1px solid var(--easc-border);color:var(--easc-accent)}
-.easc-side-nav{display:flex;flex-direction:column;gap:.35rem}
-.easc-side-btn{display:flex;align-items:center;gap:.75rem;width:100%;padding:.72rem .7rem;border:1px solid transparent;border-radius:.7rem;background:transparent;color:var(--easc-muted);font-family:Orbitron,sans-serif;font-size:.68rem;font-weight:700;text-align:left;cursor:pointer;transition:.15s}
-.easc-side-btn i{width:18px;text-align:center}.easc-side-btn:hover{background:var(--easc-card2);color:var(--easc-text);border-color:var(--easc-border)}.easc-side-btn.active{background:var(--easc-card2);color:var(--easc-accent);border-color:var(--easc-border)}
-.easc-side-profile{position:absolute;left:.8rem;right:.8rem;bottom:.8rem;display:flex;align-items:center;gap:.55rem;padding:.65rem;border:1px solid var(--easc-border);border-radius:.75rem;background:var(--easc-card2)}
-.easc-side-avatar{width:34px;height:34px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--easc-card);border:1px solid var(--easc-border);color:var(--easc-accent);flex-shrink:0}.easc-side-avatar img{width:100%;height:100%;object-fit:cover}
-.easc-right-panel,#stageMenu,#stageModule{margin-left:240px;width:calc(100% - 240px);max-width:none}
-.easc-right-panel{padding:.25rem 0 1rem}
-.easc-panel-heading{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 0 1rem;border-bottom:1px solid var(--easc-border)}
-.easc-quick-card{display:flex;flex-direction:column;align-items:flex-start;gap:.45rem;text-align:left;padding:1.2rem;border-radius:1rem;background:var(--easc-card);border:1px solid var(--easc-border);color:var(--easc-text);cursor:pointer;transition:.15s}.easc-quick-card:hover{transform:translateY(-2px);border-color:var(--easc-accent);box-shadow:var(--easc-shadow)}.easc-quick-card i{font-size:1.4rem;color:var(--easc-accent)}.easc-quick-card b{font:700 .75rem Orbitron,sans-serif}.easc-quick-card span{font-size:.7rem;color:var(--easc-muted);line-height:1.5}
-.easc-stat-card{padding:1rem;border-radius:.9rem;background:var(--easc-card);border:1px solid var(--easc-border)}.easc-stat-card span{display:block;font:700 .58rem Orbitron,sans-serif;color:var(--easc-muted)}.easc-stat-card b{display:block;font:800 1.25rem Orbitron,sans-serif;color:var(--easc-accent);margin-top:.35rem}
-.easc-score-chart{height:230px;display:flex;align-items:flex-end;gap:clamp(.3rem,1.5vw,1rem);padding:1rem .5rem .5rem;border-bottom:1px solid var(--easc-border);border-left:1px solid var(--easc-border);background:linear-gradient(to top,transparent 24%,var(--easc-border) 25%,transparent 26%,transparent 49%,var(--easc-border) 50%,transparent 51%,transparent 74%,var(--easc-border) 75%,transparent 76%)}
-.easc-score-bar{flex:1;min-width:22px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:.35rem}.easc-score-fill{width:min(46px,70%);min-height:4px;background:var(--easc-accent);border-radius:.45rem .45rem 0 0;transition:height .4s}.easc-score-value{font:700 .6rem Orbitron,sans-serif;color:var(--easc-accent)}.easc-score-label{font:700 .55rem Orbitron,sans-serif;color:var(--easc-muted)}
-.easc-module-row{display:grid;grid-template-columns:52px 1fr 70px;align-items:center;gap:.7rem;padding:.65rem;border:1px solid var(--easc-border);border-radius:.65rem;background:var(--easc-card2);font-size:.7rem}.easc-module-row .num{font:700 .65rem Orbitron;color:var(--easc-accent)}
-@media(max-width:800px){
-  #eascSidebar{width:66px;padding:.55rem;top:0}.easc-side-brandtext,.easc-side-btn span,.easc-side-profile .min-w-0{display:none}.easc-side-brand{justify-content:center}.easc-side-nav{gap:.5rem}.easc-side-btn{justify-content:center;padding:.75rem .3rem}.easc-side-profile{justify-content:center;left:.55rem;right:.55rem}.easc-right-panel,#stageMenu,#stageModule{margin-left:82px;width:calc(100% - 82px)}
-}
-@media(max-width:520px){
-  #eascSidebar{position:fixed;top:0;bottom:0;height:100vh;min-height:100vh;border-radius:0 1rem 1rem 0}.easc-right-panel,#stageMenu,#stageModule{margin-left:78px;width:calc(100% - 78px)}
-}
-/* Readable form controls: match the question/body font instead of Orbitron */
-select, select option, input, textarea {
-  font-family: inherit !important;
-}
-select option {
-  background: var(--easc-card, #0a1728);
-  color: var(--easc-text, #c2e9ff);
-  font-weight: 400;
-}
-/* Keep KaTeX formulas readable inside lesson cards */
-.katex { font-size: 1.05em; }
-.katex-display { overflow-x: auto; overflow-y: hidden; padding: .15rem 0; }
-
-</style>
-
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EAS•C — Enhancing Activities in Statistics Courseware</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 <style>
-#autosaveIndicator{position:fixed;right:14px;bottom:14px;z-index:9999;padding:8px 12px;border:1px solid rgba(0,240,255,.35);border-radius:10px;background:rgba(3,8,16,.92);color:#8fefff;font:600 11px Orbitron,sans-serif;box-shadow:0 0 14px rgba(0,240,255,.12);pointer-events:none}
-</style>
-<script>
-/* EAS•C Learner Auto-Save / Auto-Restore — APK/WebView ready
- * Primary storage: localStorage (private WebView/app storage).
- * Fallback storage: IndexedDB if localStorage is unavailable.
- * Designed to persist when the Android WebView/app is closed or backgrounded.
- * No Android storage permission is required for this internal app data.
- */
-(function(){
- const BASE_KEY='EAS-C_learnerData_v3';
- const LEGACY_KEY='EAS-C_learnerData_v2';
- function activeKey(){ const id=localStorage.getItem('EASC_currentProfileId'); return id ? BASE_KEY+'_'+id : BASE_KEY; }
- const DB_NAME='EASC_LocalLearnerDB';
- const STORE='learner';
- const DB_KEY='current';
- let saveTimer=null, restoring=false;
- function indicator(msg){
-   let el=document.getElementById('autosaveIndicator');
-   if(!el){el=document.createElement('div');el.id='autosaveIndicator';document.body.appendChild(el)}
-   el.textContent=msg;
- }
- function collect(){
-   const data={version:2,savedAt:new Date().toISOString(),url:location.href};
-   try{
-    if(typeof state!=='undefined') data.state=JSON.parse(JSON.stringify(state));
-   }catch(e){}
-   data.inputs={};
-   document.querySelectorAll('input,select,textarea').forEach((el,i)=>{
-     const key=el.id||el.name||('field_'+i);
-     if(el.type==='radio'||el.type==='checkbox') data.inputs[key]={type:el.type,checked:el.checked,value:el.value};
-     else data.inputs[key]=el.value;
-   });
-   data.moduleScores={};
-   for(let i=1;i<=6;i++){
-     const fb=document.getElementById('gqFeedback'+i);
-     if(fb) data.moduleScores[i]=fb.innerText||'';
-   }
-   return data;
- }
- function idbOpen(){
-   return new Promise((resolve,reject)=>{
-     if(!window.indexedDB) return reject(new Error('IndexedDB unavailable'));
-     const req=indexedDB.open(DB_NAME,1);
-     req.onupgradeneeded=()=>{try{req.result.createObjectStore(STORE)}catch(e){}};
-     req.onsuccess=()=>resolve(req.result);
-     req.onerror=()=>reject(req.error||new Error('IndexedDB open failed'));
-   });
- }
- function idbSet(data){
-   return idbOpen().then(db=>new Promise((resolve,reject)=>{
-     const tx=db.transaction(STORE,'readwrite');
-     tx.objectStore(STORE).put(data,DB_KEY);
-     tx.oncomplete=()=>{db.close();resolve(true)};
-     tx.onerror=()=>{db.close();reject(tx.error||new Error('IndexedDB write failed'))};
-   }));
- }
- function idbGet(){
-   return idbOpen().then(db=>new Promise((resolve,reject)=>{
-     const tx=db.transaction(STORE,'readonly');
-     const req=tx.objectStore(STORE).get(DB_KEY);
-     req.onsuccess=()=>resolve(req.result||null);
-     req.onerror=()=>reject(req.error||new Error('IndexedDB read failed'));
-     tx.oncomplete=()=>db.close();
-   }));
- }
- function idbClear(){
-   return idbOpen().then(db=>new Promise((resolve,reject)=>{
-     const tx=db.transaction(STORE,'readwrite'); tx.objectStore(STORE).delete(DB_KEY);
-     tx.oncomplete=()=>{db.close();resolve(true)}; tx.onerror=()=>{db.close();reject(tx.error)};
-   }));
- }
- async function persistStorage(){
-   try{if(navigator.storage && navigator.storage.persist) await navigator.storage.persist();}catch(e){}
- }
- async function save(show=true){
-   const data=collect();
-   let saved=false;
-   try{localStorage.setItem(activeKey(),JSON.stringify(data)); saved=true;}catch(e){}
-   if(!saved){try{await idbSet(data); saved=true;}catch(e){}}
-   if(show) indicator(saved?'✓ Progress saved to this device':'⚠ Save unavailable');
-   return saved;
- }
- window.EASC_saveProgress=save;
- window.EASC_restoreProgress=restore;
- window.EASC_getSavedData=async function(){
-   try{const raw=localStorage.getItem(activeKey()); if(raw) return JSON.parse(raw);}catch(e){}
-   try{const legacy=localStorage.getItem(LEGACY_KEY); if(legacy){const parsed=JSON.parse(legacy); try{localStorage.setItem(activeKey(),JSON.stringify(parsed))}catch(e){} return parsed;}}catch(e){}
-   try{return await idbGet();}catch(e){return null;}
- };
- window.EASC_clearSavedData=async function(){
-   try{localStorage.removeItem(activeKey())}catch(e){}
-   try{await idbClear()}catch(e){}
-   indicator('Saved learner data cleared');
- };
- window.EASC_storageInfo=function(){
-   return {storage:'device-local',key:activeKey(),localStorageAvailable:(()=>{try{localStorage.setItem('__easc_test','1');localStorage.removeItem('__easc_test');return true}catch(e){return false}})(),indexedDBAvailable:!!window.indexedDB};
- };
- async function restore(){
-   if(restoring) return; restoring=true;
-   let data=await window.EASC_getSavedData(); if(!data){restoring=false;return;}
-   try{
-    if(data.state && typeof state!=='undefined') Object.assign(state,data.state);
-    if(data.inputs) Object.keys(data.inputs).forEach(key=>{
-      const els=document.querySelectorAll('#'+CSS.escape(key)+', [name="'+CSS.escape(key)+'"]');
-      els.forEach(el=>{const v=data.inputs[key]; if(v.type==='radio'||v.type==='checkbox') el.checked=v.checked; else el.value=v.value;});
-    });
-    indicator('↻ Progress restored from this device');
-    if(typeof updateUIProgress==='function') updateUIProgress();
-    if(typeof updateModuleLocks==='function') updateModuleLocks();
-    if(typeof renderBadges==='function') renderBadges();
-   }catch(e){indicator('⚠ Some saved data could not be restored')}
-   restoring=false;
- }
- function schedule(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>save(false),350)}
- document.addEventListener('input',schedule,true);
- document.addEventListener('change',schedule,true);
- document.addEventListener('click',e=>{if(e.target.closest('button,[onclick]')) schedule()},true);
- window.addEventListener('pagehide',()=>{try{save(false)}catch(e){}});
- window.addEventListener('beforeunload',()=>{try{save(false)}catch(e){}});
- document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden') {try{save(false)}catch(e){}}});
- window.addEventListener('freeze',()=>{try{save(false)}catch(e){}});
- window.addEventListener('load',()=>{persistStorage();setTimeout(restore,1100)});
- // Patch common courseware state-changing functions so progress is saved immediately.
- window.addEventListener('load',()=>{
-   ['markModuleComplete','checkGuideAnswers','checkComprehension','submitQuiz','openModule'].forEach(fn=>{
-     let tries=0;
-     const timer=setInterval(()=>{
-       if(typeof window[fn]==='function'){
-         const original=window[fn];
-         if(original.__eascWrapped) {clearInterval(timer);return;}
-         const wrapped=function(){const r=original.apply(this,arguments);setTimeout(()=>save(false),80);return r};
-         wrapped.__eascWrapped=true; window[fn]=wrapped; clearInterval(timer);
-       }
-       if(++tries>40) clearInterval(timer);
-     },250);
-   });
- });
-})();
-</script>
-<!-- APK note: learner records are stored in the app/WebView private device storage; no external server is required. -->
+:root{--bg:#03112b;--bg2:#061a3b;--panel:#092653;--panel2:#0d3163;--line:#17609b;--cyan:#20c8ff;--cyan2:#72e7ff;--white:#effaff;--muted:#9db9d8;--good:#35e78b;--bad:#ff6482;--gold:#ffd66b;--easc-accent:#20c8ff;--easc-accent2:#72e7ff;--easc-card:#08234a;--easc-card2:#071f41;--easc-border:#17609b;--easc-text:#effaff}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--white);font-family:Inter,Segoe UI,Arial,sans-serif}
+body{overflow-x:hidden}button{font:inherit;cursor:pointer}
+#particles{position:fixed;inset:0;z-index:-2;overflow:hidden;background:radial-gradient(circle at 50% -10%,#0b3b70 0,#061a3b 38%,#020a1c 100%)}
+.particle{position:absolute;width:3px;height:3px;background:#45d8ff;border-radius:50%;opacity:.45;box-shadow:0 0 10px #21c8ff;animation:float linear infinite}
+@keyframes float{from{transform:translate3d(0,105vh,0)}to{transform:translate3d(var(--dx),-10vh,0)}}
+#particles:after{content:"";position:absolute;inset:0;background-image:linear-gradient(#13bfff0b 1px,transparent 1px),linear-gradient(90deg,#13bfff0b 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+.splash{min-height:100vh;display:grid;place-items:center;padding:30px;position:relative}
+.splashCard{width:min(1050px,100%);min-height:650px;border:1px solid #1670ac;border-radius:30px;background:linear-gradient(135deg,#061a3cdd,#08295add);box-shadow:0 25px 100px #0008,0 0 45px #00bfff13;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.splashText{padding:70px 60px;display:flex;flex-direction:column;justify-content:center}
+.brand{display:flex;align-items:center;gap:15px;margin-bottom:35px}.mark{width:58px;height:58px;border-radius:17px;background:linear-gradient(135deg,#10caff,#0878ff);display:grid;place-items:center;font-size:30px;font-weight:900;box-shadow:0 0 30px #00c8ff66}
+.brand b{font-size:30px}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:.7px;margin-top:3px}
+.kicker{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan2)}
+.splash h1{font-size:clamp(42px,6vw,72px);line-height:.98;margin:14px 0 20px;letter-spacing:-2px}.splash h1 span{color:var(--cyan2);text-shadow:0 0 25px #20c8ff55}
+.splash p{font-size:17px;line-height:1.75;color:#bdd2e9;max-width:550px}
+.btn{border:0;border-radius:13px;padding:14px 23px;background:linear-gradient(100deg,#08a9ed,#0877ff);color:white;font-weight:800;box-shadow:0 0 25px #00bfff3d;transition:.2s}.btn:hover{transform:translateY(-2px);box-shadow:0 0 35px #00bfff55}.btn.secondary{background:#0b2b54;border:1px solid #1d659a;box-shadow:none}
+.splashArt{display:grid;place-items:center;position:relative;background:radial-gradient(circle,#0b4a7e66,transparent 60%)}
+.curveLabel{position:absolute;top:70px;left:55px;color:#76e9ff;font-weight:700;letter-spacing:1px}
+.curve{width:90%;max-width:480px;filter:drop-shadow(0 0 15px #00c8ff77)}.curve path{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 3.2s ease-out forwards infinite alternate}
+@keyframes draw{to{stroke-dashoffset:0}}
+.curveDot{animation:pulse 1.5s ease-in-out infinite}.curveDot:nth-of-type(2){animation-delay:.4s}.curveDot:nth-of-type(3){animation-delay:.8s}
+@keyframes pulse{50%{opacity:.25;r:4}100%{opacity:1}}
+.app{display:none;min-height:100vh}.sidebar{position:fixed;left:0;top:0;bottom:0;width:270px;padding:25px 17px;background:#03142eee;border-right:1px solid #104875;z-index:10;backdrop-filter:blur(12px)}
+.logo{display:flex;align-items:center;gap:11px;margin-bottom:30px}.logo .mark{width:44px;height:44px;font-size:22px;border-radius:12px}.logo b{font-size:20px}.logo small{display:block;color:var(--muted);font-size:9px;max-width:170px}
+.nav{display:grid;gap:8px}.nav button{background:transparent;border:1px solid transparent;color:#a9c2dd;text-align:left;padding:14px;border-radius:11px}.nav button:hover,.nav button.active{background:#0a2d57;border-color:#176399;color:#fff;box-shadow:inset 3px 0 var(--cyan)}
+.profile{position:absolute;bottom:20px;left:17px;right:17px;padding:14px;border:1px solid #155080;background:#08234a;border-radius:14px}.profile b{font-size:11px}.profile span{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.main{margin-left:270px;width:calc(100% - 270px);padding:30px 35px 60px}.page{display:none}.page.active{display:block}
+.top{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:25px}.top h2{font-size:32px;margin:6px 0}.sub{color:var(--muted)}.progressBox{width:280px}.progressRow{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:7px}.progress{height:9px;border-radius:99px;background:#102d52;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#0ba8ed,#74eaff);box-shadow:0 0 15px #20c8ff;transition:.5s}
+.hero{border:1px solid #17639a;border-radius:23px;background:linear-gradient(135deg,#092b56,#071b3a);padding:30px;display:grid;grid-template-columns:1.3fr .7fr;gap:20px}.hero h3{font-size:26px;margin:8px 0 12px}.hero p,.card p{color:#aec5df;line-height:1.65}.statsVector{display:grid;place-items:center}.statsVector svg{width:min(100%,330px);filter:drop-shadow(0 0 16px #0bcfff55)}
+.section{margin-top:28px}.section h3{margin:0 0 14px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{border:1px solid #16517f;background:#08234aee;border-radius:16px;padding:20px}.icon{font-size:25px}.moduleCard{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.lesson{background:#071f41eF;border:1px solid #16517f;border-radius:19px;padding:28px;line-height:1.65}.lesson h3{color:#6fe3ff;margin-top:30px}.formula{padding:15px;text-align:center;border:1px solid #175887;background:#041832;border-radius:12px;font-size:18px;margin:14px 0}
+table{width:100%;border-collapse:collapse;margin:15px 0;font-size:13px}th,td{border:1px solid #1b5683;padding:10px}th{background:#0b315e}
+.activity{margin-top:20px;border:1px solid #1a669d;border-radius:18px;padding:22px;background:linear-gradient(145deg,#082b57,#061a38)}.step{display:none}.step.active{display:block}.stepNo{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#087fbe;color:#fff;font-weight:800;margin-right:8px}
+.interact{margin-top:18px;background:#041832;border:1px solid #164b78;border-radius:14px;padding:18px}.choices{display:grid;gap:9px;margin-top:14px}.choices button{border:1px solid #1c5b8b;background:#0b2b53;color:#dff6ff;text-align:left;border-radius:10px;padding:12px}.choices button:hover{border-color:#39d7ff}.choices button.selected{border-color:#55ddff;background:#0d3a69;box-shadow:0 0 12px #00c8ff22}.choices button.correct{border-color:var(--good);background:#0a5037}.choices button.wrong{border-color:var(--bad);background:#571c2c}.feedback{display:none;margin-top:14px;padding:12px;border-radius:10px;font-weight:700}.feedback.show{display:block}.feedback.good{background:#0a3d2c;color:#78efae}.feedback.bad{background:#461827;color:#ff9db1}.nextRow{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+.reveal{margin-top:12px}.reveal button{font-size:12px;padding:9px 12px}.answerBox{display:none;margin-top:10px;color:#b9d1e9}.answerBox.show{display:block}
+.quizQ{padding:18px;border:1px solid #16517f;background:#08234a;border-radius:14px;margin:12px 0}.quizQ h4{margin:0 0 12px}.quizChoices{display:grid;gap:7px}.quizChoices label{padding:9px;border-radius:8px}.quizChoices label:hover{background:#0b2e58}.quizChoices input{accent-color:#18c6ff}.quizFeedback{display:none;margin-top:12px;font-weight:700}.quizFeedback.show{display:block}.result{margin:20px 0;font-size:22px;font-weight:800}
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.badge{text-align:center;min-height:175px;display:grid;place-items:center}.medal{width:72px;height:72px;border:2px solid #28d0ff;border-radius:50%;display:grid;place-items:center;font-size:30px;box-shadow:0 0 24px #00bfff3d}.locked{opacity:.35;filter:grayscale(.8)}
+.certificate{padding:45px;text-align:center;border:2px solid #29d3ff;border-radius:22px;background:linear-gradient(135deg,#061a37,#0b315f);box-shadow:0 0 35px #00c8ff1c}.certificate h1{font-size:40px;color:#70e6ff}.certificate .name{font-size:29px;font-weight:900;margin:20px}
+@media(max-width:900px){.sidebar{width:220px}.main{margin-left:220px;width:calc(100% - 220px)}.splashCard{grid-template-columns:1fr}.splashArt{min-height:300px}.cards,.badges{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.splash{padding:12px}.splashText{padding:40px 25px}.splashCard{min-height:0}.sidebar{position:relative;width:100%;height:auto}.app{display:block}.main{margin-left:0;width:100%;padding:20px}.profile{position:static;margin-top:20px}.top{display:block}.progressBox{width:100%;margin-top:15px}.hero{grid-template-columns:1fr}.cards,.badges{grid-template-columns:1fr}}
+@media print{body{background:#fff;color:#111}.sidebar,.top,.btn{display:none!important}.main{margin:0;width:100%;padding:0}.page{display:none!important}.certificatePage{display:block!important}.certificate{color:#111;background:#fff;border-color:#078fc4}}
 
-<style id="easc-v23-theme-css">
-/* EAS•C 2.4 — three-theme system: light (default), dark, grey */
-:root{--easc-bg:#f5f7fa;--easc-card:#ffffff;--easc-card2:#eef2f7;--easc-text:#18212b;--easc-muted:#536273;--easc-accent:#1769aa;--easc-accent2:#0b4f82;--easc-border:#b9c6d3;--easc-grid:rgba(23,105,170,.08);--easc-shadow:0 8px 24px rgba(30,50,70,.10)}
-body.easc-theme-light{background:var(--easc-bg)!important;color:var(--easc-text)!important}
-body.easc-theme-dark{--easc-bg:#07111d;--easc-card:#0e1b2b;--easc-card2:#12243a;--easc-text:#e7f2fb;--easc-muted:#9fb1c2;--easc-accent:#39b9ff;--easc-accent2:#7dd3fc;--easc-border:#28506e;--easc-grid:rgba(57,185,255,.08);--easc-shadow:0 8px 26px rgba(0,0,0,.35);background:var(--easc-bg)!important;color:var(--easc-text)!important}
-body.easc-theme-grey{--easc-bg:#e5e7eb;--easc-card:#f3f4f6;--easc-card2:#d9dde3;--easc-text:#252b33;--easc-muted:#5f6875;--easc-accent:#4b5563;--easc-accent2:#374151;--easc-border:#9ca3af;--easc-grid:rgba(75,85,99,.08);--easc-shadow:0 8px 22px rgba(55,65,81,.12);background:var(--easc-bg)!important;color:var(--easc-text)!important}
-body.easc-theme-light #bgCanvas,body.easc-theme-grey #bgCanvas{opacity:.12!important}
-body.easc-theme-dark #bgCanvas{opacity:.35!important}
-.easc-theme-light .cyber-card,.easc-theme-grey .cyber-card,.easc-theme-dark .cyber-card{background:var(--easc-card)!important;border-color:var(--easc-border)!important;box-shadow:var(--easc-shadow)}
-.easc-theme-light .btn-cyber,.easc-theme-grey .btn-cyber,.easc-theme-dark .btn-cyber{background:var(--easc-card2)!important;border-color:var(--easc-accent)!important;color:var(--easc-text)!important;box-shadow:none!important}
-.easc-theme-light .btn-cyber:hover,.easc-theme-grey .btn-cyber:hover,.easc-theme-dark .btn-cyber:hover{background:var(--easc-accent)!important;color:#fff!important}
-.easc-theme-light .easc-themeable,.easc-theme-grey .easc-themeable,.easc-theme-dark .easc-themeable{background:var(--easc-card2)!important;border-color:var(--easc-border)!important;color:var(--easc-text)!important}
-.easc-theme-light .easc-feature-card,.easc-theme-grey .easc-feature-card,.easc-theme-dark .easc-feature-card{background:var(--easc-card)!important;border-color:var(--easc-border)!important;color:var(--easc-text)!important}
-.easc-feature-card{transition:transform .15s ease,box-shadow .15s ease}.easc-feature-card:hover{transform:translateY(-2px);box-shadow:var(--easc-shadow)}
-.easc-input{width:100%;padding:.55rem .65rem;border:1px solid var(--easc-border);border-radius:.55rem;background:var(--easc-card2);color:var(--easc-text);outline:none;font-size:.8rem}.easc-input:focus{border-color:var(--easc-accent)}
-.easc-label{display:block;font-size:.68rem;font-weight:700;color:var(--easc-muted);margin-bottom:.25rem}.easc-muted{color:var(--easc-muted)}
-.easc-result{background:var(--easc-card2);border:1px solid var(--easc-border);border-radius:.7rem;padding:.65rem;color:var(--easc-text)}
-.easc-table{width:100%;border-collapse:collapse;font-size:.72rem}.easc-table th,.easc-table td{padding:.4rem;border:1px solid var(--easc-border);text-align:center}.easc-table th{background:var(--easc-card2)}
-.easc-modal{position:fixed;inset:0;z-index:12000;background:rgba(0,0,0,.58);display:none;align-items:center;justify-content:center;padding:1rem}.easc-modal.open{display:flex}.easc-modal-box{width:min(1100px,100%);max-height:92vh;overflow:auto;background:var(--easc-card);color:var(--easc-text);border:1px solid var(--easc-border);border-radius:1rem;box-shadow:0 18px 60px rgba(0,0,0,.35);padding:1rem}
-.easc-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}.easc-tab{padding:.45rem .7rem;border:1px solid var(--easc-border);border-radius:.55rem;background:var(--easc-card2);color:var(--easc-text);font-size:.7rem;font-weight:700;cursor:pointer}.easc-tab.active{background:var(--easc-accent);color:#fff;border-color:var(--easc-accent)}
-.easc-hidden{display:none!important}.easc-feature-title{font-weight:800;font-size:.85rem;margin-bottom:.3rem}.easc-feature-desc{font-size:.68rem;color:var(--easc-muted);line-height:1.45}
-/* Re-map the original cyan-heavy utility classes so the three themes are genuinely different. */
-.easc-theme-light [class*="text-cyan-"]{color:var(--easc-text)!important}.easc-theme-grey [class*="text-cyan-"]{color:var(--easc-text)!important}.easc-theme-dark [class*="text-cyan-"]{color:var(--easc-text)!important}
-.easc-theme-light [class*="bg-cyan-"]{background-color:var(--easc-card2)!important}.easc-theme-grey [class*="bg-cyan-"]{background-color:var(--easc-card2)!important}.easc-theme-dark [class*="bg-cyan-"]{background-color:var(--easc-card2)!important}
-.easc-theme-light [class*="border-cyan-"]{border-color:var(--easc-border)!important}.easc-theme-grey [class*="border-cyan-"]{border-color:var(--easc-border)!important}.easc-theme-dark [class*="border-cyan-"]{border-color:var(--easc-border)!important}
-.easc-theme-light .cyber-text-glow,.easc-theme-grey .cyber-text-glow{ text-shadow:none!important;color:var(--easc-accent)!important}.easc-theme-dark .cyber-text-glow{text-shadow:0 0 10px var(--easc-accent)!important}
-.easc-theme-light .bg-grid,.easc-theme-grey .bg-grid{background-image:linear-gradient(to right,var(--easc-grid) 1px,transparent 1px),linear-gradient(to bottom,var(--easc-grid) 1px,transparent 1px)!important}
-.easc-theme-dark .bg-grid{background-image:linear-gradient(to right,var(--easc-grid) 1px,transparent 1px),linear-gradient(to bottom,var(--easc-grid) 1px,transparent 1px)!important}
-
-</style>
-
-
-<style id="easc-video-system">
-.easc-video-wrap{margin:1.25rem 0}.easc-video-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:14px;border:1px solid rgba(34,211,238,.35);background:#020617}.easc-video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.easc-video-suggestions{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem;margin-top:.75rem}.easc-video-suggestion{border:1px solid rgba(34,211,238,.22);border-radius:12px;padding:.8rem;background:rgba(15,23,42,.72);color:inherit;text-align:left}.easc-video-suggestion .sv-icon{font-size:1.3rem}.easc-video-suggestion .sv-title{font-weight:700;font-size:.78rem}.easc-video-suggestion .sv-note{font-size:.68rem;opacity:.72;margin-top:.2rem}.easc-video-status{font-size:.7rem;opacity:.75;margin-top:.55rem}
-</style>
-
-<style id="easc-portrait-default">
-html,body{width:100%;min-height:100%;overflow-x:hidden}
-@media (max-width: 768px){
-  body{min-width:0}
-  .easc-sidebar{max-width:86vw}
-}
-</style>
-
+/* EAS-C multi-module adaptation: module-1 visual format */
+body{font-size:16px}.main{padding-top:28px}.moduleShell{max-width:1200px;margin:0 auto}.component-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}.component-chip{border:1px solid #17609b;background:#08234a;border-radius:12px;padding:12px 14px}.component-chip b{display:block;color:#72e7ff;font-size:12px;letter-spacing:.8px}.component-chip span{display:block;color:#b9d1e9;font-size:12px;margin-top:3px;line-height:1.4}.module-nav{display:grid;gap:6px}.module-nav button{background:transparent;border:1px solid transparent;color:#a9c2dd;text-align:left;padding:11px 12px;border-radius:10px}.module-nav button:hover,.module-nav button.active{background:#0a2d57;border-color:#176399;color:#fff}.backBtn{margin-bottom:15px}@media(max-width:900px){.component-strip{grid-template-columns:1fr 1fr}}@media(max-width:650px){.component-strip{grid-template-columns:1fr}.sidebar{position:fixed;width:235px}.main{margin-left:235px;width:calc(100% - 235px)}}
+.easc-feature-card{border:1px solid #16517f;background:#08234a;border-radius:14px;padding:18px;color:inherit}.easc-feature-card:hover{border-color:#39d7ff}.easc-feature-title{font-weight:800;font-size:13px}.easc-feature-desc{font-size:12px;color:#aec5df;line-height:1.5;margin-top:4px}.easc-modal{position:fixed;inset:0;z-index:12000;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:18px}.easc-modal.open{display:flex}.easc-modal-box{width:min(1100px,100%);max-height:92vh;overflow:auto;background:#071f41;color:#effaff;border:1px solid #17639a;border-radius:18px;padding:20px}.easc-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.easc-tab{padding:9px 12px;border:1px solid #1b5683;border-radius:8px;background:#08234a;color:#dff6ff;font-size:12px;font-weight:700}.easc-tab.active{background:#087fbe;border-color:#39d7ff}.easc-input{width:100%;padding:9px;border:1px solid #1b5683;border-radius:8px;background:#041832;color:#effaff}.easc-label{display:block;font-size:12px;font-weight:700;color:#9db9d8;margin-bottom:4px}.easc-result{background:#041832;border:1px solid #164b78;border-radius:10px;padding:12px}.easc-muted{color:#9db9d8}.easc-video-wrap{margin:18px 0}.easc-video-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;border:1px solid #17639a;background:#020617}.easc-video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media(max-width:900px){.sidebar{width:220px}.main{margin-left:220px;width:calc(100% - 220px);padding:22px}.cards{grid-template-columns:1fr 1fr}.hero{grid-template-columns:1fr}}@media(max-width:650px){.sidebar{position:relative;width:100%;height:auto;bottom:auto;padding:14px}.main{margin-left:0;width:100%;padding:16px}.app{display:block}.profile{position:static;margin-top:14px}.nav{grid-template-columns:1fr 1fr}.module-nav{grid-column:1/-1}.cards{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.progressBox{width:100%}.moduleShell{padding:0}.component-strip{grid-template-columns:1fr 1fr}}</style>
 </head>
-<body class="h-full flex flex-col bg-cyber-bg text-cyber-text bg-grid select-none easc-theme-dark">
-
-    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
-
-    <!-- INITIAL PROFILE SETUP SCREEN -->
-    <div id="stageInit" class="fixed inset-0 z-50 bg-cyber-dark/95 backdrop-blur-xl flex items-center justify-center p-4">
-        <div class="cyber-card w-full max-w-md rounded-2xl p-6 md:p-8 text-center border border-cyan-400/50 shadow-[0_0_40px_rgba(0,240,255,0.3)]">
-            <div class="w-16 h-16 rounded-2xl bg-cyan-950/80 border border-cyan-400 flex items-center justify-center text-cyan-300 font-orbitron font-black text-3xl mx-auto mb-4 shadow-[0_0_15px_rgba(0,240,255,0.4)]">
-                ∑
-            </div>
-            <h2 class="font-orbitron font-bold text-2xl text-cyan-200 tracking-wider mb-1">WELCOME TO EAS•C</h2>
-            <p class="text-xs text-cyan-400/70 tracking-widest uppercase mb-6">Setup Your Learner Profile</p>
-
-            <div id="savedProfilesSection" class="mb-5 hidden text-left">
-                <div class="flex items-center justify-between mb-2">
-                    <label class="block text-xs font-orbitron text-cyan-300">SAVED LEARNER PROFILES</label>
-                    <button onclick="showNewProfileForm()" class="text-[10px] text-cyan-400 hover:text-cyan-200 font-orbitron">+ NEW PROFILE</button>
-                </div>
-                <div id="savedProfilesList" class="space-y-2 max-h-48 overflow-y-auto pr-1"></div>
-                <div class="text-[10px] text-cyan-400/60 mt-2">Select a saved profile to continue with its previous progress.</div>
-            </div>
-
-            <div id="newProfileForm" class="space-y-4 text-left">
-                <div>
-                    <label class="block text-xs font-orbitron text-cyan-300 mb-1">Your Full Name:</label>
-                    <input type="text" id="initNameInput" placeholder="e.g. Alex Vance" class="w-full bg-cyan-950/80 border border-cyan-500/50 rounded-lg p-2.5 text-xs text-cyan-100 font-orbitron focus:outline-none focus:border-cyan-400">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-orbitron text-cyan-300 mb-1">Profile Avatar Image:</label>
-                    <div class="flex items-center space-x-3">
-                        <div id="initAvatarPreview" class="w-12 h-12 rounded-xl bg-cyan-950 border border-cyan-400 flex items-center justify-center text-cyan-300 overflow-hidden shrink-0">
-                            <i class="fas fa-user text-lg"></i>
-                        </div>
-                        <input type="file" accept="image/*" id="initAvatarFile" onchange="handleAvatarUpload(event)" class="w-full text-[11px] text-cyan-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-orbitron file:bg-cyan-900 file:text-cyan-100 hover:file:bg-cyan-800 cursor-pointer">
-                    </div>
-                </div>
-
-                <button onclick="completeProfileSetup()" class="w-full btn-cyber font-orbitron font-bold text-sm py-3 rounded-xl text-cyan-100 tracking-wider mt-4">
-                    CREATE PROFILE & ENTER
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MAIN WRAPPER -->
-    <div class="relative z-10 flex-1 flex flex-col min-h-screen max-w-7xl w-full mx-auto p-3 md:p-6">
-
-
-
-        <!-- TITLE / LANDING SCREEN STAGE -->
-        <div id="stageTitle" class="flex-1 flex flex-col items-center justify-center py-8 text-center relative overflow-hidden my-auto">
-            <div class="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-transparent to-cyan-500/5 pointer-events-none rounded-3xl"></div>
-            
-            <div class="relative z-10 max-w-3xl px-4 flex flex-col items-center">
-                <div class="mb-6 flex items-center justify-center space-x-4">
-                    <span class="font-orbitron text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-200 to-cyan-500 cyber-text-glow">
-                        ∑
-                    </span>
-                    <div class="text-left">
-                        <div class="font-orbitron text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-100 to-blue-400 tracking-wider">
-                            EAS<span class="text-cyan-400">•</span>C
-                        </div>
-                        <div class="h-1 w-full bg-gradient-to-r from-cyan-400 to-transparent mt-1 rounded-full shadow-[0_0_8px_#00f0ff]"></div>
-                    </div>
-                </div>
-
-                <p class="font-orbitron text-sm md:text-base text-cyan-300 tracking-widest uppercase mb-8 max-w-xl text-center leading-relaxed">
-                    Interactive Multimedia Platform for Higher Statistics & Applied Analytics
-                </p>
-
-                <div class="w-full max-w-md h-32 mb-8 relative border border-cyan-500/30 rounded-xl bg-cyan-950/30 overflow-hidden flex items-center justify-center">
-                    <canvas id="titlePreviewCanvas" class="w-full h-full"></canvas>
-                    <div class="absolute inset-0 bg-gradient-to-t from-cyber-bg via-transparent to-transparent pointer-events-none"></div>
-                </div>
-
-                <button onclick="startLearningTransition()" class="btn-cyber font-orbitron font-bold text-lg md:text-xl px-10 py-4 rounded-xl text-cyan-100 tracking-wider flex items-center space-x-3 cursor-pointer group animate-cyber-pulse">
-                    <div class="w-8 h-8 rounded-full bg-cyan-400/20 flex items-center justify-center border border-cyan-300 group-hover:bg-cyan-400 group-hover:text-cyan-950 transition-colors">
-                        <i class="fas fa-play text-sm ml-0.5"></i>
-                    </div>
-                    <span>START LEARNING</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- MAIN MENU STAGE -->
-        
-        <!-- EAS•C SIDEBAR WORKSPACE -->
-        <aside id="eascSidebar" class="hidden">
-            <div class="easc-side-brand">
-                <div class="easc-side-logo">∑</div>
-                <div class="easc-side-brandtext">
-                    <div class="font-orbitron font-bold">EAS•C</div>
-                    <div class="text-[9px] easc-muted">COURSEWARE</div>
-                </div>
-            </div>
-            <nav class="easc-side-nav">
-                <button class="easc-side-btn active" data-view="home" onclick="showSidebarView('home')"><i class="fas fa-home"></i><span>MENU</span></button>
-                <button class="easc-side-btn" data-view="dashboard" onclick="showSidebarView('dashboard')"><i class="fas fa-chart-line"></i><span>DASHBOARD</span></button>
-                <button class="easc-side-btn" data-view="modules" onclick="showSidebarView('modules')"><i class="fas fa-book-open"></i><span>MODULES</span></button>
-                <button class="easc-side-btn" data-view="stats" onclick="showSidebarView('stats')"><i class="fas fa-flask"></i><span>STATS LAB</span></button>
-                <button class="easc-side-btn" data-view="settings" onclick="showSidebarView('settings')"><i class="fas fa-cog"></i><span>SETTINGS</span></button>
-            </nav>
-            <div class="easc-side-profile">
-                <div id="sideAvatar" class="easc-side-avatar"><i class="fas fa-user"></i></div>
-                <div class="min-w-0">
-                    <div id="sideName" class="font-orbitron text-[10px] truncate">Student</div>
-                    <div class="text-[9px] easc-muted">LOCAL PROFILE</div>
-                </div>
-            </div>
-        </aside>
-
-        <section id="eascHomePanel" class="easc-right-panel hidden">
-            <div class="easc-panel-heading">
-                <div><div class="font-orbitron font-bold text-lg">WELCOME TO EAS•C</div><div class="text-xs easc-muted">Enhancing Activities in Statistics Courseware</div></div>
-                <button onclick="showSidebarView('dashboard')" class="btn-cyber px-4 py-2 rounded text-xs font-orbitron">VIEW DASHBOARD</button>
-            </div>
-            <div class="grid md:grid-cols-3 gap-4 mt-4">
-                <button onclick="showSidebarView('modules')" class="easc-quick-card"><i class="fas fa-book-open"></i><b>LEARNING MODULES</b><span>Study lessons, interactive graphs, activities, and comprehension checks.</span></button>
-                <button onclick="showSidebarView('stats')" class="easc-quick-card"><i class="fas fa-flask"></i><b>STATISTICS LAB</b><span>Z-test and t-test calculators plus Pearson r correlation with an interactive scatterplot.</span></button>
-                <button onclick="showSidebarView('settings')" class="easc-quick-card"><i class="fas fa-cog"></i><b>SETTINGS</b><span>Change theme, sound, particles, learner profile, and data options.</span></button>
-            </div>
-            <div class="cyber-card rounded-2xl p-5 mt-4">
-                <div class="flex items-center justify-between"><div><div class="font-orbitron font-bold">LEARNING PATH</div><div class="text-xs easc-muted">Complete each comprehension check to unlock the next module.</div></div><div id="homeProgressPercent" class="font-orbitron text-xl" style="color:var(--easc-accent)">0%</div></div>
-                <div class="h-3 rounded-full mt-4" style="background:var(--easc-card2);border:1px solid var(--easc-border)"><div id="homeProgressBar" class="h-full rounded-full" style="width:0%;background:var(--easc-accent);transition:width .3s"></div></div>
-            </div>
-        </section>
-
-        <section id="eascDashboardPanel" class="easc-right-panel hidden">
-            <div class="easc-panel-heading"><div><div class="font-orbitron font-bold text-lg">LEARNER DASHBOARD</div><div class="text-xs easc-muted">Progress, module scores, and learning performance</div></div><button onclick="EASC_exportData()" class="btn-cyber px-3 py-2 rounded text-xs">EXPORT RECORD</button></div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-                <div class="easc-stat-card"><span>COMPLETED</span><b id="dashCompleted">0/6</b></div>
-                <div class="easc-stat-card"><span>AVERAGE SCORE</span><b id="dashAverage">0%</b></div>
-                <div class="easc-stat-card"><span>BADGES</span><b id="dashBadges">0</b></div>
-                <div class="easc-stat-card"><span>LAB TOOLS</span><b id="dashLabs">0</b></div>
-            </div>
-            <div class="cyber-card rounded-2xl p-5 mt-4">
-                <div class="font-orbitron font-bold mb-1">MODULE SCORE CHART</div>
-                <div class="text-xs easc-muted mb-4">Scores are based on the learner's saved module results.</div>
-                <div id="dashScoreChart" class="easc-score-chart"></div>
-            </div>
-            <div class="cyber-card rounded-2xl p-5 mt-4">
-                <div class="font-orbitron font-bold mb-3">MODULE PROGRESS</div>
-                <div id="dashModuleRows" class="space-y-2"></div>
-            </div>
-        </section>
-
-        <section id="eascStatsPanel" class="easc-right-panel hidden">
-            <div class="easc-panel-heading"><div><div class="font-orbitron font-bold text-lg">STATISTICS LAB</div><div class="text-xs easc-muted">Interactive statistics tools and simulations</div></div></div>
-            <div id="eascStatsContent" class="mt-4"></div>
-        </section>
-
-        <section id="eascSettingsPanel" class="easc-right-panel hidden">
-            <div class="easc-panel-heading"><div><div class="font-orbitron font-bold text-lg">SETTINGS</div><div class="text-xs easc-muted">Personalize EAS•C and manage local learner data</div></div></div>
-            <div class="grid md:grid-cols-2 gap-4 mt-4">
-                <div class="cyber-card rounded-2xl p-5">
-                    <div class="font-orbitron font-bold mb-3">THEME</div>
-                    <div id="sidebarThemeButtons" class="grid grid-cols-3 gap-2"></div>
-                    <div class="text-xs easc-muted mt-3">Default theme: Dark</div>
-                </div>
-                <div class="cyber-card rounded-2xl p-5">
-                    <div class="font-orbitron font-bold mb-3">COURSEWARE OPTIONS</div>
-                    <label class="flex items-center justify-between text-xs py-2"><span>Sound Effects</span><input id="sideSoundToggle" type="checkbox" checked onchange="state.soundEnabled=this.checked;EASC_saveProgress&&EASC_saveProgress(false)"></label>
-                    <label class="flex items-center justify-between text-xs py-2"><span>Background Particles</span><input id="sideParticlesToggle" type="checkbox" checked onchange="state.particlesEnabled=this.checked;EASC_saveProgress&&EASC_saveProgress(false)"></label>
-                </div>
-                <div class="cyber-card rounded-2xl p-5">
-                    <div class="font-orbitron font-bold mb-3">LEARNER PROFILE</div>
-                    <div class="flex gap-3 items-center">
-                        <div id="settingsSideAvatar" class="easc-side-avatar"></div>
-                        <div><div id="settingsSideName" class="font-orbitron text-sm"></div><div class="text-xs easc-muted">Saved on this device</div></div>
-                    </div>
-                    <button onclick="switchLearnerProfile()" class="btn-cyber px-4 py-2 rounded text-xs mt-4">SWITCH PROFILE</button>
-                </div>
-                <div class="cyber-card rounded-2xl p-5">
-                    <div class="font-orbitron font-bold mb-3">LEARNER DATA</div>
-                    <div class="text-xs easc-muted mb-3">Export a backup or clear the current learner's local record.</div>
-                    <div class="flex flex-wrap gap-2"><button onclick="EASC_exportData()" class="btn-cyber px-3 py-2 rounded text-xs">EXPORT JSON</button><button onclick="EASC_openDataPanel()" class="btn-cyber px-3 py-2 rounded text-xs">DATA MANAGER</button></div>
-                </div>
-            </div>
-        </section>
-
-<div id="stageMenu" class="hidden flex-1 flex flex-col justify-center py-2">
-            <div class="text-center mb-6">
-                <h2 class="font-orbitron text-2xl md:text-3xl font-bold text-cyan-300 tracking-widest cyber-text-glow uppercase">
-                    MAIN MENU
-                </h2>
-                <div class="h-0.5 w-24 bg-cyan-400 mx-auto mt-2 rounded-full shadow-[0_0_8px_#00f0ff]"></div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 my-auto">
-                
-                <!-- Module 1 -->
-                <div onclick="openModule(1)" class="cyber-card rounded-2xl p-5 cursor-pointer flex flex-col justify-between group relative overflow-hidden">
-                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl group-hover:bg-cyan-400/20 transition-all"></div>
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="font-orbitron font-bold text-2xl text-cyan-400">01</span>
-                            <div class="w-12 h-12 rounded-xl bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-300 group-hover:border-cyan-300 group-hover:text-cyan-100 transition-colors shadow-[0_0_10px_rgba(0,240,255,0.15)]">
-                                <i class="fas fa-balance-scale text-xl"></i>
-                            </div>
-                        </div>
-                        <h3 class="font-orbitron font-bold text-lg text-cyan-200 group-hover:text-cyan-100 mb-1">HYPOTHESIS FUNDAMENTALS</h3>
-                        <p class="text-xs text-cyan-400/80 line-clamp-2">Null vs. Alternative hypotheses, directional statements, & real problems.</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-cyan-500/20 flex items-center justify-between text-xs text-cyan-400 font-orbitron">
-                        <span id="m1Status">Ready</span>
-                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </div>
-
-                <!-- Module 2 -->
-                <div onclick="openModule(2)" class="cyber-card rounded-2xl p-5 cursor-pointer flex flex-col justify-between group relative overflow-hidden">
-                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl group-hover:bg-cyan-400/20 transition-all"></div>
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="font-orbitron font-bold text-2xl text-cyan-400">02</span>
-                            <div class="w-12 h-12 rounded-xl bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-300 group-hover:border-cyan-300 group-hover:text-cyan-100 transition-colors shadow-[0_0_10px_rgba(0,240,255,0.15)]">
-                                <i class="fas fa-bullseye text-xl"></i>
-                            </div>
-                        </div>
-                        <h3 class="font-orbitron font-bold text-lg text-cyan-200 group-hover:text-cyan-100 mb-1">LEVEL OF SIGNIFICANCE</h3>
-                        <p class="text-xs text-cyan-400/80 line-clamp-2">Alpha ($\\alpha$) thresholds, critical values, rejection regions & distribution curves.</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-cyan-500/20 flex items-center justify-between text-xs text-cyan-400 font-orbitron">
-                        <span id="m2Status">Ready</span>
-                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </div>
-
-                <!-- Module 3 -->
-                <div onclick="openModule(3)" class="cyber-card rounded-2xl p-5 cursor-pointer flex flex-col justify-between group relative overflow-hidden">
-                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl group-hover:bg-cyan-400/20 transition-all"></div>
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="font-orbitron font-bold text-2xl text-cyan-400">03</span>
-                            <div class="w-12 h-12 rounded-xl bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-300 group-hover:border-cyan-300 group-hover:text-cyan-100 transition-colors shadow-[0_0_10px_rgba(0,240,255,0.15)]">
-                                <i class="fas fa-chart-area text-xl"></i>
-                            </div>
-                        </div>
-                        <h3 class="font-orbitron font-bold text-lg text-cyan-200 group-hover:text-cyan-100 mb-1">HYPOTHESIS TESTING</h3>
-                        <p class="text-xs text-cyan-400/80 line-clamp-2">Step-by-step Z-test and T-test calculators, decision engines.</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-cyan-500/20 flex items-center justify-between text-xs text-cyan-400 font-orbitron">
-                        <span id="m3Status">Ready</span>
-                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </div>
-
-                <!-- Module 4 -->
-                <div onclick="openModule(4)" class="cyber-card rounded-2xl p-5 cursor-pointer flex flex-col justify-between group relative overflow-hidden">
-                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl group-hover:bg-cyan-400/20 transition-all"></div>
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="font-orbitron font-bold text-2xl text-cyan-400">04</span>
-                            <div class="w-12 h-12 rounded-xl bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-300 group-hover:border-cyan-300 group-hover:text-cyan-100 transition-colors shadow-[0_0_10px_rgba(0,240,255,0.15)]">
-                                <i class="fas fa-project-diagram text-xl"></i>
-                            </div>
-                        </div>
-                        <h3 class="font-orbitron font-bold text-lg text-cyan-200 group-hover:text-cyan-100 mb-1">CORRELATION</h3>
-                        <p class="text-xs text-cyan-400/80 line-clamp-2">Pearson's $r$ coefficient, strength & direction interactive visualizer.</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-cyan-500/20 flex items-center justify-between text-xs text-cyan-400 font-orbitron">
-                        <span id="m4Status">Ready</span>
-                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </div>
-
-                <!-- Module 5 -->
-                <div onclick="openModule(5)" class="cyber-card rounded-2xl p-5 cursor-pointer flex flex-col justify-between group relative overflow-hidden">
-                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl group-hover:bg-cyan-400/20 transition-all"></div>
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="font-orbitron font-bold text-2xl text-cyan-400">05</span>
-                            <div class="w-12 h-12 rounded-xl bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-300 group-hover:border-cyan-300 group-hover:text-cyan-100 transition-colors shadow-[0_0_10px_rgba(0,240,255,0.15)]">
-                                <i class="fas fa-chart-line text-xl"></i>
-                            </div>
-                        </div>
-                        <h3 class="font-orbitron font-bold text-lg text-cyan-200 group-hover:text-cyan-100 mb-1">SCATTER PLOT & LINE OF BEST FIT</h3>
-                        <p class="text-xs text-cyan-400/80 line-clamp-2">Linear regression modeling, slope/intercept computation ($Y = mx + b$).</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-cyan-500/20 flex items-center justify-between text-xs text-cyan-400 font-orbitron">
-                        <span id="m5Status">Ready</span>
-                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </div>
-
-                <!-- Module 6 -->
-                <div onclick="openModule(6)" class="cyber-card rounded-2xl p-5 cursor-pointer flex flex-col justify-between group relative overflow-hidden">
-                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl group-hover:bg-cyan-400/20 transition-all"></div>
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="font-orbitron font-bold text-2xl text-cyan-400">06</span>
-                            <div class="w-12 h-12 rounded-xl bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-300 group-hover:border-cyan-300 group-hover:text-cyan-100 transition-colors shadow-[0_0_10px_rgba(0,240,255,0.15)]">
-                                <i class="fas fa-tasks text-xl"></i>
-                            </div>
-                        </div>
-                        <h3 class="font-orbitron font-bold text-lg text-cyan-200 group-hover:text-cyan-100 mb-1">ASSESSMENT QUIZ</h3>
-                        <p class="text-xs text-cyan-400/80 line-clamp-2">Interactive testing, performance evaluation, & certificate qualification.</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-cyan-500/20 flex items-center justify-between text-xs text-cyan-400 font-orbitron">
-                        <span id="m6Status">Ready</span>
-                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-<div id="eascFeatureHub" class="hidden mt-7">
-  <div class="flex items-center justify-between gap-3 mb-3">
-    <div><h3 class="font-orbitron font-bold text-lg" style="color:var(--easc-accent)">STATISTICS LAB</h3>
-    <p class="text-xs easc-muted">Choose an inferential statistics calculator or construct a Pearson correlation scatterplot.</p></div>
-  </div>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-    <button class="easc-feature-card text-left p-4 rounded-xl border" onclick="openEascFeature('zknown')"><div class="text-2xl mb-2">Zσ</div><div class="easc-feature-title">Z-TEST FOR KNOWN SD</div><div class="easc-feature-desc">Test a population mean when the population standard deviation σ is known.</div></button>
-    <button class="easc-feature-card text-left p-4 rounded-xl border" onclick="openEascFeature('zunknown')"><div class="text-2xl mb-2">Zs</div><div class="easc-feature-title">Z-TEST FOR UNKNOWN SD</div><div class="easc-feature-desc">Explore a one-sample z procedure using the sample SD as an estimate when σ is unknown.</div></button>
-    <button class="easc-feature-card text-left p-4 rounded-xl border" onclick="openEascFeature('onesamplet')"><div class="text-2xl mb-2">t₁</div><div class="easc-feature-title">ONE-SAMPLE T-TEST</div><div class="easc-feature-desc">Compare a sample mean with a hypothesized population mean using the t statistic.</div></button>
-    <button class="easc-feature-card text-left p-4 rounded-xl border" onclick="openEascFeature('indttest')"><div class="text-2xl mb-2">t₂</div><div class="easc-feature-title">INDEPENDENT-SAMPLE T-TEST</div><div class="easc-feature-desc">Compare the means of two independent groups.</div></button>
-    <button class="easc-feature-card text-left p-4 rounded-xl border" onclick="openEascFeature('pairedt')"><div class="text-2xl mb-2">tₚ</div><div class="easc-feature-title">PAIRED-SAMPLE T-TEST</div><div class="easc-feature-desc">Analyze matched or before-and-after observations using paired differences.</div></button>
-    <button class="easc-feature-card text-left p-4 rounded-xl border" onclick="openEascFeature('pearson')"><div class="text-2xl mb-2">r</div><div class="easc-feature-title">PEARSON r CORRELATION</div><div class="easc-feature-desc">Enter paired X and Y observations, calculate Pearson's r, and construct an interactive scatterplot.</div></button>
-  </div>
-</div>
-
-<div id="eascFeatureModal" class="easc-modal" onclick="if(event.target===this)closeEascFeature()">
- <div class="easc-modal-box">
-  <div class="flex items-center justify-between gap-3 mb-3"><div><div id="eascFeatureHeading" class="font-orbitron font-bold text-lg" style="color:var(--easc-accent)">STATISTICS LAB</div><div id="eascFeatureSub" class="text-xs easc-muted">Interactive learning tools</div></div><button onclick="closeEascFeature()" class="p-2 rounded-lg border" style="border-color:var(--easc-border)">✕</button></div>
-  <div id="eascFeatureBody"></div>
- </div>
-</div>
-
-
-        <!-- MODULE STAGE VIEW -->
-        <div id="stageModule" class="hidden flex-1 flex flex-col my-2">
-            <!-- Module Top Bar -->
-            <div class="flex items-center justify-between mb-4 pb-2 border-b border-cyan-500/30">
-                <button onclick="goToMenu()" class="flex items-center space-x-2 text-cyan-400 hover:text-cyan-200 font-orbitron text-sm transition-colors">
-                    <i class="fas fa-chevron-left"></i>
-                    <span>MAIN MENU</span>
-                </button>
-                <div id="moduleTitleHeader" class="font-orbitron font-bold text-lg text-cyan-200 tracking-wider">
-                    MODULE TITLE
-                </div>
-                <div></div>
-            </div>
-
-            <!-- MODULE CONTENT CONTAINER -->
-            <div id="moduleContainer" class="flex-1 cyber-card rounded-2xl p-4 md:p-6 overflow-y-auto">
-                <!-- Dynamically populated module components -->
-            </div>
-        </div>
-
-        <!-- BOTTOM TABS NAVIGATION BAR -->
-        <footer id="bottomNav" class="hidden cyber-card rounded-xl p-2 mt-4 grid grid-cols-4 gap-2 border-t border-cyan-500/30">
-            <button onclick="openModal('modalProgress')" class="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-cyan-950/60 text-cyan-400 hover:text-cyan-200 transition-all group">
-                <i class="fas fa-chart-bar text-lg mb-1 group-hover:scale-110 transition-transform"></i>
-                <span class="font-orbitron text-[11px] tracking-wider">PROGRESS</span>
-            </button>
-
-            <button onclick="openModal('modalBadges')" class="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-cyan-950/60 text-cyan-400 hover:text-cyan-200 transition-all group">
-                <i class="fas fa-award text-lg mb-1 group-hover:scale-110 transition-transform"></i>
-                <span class="font-orbitron text-[11px] tracking-wider">BADGES</span>
-            </button>
-
-            <button onclick="openModal('modalCertificate')" class="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-cyan-950/60 text-cyan-400 hover:text-cyan-200 transition-all group">
-                <i class="fas fa-certificate text-lg mb-1 group-hover:scale-110 transition-transform"></i>
-                <span class="font-orbitron text-[11px] tracking-wider">CERTIFICATE</span>
-            </button>
-
-            <button onclick="openModal('modalSettings')" class="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-cyan-950/60 text-cyan-400 hover:text-cyan-200 transition-all group">
-                <i class="fas fa-sliders-h text-lg mb-1 group-hover:scale-110 transition-transform"></i>
-                <span class="font-orbitron text-[11px] tracking-wider">SETTINGS</span>
-            </button>
-        </footer>
-
-    </div>
-
-    <!-- MODALS CONTAINER -->
-
-    <!-- PROGRESS MODAL -->
-    <div id="modalProgress" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="cyber-card w-full max-w-xl rounded-2xl p-6 border border-cyan-400/50 shadow-[0_0_30px_rgba(0,240,255,0.2)]">
-            <div class="flex items-center justify-between mb-6 pb-2 border-b border-cyan-500/30">
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-chart-bar text-cyan-400 text-xl"></i>
-                    <h3 class="font-orbitron font-bold text-xl text-cyan-200">LEARNING PROGRESS</h3>
-                </div>
-                <button onclick="closeModal('modalProgress')" class="text-cyan-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
-            </div>
-
-            <div class="space-y-4">
-                <div>
-                    <div class="flex justify-between font-orbitron text-sm mb-1 text-cyan-300">
-                        <span>Overall Course Mastery</span>
-                        <span id="overallProgressPercent">0%</span>
-                    </div>
-                    <div class="w-full h-3 bg-cyan-950 rounded-full overflow-hidden border border-cyan-500/30 p-0.5">
-                        <div id="overallProgressBar" class="h-full bg-gradient-to-r from-cyan-500 to-sky-300 rounded-full w-0 transition-all duration-500 shadow-[0_0_10px_#00f0ff]"></div>
-                    </div>
-                </div>
-
-                <div id="progressModuleList" class="space-y-2 mt-4 max-h-60 overflow-y-auto pr-1">
-                    <!-- Dynamic Progress Items -->
-                </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-cyan-500/20 text-right">
-                <button onclick="closeModal('modalProgress')" class="btn-cyber font-orbitron text-xs px-6 py-2 rounded-lg text-cyan-100">CLOSE</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- BADGES MODAL -->
-    <div id="modalBadges" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="cyber-card w-full max-w-2xl rounded-2xl p-6 border border-cyan-400/50 shadow-[0_0_30px_rgba(0,240,255,0.2)]">
-            <div class="flex items-center justify-between mb-6 pb-2 border-b border-cyan-500/30">
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-award text-cyan-400 text-xl"></i>
-                    <h3 class="font-orbitron font-bold text-xl text-cyan-200">ACHIEVEMENT BADGES</h3>
-                </div>
-                <button onclick="closeModal('modalBadges')" class="text-cyan-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
-            </div>
-
-            <div id="badgeGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-4 max-h-80 overflow-y-auto p-1">
-                <!-- Dynamic Badges -->
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-cyan-500/20 text-right">
-                <button onclick="closeModal('modalBadges')" class="btn-cyber font-orbitron text-xs px-6 py-2 rounded-lg text-cyan-100">CLOSE</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- CERTIFICATE MODAL -->
-    <div id="modalCertificate" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="cyber-card w-full max-w-3xl rounded-2xl p-6 border border-cyan-400/50 shadow-[0_0_30px_rgba(0,240,255,0.2)]">
-            <div class="flex items-center justify-between mb-4 pb-2 border-b border-cyan-500/30">
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-certificate text-cyan-400 text-xl"></i>
-                    <h3 class="font-orbitron font-bold text-xl text-cyan-200">COURSE CERTIFICATE</h3>
-                </div>
-                <button onclick="closeModal('modalCertificate')" class="text-cyan-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
-            </div>
-
-            <!-- Certificate View Printable Area -->
-            <div id="certificatePrintArea" class="bg-gradient-to-b from-cyan-950/90 to-slate-950 p-6 md:p-10 rounded-xl border-2 border-cyan-400/60 text-center relative overflow-hidden my-2 shadow-[inset_0_0_30px_rgba(0,240,255,0.15)]">
-                <div class="absolute -top-12 -right-12 w-32 h-32 bg-cyan-400/10 rounded-full blur-2xl"></div>
-                <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-cyan-400/10 rounded-full blur-2xl"></div>
-
-                <div class="font-orbitron text-2xl md:text-3xl font-black text-cyan-300 tracking-widest mb-1 cyber-text-glow">
-                    CERTIFICATE OF ACHIEVEMENT
-                </div>
-                <div class="text-xs text-cyan-400/70 font-orbitron tracking-widest mb-6">ENHANCING ACTIVITIES IN STATISTICS COURSEWARE (EAS•C)</div>
-
-                <p class="text-sm text-cyan-200 italic mb-2">This is to officially certify that</p>
-                <div id="certStudentName" class="font-orbitron text-xl md:text-2xl font-bold text-white border-b border-cyan-400/50 inline-block px-8 py-1 mb-4">
-                    STUDENT LEARNER
-                </div>
-                <p class="text-xs md:text-sm text-cyan-300 max-w-md mx-auto mb-6 leading-relaxed">
-                    has successfully completed all learning modules and demonstrated proficiency in Academic Hypothesis Fundamentals, Significance Testing, Correlation, and Regression Analysis.
-                </p>
-
-                <div class="flex justify-between items-end pt-4 border-t border-cyan-500/30 text-left font-orbitron text-[10px] md:text-xs text-cyan-400">
-                    <div>
-                        <div>DATE ISSUED: <span id="certDate">--/--/----</span></div>
-                        <div>VERIFICATION ID: <span id="certId">EASC-8942-X</span></div>
-                    </div>
-                    <div class="text-right">
-                        <div class="font-bold text-cyan-200">EAS•C ACADEMIC BOARD</div>
-                        <div>STATISTICAL LEARNING</div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="certLockedMessage" class="hidden text-center py-8">
-                <i class="fas fa-lock text-4xl text-cyan-500/50 mb-3"></i>
-                <p class="text-cyan-300 font-orbitron text-sm mb-1">CERTIFICATE LOCKED</p>
-                <p class="text-xs text-cyan-400/70">Complete Module 06 (Assessment Quiz) with a score of 80% or higher to unlock your certificate.</p>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-cyan-500/20 flex justify-between items-center">
-                <input type="text" id="certNameInput" placeholder="Enter Your Full Name" oninput="updateCertName()" class="bg-cyan-950/80 border border-cyan-500/40 rounded-lg px-3 py-1.5 text-xs text-cyan-100 font-orbitron focus:outline-none focus:border-cyan-400 w-1/2">
-                
-                <div class="space-x-2">
-                    <button onclick="printCertificate()" id="btnPrintCert" class="btn-cyber font-orbitron text-xs px-4 py-2 rounded-lg text-cyan-100">
-                        <i class="fas fa-print mr-1"></i> PRINT
-                    </button>
-                    <button onclick="closeModal('modalCertificate')" class="bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/40 font-orbitron text-xs px-4 py-2 rounded-lg text-cyan-300">
-                        CLOSE
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SETTINGS MODAL -->
-    <div id="modalSettings" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="cyber-card w-full max-w-md rounded-2xl p-6 border border-cyan-400/50 shadow-[0_0_30px_rgba(0,240,255,0.2)]">
-            <div class="flex items-center justify-between mb-6 pb-2 border-b border-cyan-500/30">
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-cog text-cyan-400 text-xl"></i>
-                    <h3 class="font-orbitron font-bold text-xl text-cyan-200">SYSTEM SETTINGS</h3>
-                </div>
-                <button onclick="closeModal('modalSettings')" class="text-cyan-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
-            </div>
-
-            <div class="space-y-5">
-                <!-- Theme Color Selector -->
-                <div>
-                    <label class="block font-orbitron text-sm text-cyan-200 mb-2">Theme Color Palette</label>
-                    <div class="grid grid-cols-4 gap-2">
-                        <button onclick="setThemeColor('cyan')" class="p-2 rounded-lg border border-cyan-400 bg-cyan-950 text-cyan-300 font-orbitron text-xs flex items-center justify-center space-x-1">
-                            <span class="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span>
-                            <span>Cyan</span>
-                        </button>
-                        <button onclick="setThemeColor('emerald')" class="p-2 rounded-lg border border-emerald-400 bg-emerald-950 text-emerald-300 font-orbitron text-xs flex items-center justify-center space-x-1">
-                            <span class="w-3 h-3 rounded-full bg-emerald-400 inline-block"></span>
-                            <span>Matrix</span>
-                        </button>
-                        <button onclick="setThemeColor('purple')" class="p-2 rounded-lg border border-purple-400 bg-purple-950 text-purple-300 font-orbitron text-xs flex items-center justify-center space-x-1">
-                            <span class="w-3 h-3 rounded-full bg-purple-400 inline-block"></span>
-                            <span>Plasma</span>
-                        </button>
-                        <button onclick="setThemeColor('amber')" class="p-2 rounded-lg border border-amber-400 bg-amber-950 text-amber-300 font-orbitron text-xs flex items-center justify-center space-x-1">
-                            <span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
-                            <span>Amber</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <div>
-                        <div class="font-orbitron text-sm text-cyan-200">Audio Sound Effects</div>
-                        <div class="text-xs text-cyan-400/70">Futuristic UI sound chimes</div>
-                    </div>
-                    <button id="btnSoundToggle" onclick="toggleAudio()" class="w-12 h-6 rounded-full bg-cyan-900 border border-cyan-400 p-0.5 transition-colors relative">
-                        <div id="soundToggleDot" class="w-4 h-4 rounded-full bg-cyan-400 transition-transform translate-x-6"></div>
-                    </button>
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <div>
-                        <div class="font-orbitron text-sm text-cyan-200">Background Canvas Particles</div>
-                        <div class="text-xs text-cyan-400/70">Animate particle mesh grid</div>
-                    </div>
-                    <button id="btnParticleToggle" onclick="toggleParticles()" class="w-12 h-6 rounded-full bg-cyan-900 border border-cyan-400 p-0.5 transition-colors relative">
-                        <div id="particleToggleDot" class="w-4 h-4 rounded-full bg-cyan-400 transition-transform translate-x-6"></div>
-                    </button>
-                </div>
-
-                <div class="pt-4 border-t border-cyan-500/20 space-y-2">
-                    <button onclick="switchLearnerProfile();closeModal('modalSettings')" class="w-full btn-cyber font-orbitron text-xs py-2.5 rounded-lg text-cyan-100 flex items-center justify-center space-x-2">
-                        <i class="fas fa-user-switch"></i><span>SWITCH LEARNER PROFILE</span>
-                    </button>
-                    <button onclick="resetAllProgress()" class="w-full bg-red-950/50 hover:bg-red-900/80 border border-red-500/50 text-red-200 font-orbitron text-xs py-2.5 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                        <i class="fas fa-redo-alt"></i>
-                        <span>RESET ALL LEARNING DATA</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-cyan-500/20 text-right">
-                <button onclick="closeModal('modalSettings')" class="btn-cyber font-orbitron text-xs px-6 py-2 rounded-lg text-cyan-100">SAVE & CLOSE</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        /* GLOBAL APPLICATION STATE */
-        const state = {
-            soundEnabled: true,
-            particlesEnabled: true,
-            currentStage: 'init',
-            currentModule: 0,
-            userName: 'Student Learner',
-            avatarDataUrl: '',
-            theme: 'dark',
-            progress: {
-                1: { completed: false, score: 0 },
-                2: { completed: false, score: 0 },
-                3: { completed: false, score: 0 },
-                4: { completed: false, score: 0 },
-                5: { completed: false, score: 0 },
-                6: { completed: false, score: 0 }
-            }
-        };
-
-        /* PROFILE MANAGER — APK LOCAL PROFILES */
-        const PROFILE_LIST_KEY = 'EASC_savedProfiles_v1';
-        function getSavedProfiles(){
-            try { return JSON.parse(localStorage.getItem(PROFILE_LIST_KEY) || '[]'); } catch(e){ return []; }
-        }
-        function saveSavedProfiles(list){
-            try { localStorage.setItem(PROFILE_LIST_KEY, JSON.stringify(list)); } catch(e) {}
-        }
-        function makeProfileId(){ return 'p_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2,8); }
-        function showProfileChooser(){
-            document.getElementById('stageInit').classList.remove('hidden');
-            document.getElementById('newProfileForm').classList.add('hidden');
-            renderSavedProfiles();
-        }
-        function showNewProfileForm(){
-            document.getElementById('newProfileForm').classList.remove('hidden');
-            document.getElementById('initNameInput').value='';
-            document.getElementById('initAvatarFile').value='';
-            document.getElementById('initAvatarPreview').innerHTML='<i class="fas fa-user text-lg"></i>';
-        }
-        function renderSavedProfiles(){
-            const list=document.getElementById('savedProfilesList');
-            const section=document.getElementById('savedProfilesSection');
-            const profiles=getSavedProfiles();
-            if(!profiles.length){ section.classList.add('hidden'); showNewProfileForm(); return; }
-            section.classList.remove('hidden');
-            list.innerHTML=profiles.map(p=>{
-                const avatar=p.avatarDataUrl ? `<img src="${p.avatarDataUrl}" class="w-full h-full object-cover">` : '<i class="fas fa-user text-cyan-300"></i>';
-                return `<div class="flex items-center gap-3 p-2.5 rounded-xl border border-cyan-500/30 bg-cyan-950/40 hover:bg-cyan-900/50 transition-colors">
-                    <button onclick="selectSavedProfile('${p.id}')" class="flex items-center gap-3 flex-1 text-left min-w-0">
-                        <div class="w-10 h-10 rounded-full overflow-hidden border border-cyan-400/60 bg-cyan-950 flex items-center justify-center shrink-0">${avatar}</div>
-                        <div class="min-w-0"><div class="font-orbitron text-xs text-cyan-100 truncate">${escapeProfileText(p.name)}</div><div class="text-[9px] text-cyan-400/70">Saved profile • ${p.lastUsed ? new Date(p.lastUsed).toLocaleDateString() : 'New'}</div></div>
-                    </button>
-                    <button onclick="deleteSavedProfile('${p.id}')" title="Delete profile" class="p-2 text-red-300 hover:text-red-100"><i class="fas fa-trash"></i></button>
-                </div>`;
-            }).join('');
-            document.getElementById('newProfileForm').classList.add('hidden');
-        }
-        function escapeProfileText(v){ return String(v||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-        async function selectSavedProfile(id){
-            const p=getSavedProfiles().find(x=>x.id===id); if(!p) return;
-            localStorage.setItem('EASC_currentProfileId',id);
-            state.userName=p.name||'Student Learner'; state.avatarDataUrl=p.avatarDataUrl||'';
-            document.getElementById('initNameInput').value=state.userName;
-            if(state.avatarDataUrl) document.getElementById('initAvatarPreview').innerHTML=`<img src="${state.avatarDataUrl}" class="w-full h-full object-cover">`;
-            const profiles=getSavedProfiles().map(x=>x.id===id?{...x,lastUsed:new Date().toISOString()}:x); saveSavedProfiles(profiles);
-            if(window.EASC_restoreProgress) await window.EASC_restoreProgress();
-            applyProfileToHeader();
-            document.getElementById('stageInit').classList.add('hidden');
-            state.currentStage='title';
-            document.getElementById('stageTitle').classList.remove('hidden');
-            renderAllMath();
-            if(window.EASC_saveProgress) window.EASC_saveProgress(false);
-        }
-        function applyProfileToHeader(){
-            const headerBox=document.getElementById('headerAvatarBox'), headerName=document.getElementById('headerNameDisp');
-            if(headerName) headerName.innerText=state.userName;
-            if(headerBox) headerBox.innerHTML=state.avatarDataUrl?`<img src="${state.avatarDataUrl}" class="w-full h-full object-cover">`:'<i class="fas fa-user"></i>';
-            const cert=document.getElementById('certStudentName'); if(cert) cert.innerText=state.userName;
-            const certInput=document.getElementById('certNameInput'); if(certInput) certInput.value=state.userName;
-        }
-        function deleteSavedProfile(id){
-            const p=getSavedProfiles().find(x=>x.id===id); if(!p) return;
-            if(!confirm('Delete saved profile "'+p.name+'" and its learning progress from this device?')) return;
-            try{ localStorage.removeItem('EAS-C_learnerData_v3_'+id); }catch(e){}
-            const next=getSavedProfiles().filter(x=>x.id!==id); saveSavedProfiles(next);
-            if(localStorage.getItem('EASC_currentProfileId')===id) localStorage.removeItem('EASC_currentProfileId');
-            renderSavedProfiles();
-        }
-        function switchLearnerProfile(){
-            if(window.EASC_saveProgress) window.EASC_saveProgress(false);
-            document.getElementById('stageTitle').classList.add('hidden');
-            document.getElementById('stageMenu').classList.add('hidden');
-            document.getElementById('stageModule').classList.add('hidden');
-            document.getElementById('bottomNav').classList.add('hidden');
-            showProfileChooser();
-        }
-
-        /* KaTeX Auto-Render Helper */
-        function renderAllMath(root = document.body) {
-            const render = () => {
-                if (typeof renderMathInElement !== 'function') return;
-                try {
-                    renderMathInElement(root, {
-                        delimiters: [
-                            {left: '$$', right: '$$', display: true},
-                            {left: '\\[', right: '\\]', display: true},
-                            {left: '\\(', right: '\\)', display: false},
-                            {left: '$', right: '$', display: false}
-                        ],
-                        throwOnError: false,
-                        strict: false,
-                        trust: false,
-                        ignoredTags: ['script','noscript','style','textarea','pre','code']
-                    });
-                } catch (e) {
-                    console.warn('Math rendering skipped:', e);
-                }
-            };
-            if (typeof renderMathInElement === 'function') {
-                requestAnimationFrame(render);
-            } else {
-                window.addEventListener('load', render, {once:true});
-            }
-        }
-
-        // Detailed lesson/discussion content shown at the top of every module.
+<body class="easc-theme-dark">
+<div id="particles"></div>
+<section class="splash" id="welcome"><div class="splashCard"><div class="splashText"><div class="brand"><div class="mark">Σ</div><div><b>EAS•C</b><small>ENHANCING ACTIVITIES IN STATISTICS COURSEWARE</small></div></div><div class="kicker">Interactive Statistics Learning</div><h1>Welcome to <span>EAS•C</span></h1><p>All six EAS•C modules are available from the start. Each module follows the same structure: Objectives → Content → Activity → Assessment.</p><button class="btn" onclick="enterCourse()">Start Learning →</button></div><div class="splashArt"><div class="curveLabel">STATISTICS • μ • σ • r</div><svg class="curve" viewBox="0 0 520 300" fill="none"><path d="M35 250 C115 250 145 247 180 225 C215 202 220 62 260 50 C300 62 305 202 340 225 C375 247 405 250 485 250" stroke="#43dcff" stroke-width="5"/><path d="M35 250H485" stroke="#27638e" stroke-width="2"/><path d="M260 50V250" stroke="#2a8dbb" stroke-dasharray="7 8" stroke-width="2"/></svg></div></div></section>
+<div class="app" id="app">
+<aside class="sidebar"><div class="logo"><div class="mark">Σ</div><div><b>EAS•C</b><small>Enhancing Activities in Statistics Courseware</small></div></div><div class="nav"><button id="navDash" class="active" onclick="showView('dashboard',this)">⌂ &nbsp; Dashboard</button><div class="module-nav" id="moduleNav"></div><button onclick="showView('stats',this)">⚗ &nbsp; Stats Lab</button></div><div class="profile"><b>EAS•C COURSEWARE</b><span>All six modules unlocked.</span></div></aside>
+<main class="main">
+<section id="dashboard" class="page active"><div class="top"><div><div class="kicker">EAS•C Dashboard</div><h2>Statistics Learning Path</h2><div class="sub">Six modules are available immediately. Progress is recorded for learning evidence, not for locking modules.</div></div></div><div class="hero"><div><div class="kicker">Enhancing Activities in Statistics Courseware</div><h3>Objectives → Content → Activity → Assessment</h3><p>Study each module using the same Module 1 courseware format. The Statistics Lab provides the requested inferential tools separately.</p><button class="btn" onclick="openModule(1)">Open Module 1 →</button></div><div class="statsVector"><svg viewBox="0 0 300 220" fill="none"><path d="M25 190H280M40 190V35" stroke="#27628e" stroke-width="2"/><path d="M45 178C75 178 95 170 118 135C140 100 148 48 165 43C182 48 190 100 212 135C235 170 255 178 275 178" stroke="#42d9ff" stroke-width="5"/><path d="M55 180L90 145L120 160L150 112L180 130L215 80L260 100" stroke="#087eff" stroke-width="3" opacity=".8"/></svg></div></div><div class="section"><h3>Module Components</h3><div class="cards"><div class="card"><div class="icon">🎯</div><h4>Objectives</h4><p>What learners should know or do after the module.</p></div><div class="card"><div class="icon">📘</div><h4>Content</h4><p>Lesson, examples, explanations, formulas, and discussion.</p></div><div class="card"><div class="icon">🧪</div><h4>Activity & Assessment</h4><p>Interactive practice and assessment for evidence of learning.</p></div></div></div></section>
+<section id="moduleView" class="page"><div class="backBtn"><button class="btn secondary" onclick="showView('dashboard',document.getElementById('navDash'))">← Dashboard</button></div><div class="moduleShell"><div class="top"><div><div class="kicker" id="moduleKicker">MODULE 01</div><h2 id="moduleTitle">Module</h2><div class="sub">Objectives → Content → Activity → Assessment</div></div></div><div id="moduleContainer"></div></div></section>
+<section id="stats" class="page"><div class="top"><div><div class="kicker">EAS•C Statistics Lab</div><h2>Stats Lab</h2><div class="sub">Six interactive statistical tools.</div></div></div><div class="cards"><button class="easc-feature-card" onclick="openEascFeature('zknown')"><div class="icon">Zσ</div><div class="easc-feature-title">Z-TEST FOR KNOWN SD</div><div class="easc-feature-desc">Test a population mean when σ is known.</div></button><button class="easc-feature-card" onclick="openEascFeature('zunknown')"><div class="icon">Zs</div><div class="easc-feature-title">Z-TEST FOR UNKNOWN SD</div><div class="easc-feature-desc">Explore the sample-SD version.</div></button><button class="easc-feature-card" onclick="openEascFeature('onesamplet')"><div class="icon">t₁</div><div class="easc-feature-title">ONE-SAMPLE T-TEST</div><div class="easc-feature-desc">Compare a sample mean with μ₀.</div></button><button class="easc-feature-card" onclick="openEascFeature('indttest')"><div class="icon">t₂</div><div class="easc-feature-title">INDEPENDENT-SAMPLE T-TEST</div><div class="easc-feature-desc">Compare two independent groups.</div></button><button class="easc-feature-card" onclick="openEascFeature('pairedt')"><div class="icon">tₚ</div><div class="easc-feature-title">PAIRED-SAMPLE T-TEST</div><div class="easc-feature-desc">Analyze matched observations.</div></button><button class="easc-feature-card" onclick="openEascFeature('pearson')"><div class="icon">r</div><div class="easc-feature-title">PEARSON r CORRELATION</div><div class="easc-feature-desc">Calculate r and construct a scatterplot.</div></button></div></section>
+</main></div>
+<div id="eascFeatureModal" class="easc-modal" onclick="if(event.target===this)closeEascFeature()"><div class="easc-modal-box"><div class="flex items-center justify-between gap-3 mb-3"><div><div id="eascFeatureHeading" class="font-orbitron font-bold text-lg">STATISTICS LAB</div><div id="eascFeatureSub" class="text-xs easc-muted">Interactive learning tools</div></div><button onclick="closeEascFeature()" class="btn secondary">✕</button></div><div id="eascFeatureBody"></div></div></div>
+<script>
+const particleHost=document.getElementById('particles'); for(let i=0;i<70;i++){let s=document.createElement('span');s.className='particle';s.style.left=Math.random()*100+'%';s.style.setProperty('--dx',(Math.random()*180-90)+'px');s.style.animationDuration=(8+Math.random()*18)+'s';s.style.animationDelay=(-Math.random()*20)+'s';particleHost.appendChild(s)}
+const state={soundEnabled:true,particlesEnabled:true,currentStage:'menu',currentModule:0,userName:'Student Learner',avatarDataUrl:'',theme:'dark',progress:{1:{completed:false,score:0},2:{completed:false,score:0},3:{completed:false,score:0},4:{completed:false,score:0},5:{completed:false,score:0},6:{completed:false,score:0}}};
+function playSound(){} function alertBox(msg){alert(msg)}
+function renderAllMath(root=document.body){const run=()=>{if(typeof renderMathInElement!=='function')return;try{renderMathInElement(root,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false,strict:false})}catch(e){}}; if(typeof renderMathInElement==='function')requestAnimationFrame(run); else window.addEventListener('load',run,{once:true})}
+function enterCourse(){document.getElementById('welcome').style.display='none';document.getElementById('app').style.display='flex';buildModuleNav();showView('dashboard',document.getElementById('navDash'));}
+function showView(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav>button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');window.scrollTo(0,0);}
+function buildModuleNav(){const nav=document.getElementById('moduleNav');const names=['NULL & ALTERNATIVE HYPOTHESES','LEVEL OF SIGNIFICANCE','HYPOTHESIS TESTING','CORRELATION ANALYSIS','SCATTER PLOT & REGRESSION','ASSESSMENT'];nav.innerHTML=names.map((n,i)=>`<button onclick="openModule(${i+1});this.classList.add('active')">▣ &nbsp; Module ${String(i+1).padStart(2,'0')}<br><small style="color:#72e7ff">${n}</small></button>`).join('')}
+function updateUIProgress(){} function updateModuleLocks(){} function moduleIsUnlocked(){return true}
+</script>
+<script>
         function detailedLesson(num) {
             const lessons = {
                 1: {
@@ -2692,269 +1700,39 @@ function renderModule1(container) {
             }
         };
 
-        function moduleIsUnlocked(num) {
-            const rule = MODULE_UNLOCK_RULES[num];
-            return !rule.required || !!state.progress[rule.required].completed;
-        }
-
-        function createDropdownQuestion(id, item) {
-            const [question, answer, choices] = item;
-            return `<div class="p-3 rounded-lg bg-cyber-dark border border-cyan-500/30 space-y-2">
-                <label class="block text-cyan-100 font-semibold">${question}</label>
-                <select id="${id}" class="w-full bg-cyan-950 border border-cyan-500/50 rounded-lg p-2 text-xs text-cyan-100 font-orbitron focus:outline-none focus:border-cyan-400">
-                    <option value="">Select an answer...</option>
-                    ${choices.map((c,i)=>`<option value="${String.fromCharCode(97+i)}">${String.fromCharCode(65+i)}) ${c}</option>`).join('')}
-                </select>
-            </div>`;
-        }
-
-        function appendInteractiveGuide(mod) {
-            const guide = GRAPH_GUIDES[mod];
-            if (!guide) return;
-            const container = document.getElementById('moduleContainer');
-            if (!container || document.getElementById(`interactiveGuide${mod}`)) return;
-            const wrap = document.createElement('div');
-            wrap.id = `interactiveGuide${mod}`;
-            wrap.className = 'p-4 rounded-xl bg-cyan-950/40 border border-cyan-500/50 space-y-3 mt-4';
-            wrap.innerHTML = `<h4 class="font-orbitron font-bold text-cyan-200 text-sm"><i class="fas fa-compass text-cyan-400 mr-2"></i>${guide.title}</h4>
-                <p class="text-[11px] text-cyan-300/80">Use the interactive graph above, then answer each guide question.</p>
-                <div class="space-y-2">${guide.questions.map((q,i)=>createDropdownQuestion(`ig${mod}_${i+1}`,q)).join('')}</div>
-                <button onclick="checkInteractiveGuide(${mod})" class="btn-cyber font-orbitron text-xs px-4 py-2 rounded text-cyan-100">CHECK GRAPH GUIDE</button>
-                <div id="igFeedback${mod}" class="text-xs font-orbitron"></div>`;
-            const completion = container.querySelector('[onclick^="markModuleComplete"]');
-            if (completion) completion.parentElement.insertBefore(wrap, completion);
-            else container.appendChild(wrap);
-        }
-
-        function appendComprehension(mod) {
-            const container = document.getElementById('moduleContainer');
-            if (!container || document.getElementById(`comprehension${mod}`)) return;
-            const bank = COMPREHENSION_BANK[mod];
-            const wrap = document.createElement('div');
-            wrap.id = `comprehension${mod}`;
-            wrap.className = 'p-4 rounded-xl bg-cyan-950/40 border border-cyan-400/50 space-y-3 mt-5';
-            wrap.innerHTML = `<div class="flex items-center justify-between gap-3">
-                    <h4 class="font-orbitron font-bold text-cyan-200 text-sm"><i class="fas fa-brain text-cyan-400 mr-2"></i>5-QUESTION COMPREHENSION CHECK</h4>
-                    <span id="compScore${mod}" class="font-orbitron text-xs text-cyan-400">0 / 5</span>
-                </div>
-                <p class="text-[11px] text-cyan-300/80">Answer all 5 questions and review the feedback for each one. A score of at least 3/5 completes the module and unlocks the next one.</p>
-                <div class="space-y-2">${bank.map((q,i)=>createDropdownQuestion(`comp${mod}_${i+1}`,q)).join('')}</div>
-                <button onclick="checkComprehension(${mod})" class="btn-cyber font-orbitron text-xs px-5 py-2 rounded text-cyan-100">CHECK COMPREHENSION</button>
-                <div id="compFeedback${mod}" class="text-xs font-orbitron"></div>`;
-            const completion = container.querySelector('[onclick^="markModuleComplete"]');
-            if (completion) completion.parentElement.insertBefore(wrap, completion);
-            else container.appendChild(wrap);
-        }
-
-        function checkInteractiveGuide(mod) {
-            const guide = GRAPH_GUIDES[mod];
-            let score = 0;
-            guide.questions.forEach((q,i)=>{ if(document.getElementById(`ig${mod}_${i+1}`)?.value === q[1]) score++; });
-            const fb = document.getElementById(`igFeedback${mod}`);
-            if (score === 5) {
-                fb.className='text-xs font-orbitron text-emerald-400 font-bold';
-                fb.innerHTML='<i class="fas fa-check-circle mr-1"></i>All graph-guide answers are correct.';
-                playSound('success');
-            } else {
-                fb.className='text-xs font-orbitron text-amber-300';
-                fb.innerHTML=`${score}/5 correct. Recheck the graph and try again.`;
-                playSound('fail');
-            }
-            renderAllMath();
-        }
-
-        function checkComprehension(mod) {
-            const bank = COMPREHENSION_BANK[mod];
-            let score = 0;
-            const feedback = [];
-            bank.forEach((q,i)=>{
-                const selected = document.getElementById(`comp${mod}_${i+1}`)?.value || '';
-                const correct = q[1];
-                if(selected === correct){
-                    score++;
-                    feedback.push(`<div class="mt-1 text-emerald-300"><i class="fas fa-check-circle mr-1"></i><b>Question ${i+1}: Correct.</b></div>`);
-                }else{
-                    const idx = correct.charCodeAt(0)-97;
-                    const correctText = q[2][idx] || '';
-                    feedback.push(`<div class="mt-1 text-amber-200"><i class="fas fa-lightbulb mr-1"></i><b>Question ${i+1}: Correct answer: ${correct.toUpperCase()}) ${correctText}</b></div>`);
-                }
-            });
-            const scoreEl=document.getElementById(`compScore${mod}`);
-            const fb=document.getElementById(`compFeedback${mod}`);
-            if(scoreEl) scoreEl.innerText=`${score} / 5`;
-            const PASS_SCORE=3;
-            state.progress[mod].score=score*20;
-            if(score>=PASS_SCORE){
-                state.progress[mod].completed=true;
-                if(fb){fb.className='text-xs leading-relaxed';fb.innerHTML=`<div class="p-3 rounded-lg bg-emerald-950/40 border border-emerald-500/30"><div class="text-emerald-300 font-bold"><i class="fas fa-unlock mr-1"></i>${score}/5 — Module completed. The next module is now unlocked.</div>${feedback.join('')}</div>`;}
-                playSound('success'); updateUIProgress(); updateModuleLocks();
-            }else{
-                state.progress[mod].completed=false;
-                if(fb){fb.className='text-xs leading-relaxed';fb.innerHTML=`<div class="p-3 rounded-lg bg-amber-950/30 border border-amber-500/30"><div class="text-amber-200 font-bold"><i class="fas fa-info-circle mr-1"></i>${score}/5 — At least 3/5 is needed to complete this module.</div>${feedback.join('')}</div>`;}
-                playSound('fail'); updateUIProgress();
-            }
-            if(window.EASC_saveProgress) window.EASC_saveProgress(false);
-            renderAllMath();
-        }
-
-        function updateModuleLocks() {
-            const cards=[...document.querySelectorAll('#stageMenu .cyber-card')];
-            cards.forEach((card,idx)=>{
-                const mod=idx+1;
-                if(mod>6) return;
-                const unlocked=moduleIsUnlocked(mod);
-                card.classList.toggle('opacity-60',!unlocked);
-                card.classList.toggle('grayscale',!unlocked);
-                let badge=card.querySelector('.module-lock-badge');
-                if(!unlocked){
-                    if(!badge){
-                        badge=document.createElement('div');
-                        badge.className='module-lock-badge absolute top-2 left-2 z-10 px-2 py-1 rounded bg-slate-950/90 border border-cyan-500/30 text-[9px] font-orbitron text-cyan-400';
-                        card.appendChild(badge);
-                    }
-                    badge.innerHTML='<i class="fas fa-lock mr-1"></i>LOCKED';
-                } else if(badge) badge.remove();
-            });
-        }
-
-        function openModule(moduleNum) {
-            if(!moduleIsUnlocked(moduleNum)){
-                const req=MODULE_UNLOCK_RULES[moduleNum].required;
-                alertBox(`Module 0${moduleNum} is locked. Complete Module 0${req} with at least 3/5 comprehension answers first.`);
-                playSound('fail');
-                return;
-            }
-            playSound('click');
-            state.currentModule=moduleNum;
-            document.getElementById('stageMenu').classList.add('hidden');
-            document.getElementById('stageModule').classList.remove('hidden');
-            state.currentStage='module';
-            const container=document.getElementById('moduleContainer');
-            const titleHeader=document.getElementById('moduleTitleHeader');
-            if(moduleNum===1){titleHeader.innerText='MODULE 01: NULL AND ALTERNATIVE HYPOTHESES';renderModule1(container);}
-            else if(moduleNum===2){titleHeader.innerText='MODULE 02: LEVEL OF SIGNIFICANCE';renderModule2(container);}
-            else if(moduleNum===3){titleHeader.innerText='MODULE 03: HYPOTHESIS TESTING';renderModule3(container);}
-            else if(moduleNum===4){titleHeader.innerText='MODULE 04: CORRELATION ANALYSIS';renderModule4(container);}
-            else if(moduleNum===5){titleHeader.innerText='MODULE 05: SCATTER PLOT & REGRESSION';renderModule5(container);}
-            else if(moduleNum===6){titleHeader.innerText='MODULE 06: ASSESSMENT QUIZ';renderModule6(container);}
-            setTimeout(()=>{
-                appendInteractiveGuide(moduleNum);
-                appendComprehension(moduleNum);
-                renderAllMath();
-                if(moduleNum===5) drawM5Regression();
-            },80);
-            updateModuleLocks();
-        }
-
-        function markModuleComplete(modNum) {
-            const scoreEl=document.getElementById(`compScore${modNum}`);
-            const score=parseInt((scoreEl?.innerText||'0 / 5').split('/')[0],10)||0;
-            const PASS_SCORE=3;
-            if(score<PASS_SCORE){alertBox(`Module 0${modNum} needs at least ${PASS_SCORE}/5 on the comprehension check.`);playSound('fail');return;}
-            state.progress[modNum].completed=true;
-            state.progress[modNum].score=score*20;
-            playSound('success'); updateUIProgress(); updateModuleLocks();
-            if(window.EASC_saveProgress) window.EASC_saveProgress(false);
-            alertBox(`Module 0${modNum}: Completed successfully with ${score}/5 comprehension.`);
-        }
-
-        function drawM5Regression() {
-            const canvas=document.getElementById('m5Canvas');
-            if(!canvas) return;
-            const rect=canvas.getBoundingClientRect();
-            const dpr=window.devicePixelRatio||1;
-            const w=Math.max(320,rect.width), h=Math.max(220,rect.height);
-            canvas.width=Math.round(w*dpr); canvas.height=Math.round(h*dpr);
-            const ctx=canvas.getContext('2d');
-            ctx.setTransform(dpr,0,0,dpr,0,0);
-            ctx.clearRect(0,0,w,h);
-            ctx.fillStyle='#0a1728'; ctx.fillRect(0,0,w,h);
-
-            const m=parseFloat(document.getElementById('m5SlopeSlider')?.value||1.2);
-            const b=parseFloat(document.getElementById('m5InterceptSlider')?.value||50);
-            const sd=document.getElementById('m5SlopeDisp'); if(sd) sd.innerText=(m>=0?'+':'')+m.toFixed(1);
-            const bd=document.getElementById('m5InterceptDisp'); if(bd) bd.innerText=b.toFixed(1);
-            const eq=document.getElementById('m5EqText'); if(eq) eq.innerHTML=`$Y = ${m.toFixed(1)}X ${b>=0?'+':'−'} ${Math.abs(b).toFixed(1)}$`;
-
-            const points=[
-                [1,52],[2,57],[3,61],[4,68],[5,70],[6,77],[7,82],[8,88],[9,94],[10,99]
-            ];
-            const xMax=10, yMax=130;
-            const pad={l:46,r:18,t:18,b:34};
-            const px=x=>pad.l+(x/xMax)*(w-pad.l-pad.r);
-            const py=y=>h-pad.b-(y/yMax)*(h-pad.t-pad.b);
-
-            ctx.strokeStyle='rgba(0,240,255,.10)';ctx.lineWidth=1;
-            for(let x=0;x<=10;x++){
-                ctx.beginPath();ctx.moveTo(px(x),pad.t);ctx.lineTo(px(x),h-pad.b);ctx.stroke();
-            }
-            for(let y=0;y<=120;y+=20){
-                ctx.beginPath();ctx.moveTo(pad.l,py(y));ctx.lineTo(w-pad.r,py(y));ctx.stroke();
-            }
-            ctx.strokeStyle='rgba(0,240,255,.55)';ctx.lineWidth=1.5;
-            ctx.beginPath();ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,h-pad.b);ctx.lineTo(w-pad.r,h-pad.b);ctx.stroke();
-            ctx.fillStyle='#c2e9ff';ctx.font='10px Inter';ctx.textAlign='center';
-            for(let x=0;x<=10;x++)ctx.fillText(String(x),px(x),h-pad.b+16);
-            ctx.textAlign='right';
-            for(let y=0;y<=120;y+=20)ctx.fillText(String(y),pad.l-7,py(y)+3);
-            ctx.textAlign='center';ctx.fillText('Years of Experience (X)',(pad.l+w-pad.r)/2,h-6);
-            ctx.save();ctx.translate(12,h/2);ctx.rotate(-Math.PI/2);ctx.fillText('Predicted Productivity (Y)',0,0);ctx.restore();
-
-            // regression line, clipped to the plotting region
-            const y1=m*0+b, y2=m*xMax+b;
-            ctx.save();ctx.beginPath();ctx.rect(pad.l,pad.t,w-pad.l-pad.r,h-pad.t-pad.b);ctx.clip();
-            ctx.beginPath();ctx.moveTo(px(0),py(y1));ctx.lineTo(px(xMax),py(y2));ctx.strokeStyle='#00f0ff';ctx.lineWidth=3;ctx.shadowColor='#00f0ff';ctx.shadowBlur=9;ctx.stroke();ctx.shadowBlur=0;
-            points.forEach(([x,y])=>{ctx.beginPath();ctx.arc(px(x),py(y),5,0,Math.PI*2);ctx.fillStyle='#ff00ff';ctx.shadowColor='#ff00ff';ctx.shadowBlur=6;ctx.fill();ctx.shadowBlur=0;});
-            ctx.restore();
-            renderAllMath();
-        }
-
-        const _oldUpdateUIProgress = updateUIProgress;
-        updateUIProgress = function(){ _oldUpdateUIProgress(); updateModuleLocks(); };
-
-        // Initialize locks on first render.
-        setTimeout(updateModuleLocks, 100);
-
 </script>
-
-<div id="learnerDataPanel" class="hidden fixed inset-0 z-[10000] bg-black/70 items-center justify-center p-4">
- <div class="cyber-card max-w-lg w-full rounded-2xl p-6 border border-cyan-500/40">
-  <h3 class="font-orbitron text-cyan-300 font-bold text-lg mb-3">LEARNER DATA</h3>
-  <p class="text-xs text-cyan-200/80 mb-4">Progress is automatically stored in this browser. Export a backup before changing devices or browsers.</p>
-  <div class="flex flex-wrap gap-2">
-   <button onclick="EASC_exportData()" class="btn-cyber px-4 py-2 rounded text-xs">EXPORT JSON</button>
-   <button onclick="EASC_clearSavedData();location.reload()" class="btn-cyber px-4 py-2 rounded text-xs">CLEAR SAVED DATA</button>
-   <button onclick="document.getElementById('learnerDataPanel').classList.add('hidden');document.getElementById('learnerDataPanel').classList.remove('flex')" class="btn-cyber px-4 py-2 rounded text-xs">CLOSE</button>
-  </div>
- </div>
-</div>
 <script>
-function EASC_exportData(){
- const data=window.EASC_getSavedData?window.EASC_getSavedData():null;
- if(!data){alert('No saved learner data found yet.');return;}
- const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
- const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='EAS-C_Learner_Record_'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href);
+// EAS•C adaptation: wrap every module with the four required components and keep all modules unlocked.
+const _render1=renderModule1,_render2=renderModule2,_render3=renderModule3,_render4=renderModule4,_render5=renderModule5,_render6=renderModule6;
+function componentStrip(n){return `<div class="component-strip"><div class="component-chip"><b>OBJECTIVES</b><span>Specific learning targets for the module.</span></div><div class="component-chip"><b>CONTENT</b><span>Lesson, examples, explanations, formulas, and discussion.</span></div><div class="component-chip"><b>ACTIVITY</b><span>Interactive activity, practice, or simulation.</span></div><div class="component-chip"><b>ASSESSMENT</b><span>Comprehension check and/or assessment evidence.</span></div></div>`}
+function renderModule6(container){_render6(container);renderAllMath(container)}
+function appendInteractiveGuide(num){
+  const data=GRAPH_GUIDES[num]; if(!data) return;
+  const host=document.getElementById('moduleContainer'); if(!host) return;
+  const wrap=document.createElement('section'); wrap.className='activity guideBlock';
+  wrap.innerHTML=`<h3 style="color:var(--cyan2);margin-top:0">${data.title}</h3><p class="sub">Answer all five guide questions. Feedback appears after each choice.</p><div class="guideQuestions"></div>`;
+  const qbox=wrap.querySelector('.guideQuestions');
+  data.questions.forEach((q,i)=>{const d=document.createElement('div');d.className='interact';d.innerHTML=`<b>${i+1}. ${q[0]}</b><div class="choices">${q[2].map((o,j)=>`<button type="button" onclick="checkGuideAnswer(${num},${i},${j},this)">${String.fromCharCode(97+j)}) ${o}</button>`).join('')}</div><div id="guideFb_${num}_${i}" class="feedback"></div>`;qbox.appendChild(d)});
+  host.appendChild(wrap);
 }
-function EASC_openDataPanel(){const p=document.getElementById('learnerDataPanel');p.classList.remove('hidden');p.classList.add('flex')}
+window.checkGuideAnswer=function(num,i,j,btn){const q=GRAPH_GUIDES[num]?.questions[i];if(!q)return;const box=document.getElementById(`guideFb_${num}_${i}`);document.querySelectorAll(`#guideFb_${num}_${i}`).forEach(()=>{});if(j===q[1].charCodeAt(0)-97){btn.classList.add('correct');box.className='feedback show good';box.textContent='✓ Correct. '+q[0]}else{btn.classList.add('wrong');box.className='feedback show bad';box.textContent='✗ Review the concept and try again.'}};
+function appendComprehension(num){
+  const bank=COMPREHENSION_BANK[num]; if(!bank) return;
+  const host=document.getElementById('moduleContainer'); if(!host) return;
+  const wrap=document.createElement('section'); wrap.className='activity comprehensionBlock';
+  wrap.innerHTML=`<h3 style="color:var(--cyan2);margin-top:0">COMPREHENSION CHECK</h3><p class="sub">Five questions with immediate feedback. You may retry without needing a perfect score.</p><div class="comprehensionQuestions"></div><div id="compScore_${num}" class="feedback"></div>`;
+  const qbox=wrap.querySelector('.comprehensionQuestions');
+  bank.forEach((q,i)=>{const d=document.createElement('div');d.className='interact';d.innerHTML=`<b>${i+1}. ${q[0]}</b><div class="choices">${q[2].map((o,j)=>`<button type="button" onclick="checkComprehension(${num},${i},${j},this)">${String.fromCharCode(97+j)}) ${o}</button>`).join('')}</div><div id="compFb_${num}_${i}" class="feedback"></div>`;qbox.appendChild(d)});
+  host.appendChild(wrap);
+}
+window.checkComprehension=function(num,i,j,btn){const q=COMPREHENSION_BANK[num]?.[i];if(!q)return;const correct=q[1].charCodeAt(0)-97;const box=document.getElementById(`compFb_${num}_${i}`);if(j===correct){btn.classList.add('correct');box.className='feedback show good';box.textContent='✓ Correct. '+q[0]}else{btn.classList.add('wrong');box.className='feedback show bad';box.textContent='✗ Not quite. Review the lesson and try again.'}};
+function openModule(num){state.currentModule=num;const c=document.getElementById('moduleContainer');const title=document.getElementById('moduleTitle');document.getElementById('moduleKicker').textContent='MODULE '+String(num).padStart(2,'0');const titles=['NULL AND ALTERNATIVE HYPOTHESES','LEVEL OF SIGNIFICANCE','HYPOTHESIS TESTING','CORRELATION ANALYSIS','SCATTER PLOT & REGRESSION','ASSESSMENT'];title.textContent=titles[num-1];if(num===1)_render1(c);else if(num===2)_render2(c);else if(num===3)_render3(c);else if(num===4)_render4(c);else if(num===5)_render5(c);else renderModule6(c);c.insertAdjacentHTML('afterbegin',componentStrip(num));setTimeout(()=>{if(num<=5){appendInteractiveGuide(num);appendComprehension(num)}if(num===5&&typeof drawM5Regression==='function')drawM5Regression();renderAllMath(c)},80);showView('moduleView',null)}
+// All modules are deliberately unlocked at startup.
+function updateModuleLocks(){}
+function moduleIsUnlocked(num){return true}
 </script>
 <script>
-window.addEventListener('DOMContentLoaded', async function(){
-    renderSavedProfiles();
-    const currentId=localStorage.getItem('EASC_currentProfileId');
-    const profiles=getSavedProfiles();
-    if(currentId && profiles.some(p=>p.id===currentId)){
-        const p=profiles.find(x=>x.id===currentId);
-        state.userName=p.name||'Student Learner'; state.avatarDataUrl=p.avatarDataUrl||'';
-        applyProfileToHeader();
-        // Keep the chooser visible on every app launch so the learner can select a saved profile.
-        showProfileChooser();
-    } else {
-        showProfileChooser();
-    }
-});
-</script>
 
-<script id="easc-v23-feature-script">
 (function(){
   const FEATURE_KEY='EASC_featureData_v1';
   state.featureData=state.featureData||{customScenarios:0,csvRuns:0,ciRuns:0,practiceRuns:0,challengeWins:0,visitedTools:[]};
@@ -3089,9 +1867,8 @@ window.addEventListener('DOMContentLoaded', async function(){
 
   // ---------- ANALYTICS ----------
   window.renderEascAnalytics=function(){const completed=[1,2,3,4,5,6].filter(i=>state.progress[i]?.completed).length;const scores=[1,2,3,4,5,6].map(i=>state.progress[i]?.score||0);const avg=scores.reduce((a,b)=>a+b,0)/6;document.getElementById('analyticsSummary').innerHTML=`<div class="space-y-2"><div><b>Learner:</b> ${esc(state.userName)}</div><div><b>Modules completed:</b> ${completed}/6</div><div><b>Average module score:</b> ${avg.toFixed(1)}%</div><div><b>Tools explored:</b> ${state.featureData.visitedTools.length}</div><div><b>CSV analyses:</b> ${state.featureData.csvRuns||0}</div><div><b>CI simulations:</b> ${state.featureData.ciRuns||0}</div><div><b>Practice problems generated:</b> ${state.featureData.practiceRuns||0}</div></div>`}
-  window.printEascAnalytics=function(){const old=document.body.innerHTML;const c=document.getElementById('analyticsSummary')?.innerHTML||'';const w=window.open('','_blank');if(!w)return;w.document.write(`<html><head><title>EAS•C Learning Analytics</title><style>body{font-family:Arial;padding:30px}table{border-collapse:collapse}td{padding:8px;border:1px solid #ccc}</style></head><body><h1>EAS•C Learning Analytics</h1>${c}<h2>Module Results</h2><table>${[1,2,3,4,5,6].map(i=>`<tr><td>Module ${i}</td><td>${state.progress[i].completed?'Completed':'In progress/locked'}</td><td>${state.progress[i].score||0}%</td></tr>`).join('')}</table><script>window.print()<\/script>
+  window.printEascAnalytics=function(){const c=document.getElementById('analyticsSummary')?.innerHTML||'';const w=window.open('','_blank');if(!w)return;w.document.write('<html><head><title>EAS•C Learning Analytics</title></head><body><h1>EAS•C Learning Analytics</h1>'+c+'</body></html>');w.document.close();w.print()};
 
-</body></html>`);w.document.close()}
 
   // ---------- LOCAL PEER CHALLENGE ----------
   let blitz={timer:null,idx:0,score:[0,0],questions:[
@@ -3134,75 +1911,159 @@ window.addEventListener('DOMContentLoaded', async function(){
   const oldShowProfileChooser=window.showProfileChooser; window.showProfileChooser=function(){oldShowProfileChooser();installFeatureHub()};
   const oldShowNewProfileForm=window.showNewProfileForm; window.showNewProfileForm=function(){oldShowNewProfileForm()};
   const oldStartLearningTransition=window.startLearningTransition; window.startLearningTransition=function(){oldStartLearningTransition();installFeatureHub()};
-  window.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>{installFeatureHub();let savedTheme='';try{savedTheme=localStorage.getItem('EASC_theme_preference')||''}catch(e){};if(!savedTheme) savedTheme='dark';if(!['light','dark','grey'].includes(state.theme))state.theme='dark';applyTheme(savedTheme==='cyan'||savedTheme==='emerald'||savedTheme==='purple'||savedTheme==='amber'?'dark':savedTheme);recordLoginDay();showEli5();updateThemeButtons();renderBadges()},300)});
+  window.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>{installFeatureHub();let savedTheme='';try{savedTheme=localStorage.getItem('EASC_theme_preference')||''}catch(e){};if(!savedTheme) savedTheme='dark';if(!['light','dark','grey'].includes(state.theme))state.theme='dark';applyTheme(savedTheme==='cyan'||savedTheme==='emerald'||savedTheme==='purple'||savedTheme==='amber'?'dark':savedTheme);recordLoginDay();try{showEli5()}catch(e){};try{updateThemeButtons()}catch(e){};try{renderBadges()}catch(e){}},300)});
   const oldOpenFeatureAnalytics=window.openEascFeature;window.openEascFeature=function(tab){oldOpenFeatureAnalytics(tab);if(tab==='analytics')setTimeout(renderEascAnalytics,30);if(tab==='challenge')setTimeout(fillBlitzProfiles,30);if(tab==='chisq')setTimeout(()=>renderChiMode('gof'),30);if(tab==='practice')setTimeout(()=>showEli5(),30)};
   window.addEventListener('resize',()=>{if(document.getElementById('csvCanvas')&&csvRows.length)computeCsvStats();if(document.getElementById('anovaCanvas'))drawAnovaCurve();if(document.getElementById('ciCanvas'))drawCiCanvas();});
 })();
-</script>
 
-<script id="easc-v25-sidebar-script">
+</script>
+<script>
+window.addEventListener('DOMContentLoaded',()=>{buildModuleNav();renderAllMath();});
+</script>
+<script>
+/* EAS•C v4 — Modules 1–5: Part I–IV layout; Module 6: assessment only; dark default */
 (function(){
-  const views=['home','dashboard','modules','stats','settings'];
-  function panels(){return {home:document.getElementById('eascHomePanel'),dashboard:document.getElementById('eascDashboardPanel'),modules:document.getElementById('stageMenu'),stats:document.getElementById('eascStatsPanel'),settings:document.getElementById('eascSettingsPanel')};}
-  window.showSidebarView=function(view){
-    const p=panels(); const side=document.getElementById('eascSidebar'); if(!p[view]) return;
-    if(side) side.classList.remove('hidden');
-    Object.keys(p).forEach(k=>{if(p[k]) p[k].classList.toggle('hidden',k!==view);});
-    document.querySelectorAll('.easc-side-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
-    const mod=document.getElementById('stageModule'); if(mod) mod.classList.add('hidden');
-    if(view==='modules'){ updateUIProgress(); renderAllMath(); }
-    if(view==='stats'){
-      const hub=document.getElementById('eascFeatureHub');
-      const target=document.getElementById('eascStatsContent');
-      if(hub && target && hub.parentElement!==target){target.appendChild(hub);}
-      if(hub) hub.classList.remove('hidden');
-      if(typeof installFeatureHub==='function') installFeatureHub();
-    }
-    if(view==='settings'){ syncSidebarSettings(); }
-    if(view==='dashboard'){ renderEascDashboard(); }
-    if(view==='home'){ updateHomeProgress(); }
-    state.currentStage=view; state.currentModule= view==='modules' ? state.currentModule : state.currentModule;
-    if(window.EASC_saveProgress) window.EASC_saveProgress(false);
-  };
-  window.syncSidebarSettings=function(){
-    const t=document.getElementById('sidebarThemeButtons');
-    if(t)t.innerHTML=['light','dark','grey'].map(function(x){var label=x==='light'?'☀ LIGHT':(x==='dark'?'◐ DARK':'◒ GREY');var active=state.theme===x?'active':'';return '<button onclick="setThemeColor(\''+x+'\')" class="easc-tab '+active+'">'+label+'</button>';}).join('');
-    const s=document.getElementById('sideSoundToggle'); if(s)s.checked=!!state.soundEnabled;
-    const pt=document.getElementById('sideParticlesToggle'); if(pt)pt.checked=!!state.particlesEnabled;
-    const av=document.getElementById('settingsSideAvatar'); if(av)av.innerHTML=state.avatarDataUrl ? ('<img src="'+state.avatarDataUrl+'">') : '<i class="fas fa-user"></i>';
-    const nm=document.getElementById('settingsSideName'); if(nm)nm.textContent=state.userName||'Student Learner';
-  };
-  window.updateHomeProgress=function(){
-    const vals=Object.values(state.progress||{}), done=vals.filter(x=>x.completed).length, pct=Math.round(done/6*100);
-    const el=document.getElementById('homeProgressPercent'); if(el)el.textContent=pct+'%';
-    const bar=document.getElementById('homeProgressBar'); if(bar)bar.style.width=pct+'%';
-  };
-  window.renderEascDashboard=function(){
-    const vals=Object.values(state.progress||{}), done=vals.filter(x=>x.completed).length;
-    const scored=vals.filter(x=>typeof x.score==='number'&&x.completed), avg=scored.length?Math.round(scored.reduce((a,x)=>a+x.score,0)/scored.length):0;
-    const bd=document.getElementById('dashCompleted'); if(bd)bd.textContent=done+'/6';
-    const ba=document.getElementById('dashAverage'); if(ba)ba.textContent=avg+'%';
-    const db=document.getElementById('dashBadges'); if(db){let n=0; try{const all=(window.allBadges||[]); n=all.filter(b=>b.rule&&b.rule(state)).length;}catch(e){} db.textContent=n;}
-    const dl=document.getElementById('dashLabs'); if(dl)dl.textContent=(state.featureData?.visitedTools||[]).length;
-    const chart=document.getElementById('dashScoreChart');
-    if(chart) chart.innerHTML=vals.map(function(x,i){var score=Math.max(0,Math.min(100,Number(x.score)||0));return '<div class="easc-score-bar"><div class="easc-score-value">'+score+'%</div><div class="easc-score-fill" style="height:'+Math.max(4,score*1.65)+'px"></div><div class="easc-score-label">M'+(i+1)+'</div></div>';}).join('');
-    const rows=document.getElementById('dashModuleRows');
-    if(rows) rows.innerHTML=vals.map(function(x,i){var names=['NULL & ALTERNATIVE HYPOTHESES','LEVEL OF SIGNIFICANCE','HYPOTHESIS TESTING','CORRELATION ANALYSIS','SCATTER PLOT & REGRESSION','ASSESSMENT QUIZ'];return '<div class="easc-module-row"><div class="num">M'+(i+1)+'</div><div><b>'+names[i]+'</b><div class="text-[10px] easc-muted">'+(x.completed?'Completed':'Locked / In progress')+'</div></div><div class="text-right font-orbitron text-xs" style="color:var(--easc-accent)">'+(Number(x.score)||0)+'%</div></div>';}).join('');
-  };
-  const oldStart=window.startLearningTransition;
-  window.startLearningTransition=function(){if(oldStart)oldStart(); setTimeout(()=>showSidebarView('home'),50);}
-  const oldMenu=window.goToMenu;
-  window.goToMenu=function(){if(oldMenu)oldMenu(); setTimeout(()=>showSidebarView('home'),50);}
-  const oldOpen=window.openModule;
-  window.openModule=function(n){
-    if(oldOpen)oldOpen(n);
-    setTimeout(()=>{document.getElementById('eascSidebar')?.classList.remove('hidden');document.querySelectorAll('.easc-side-btn').forEach(b=>b.classList.toggle('active',b.dataset.view==='modules'));},50);
-  };
-  const oldApply=window.applyProfileToHeader;
-  window.applyProfileToHeader=function(){if(oldApply)oldApply(); const av=document.getElementById('sideAvatar'); if(av)av.innerHTML=state.avatarDataUrl ? ('<img src="'+state.avatarDataUrl+'">') : '<i class="fas fa-user"></i>'; const nm=document.getElementById('sideName'); if(nm)nm.textContent=state.userName||'Student Learner'; syncSidebarSettings();}
-  const oldTheme=window.applyTheme;
-  window.addEventListener('load',()=>{setTimeout(()=>{const side=document.getElementById('eascSidebar'); if(side && state.currentStage!=='init') side.classList.remove('hidden'); syncSidebarSettings();},1200)});
+const P=s=>{const a=s.split('~');return{q:a[0],o:a.slice(1,-2),a:+a[a.length-2],w:a[a.length-1]}};
+const OBJ={
+1:['Define hypothesis testing and a hypothesis about a population parameter.','State the null (H₀) and alternative (H₁) hypotheses from a research problem.','Distinguish Type I (α) and Type II (β) errors.'],
+2:['Explain the level of significance (α) and its common values.','Locate rejection regions for two-tailed, right-tailed and left-tailed tests.','Use critical values or p-values to decide about H₀.'],
+3:['Apply the steps of a hypothesis test from hypotheses to conclusion.','Compute a Z or t test statistic from sample data.','Write a decision and a conclusion in the context of the problem.'],
+4:['Describe direction and strength of a linear relationship using Pearson’s r.','Interpret r from -1 to +1 using sign and magnitude.','Explain why correlation does not establish causation.'],
+5:['Construct and read a scatter plot of paired data.','Interpret slope (m) and intercept (b) in Y = mx + b.','Use the line of best fit for prediction within the data range.']};
+const EX={
+2:[['Example 1: Choosing α','A hospital tests a new drug and wants only a 1% risk of wrongly claiming it works. It sets α = 0.01, so the critical values for a two-tailed Z test are ±2.576.'],['Example 2: Decision','A two-tailed Z test at α = 0.05 gives Z = 2.31. Since |2.31| > 1.96, the statistic falls in the rejection region: reject H₀.']],
+3:[['Example 1: Z-test','A mean of 52 is observed for n = 36 with σ = 6 against μ₀ = 50. Z = (52−50)/(6/√36) = 2.00. At α = 0.05 (two-tailed) 2.00 > 1.96, so reject H₀.'],['Example 2: Conclusion','Fail to reject H₀ when Z = 1.20 (α = 0.05): there is not enough evidence that the mean differs from μ₀. This does not prove H₀ is true.']],
+4:[['Example 1: Direction and strength','r = 0.82 between study hours and exam score: a strong positive linear relationship; more study time tends to accompany higher scores.'],['Example 2: Negative r','r = −0.35 between hours of TV and grades: a weak negative relationship. It does not show TV causes lower grades.']],
+5:[['Example 1: Prediction','Given Y = 2X + 5, a student who studies X = 4 hours has predicted Y = 2(4) + 5 = 13.'],['Example 2: Interpretation','In Y = 2X + 5, the slope 2 means Y is predicted to rise by 2 for each 1-unit increase in X; the intercept 5 is the predicted Y when X = 0.']]};
+const WH={
+1:['What is hypothesis testing?~A decision-making process for evaluating claims about a population~A way to compute the sample size~A method for drawing graphs~0~It evaluates a claim about a population using sample evidence.','What is a hypothesis?~A proven fact~An assumption about a population parameter that may or may not be true~A sample mean~1~A hypothesis is a conjecture about a parameter.','Which symbol is used for the null hypothesis?~H₁~H₀~α~1~H₀ is the null; H₁ is the alternative.','What does the null hypothesis state?~There is a significant difference~No significant difference, change or relationship~The sample is biased~1~H₀ is the initial claim of no effect.','Which symbols may appear in H₁?~Only =~≠, > or <~Only ≤~1~H₁ expresses a difference, increase or decrease.','What are the hypotheses for "the mean height differs from 66 inches"?~H₀: μ = 66; H₁: μ ≠ 66~H₀: μ ≠ 66; H₁: μ = 66~H₀: μ > 66; H₁: μ = 66~0~"Differs" is two-tailed, so H₁ uses ≠.','Which test type does "less than 1,200 hours" indicate?~Right-tailed~Left-tailed~Two-tailed~1~"Less than" gives H₁: μ < 1200, a left-tailed test.','What is a Type I error?~Rejecting a true H₀~Failing to reject a false H₀~Correctly rejecting H₀~0~Type I is a false positive, with probability α.','What is a Type II error?~Rejecting a true H₀~Failing to reject a false H₀~Choosing α~1~Type II (β) misses a real effect.','Why do we state H₀ and H₁ before collecting data?~To make the decision objective and not driven by the results~To avoid using a formula~To make α larger~0~Pre-stated hypotheses prevent bias in the decision.'],
+2:['What is the level of significance?~The maximum probability of rejecting a true H₀ that we tolerate~The probability H₀ is true~The sample size~0~α is the tolerated Type I error rate.','Which are common values of α?~0.10, 0.05, 0.01~5, 10, 20~0.5, 0.9, 1~0~These are the standard significance levels.','When is α chosen?~After seeing the result~Before the test is evaluated~Only if H₀ is rejected~1~Choosing α afterwards would bias the decision.','Where is the rejection region in a right-tailed test?~Left tail~Right tail~Both tails~1~H₁ uses > so the extreme values are on the right.','How is α distributed in a two-tailed test?~All in one tail~Split equally between both tails~Not used~1~At α = 0.05 each tail holds 0.025.','What are the critical Z values for α = 0.05 two-tailed?~±1.645~±1.96~±2.576~1~The middle 95% lies between −1.96 and 1.96.','What happens to the rejection region when α decreases from 0.05 to 0.01?~It becomes narrower/more extreme~It becomes wider~It stays the same~0~A smaller α demands stronger evidence.','When do we reject H₀ using the p-value?~When p ≤ α~When p > α~When p = 1~0~A small p-value is strong evidence against H₀.','Why is "fail to reject H₀" preferred over "accept H₀"?~Lack of evidence does not prove H₀ true~It sounds more formal~α is zero~0~We only judge the evidence against H₀.','How does a smaller α affect Type I error?~It makes Type I error less likely~It makes it more likely~It has no effect~0~α is the Type I error rate.'],
+3:['What is the first step of a hypothesis test?~State H₀ and H₁~Compute Z~Write the conclusion~0~The hypotheses guide every later step.','Which formula gives the Z statistic?~(x̄ − μ₀)/(σ/√n)~(x − y)/n~Σx/n~0~Z standardizes the sample mean.','When is a t procedure used?~When σ is estimated by s~When n is huge and σ known~Never~0~t accounts for the extra uncertainty of estimating σ.','What is the standard error of the mean?~σ/√n~σ·n~n/σ~0~SE shrinks as n increases.','Compute Z: x̄ = 52, μ₀ = 50, σ = 6, n = 36. What is it?~0.33~2.00~12~1~SE = 1, so Z = 2/1 = 2.00.','What is the decision if |Z| = 2.00 and the critical value is 1.96?~Reject H₀~Fail to reject H₀~Cannot decide~0~2.00 lies beyond 1.96.','Why compare the statistic with the critical value?~To see if it falls in the rejection region~To find the sample size~To compute r~0~The region marks results unlikely under H₀.','What does a conclusion in context mean?~Restating the decision in terms of the research problem~Writing only "reject"~Listing the formula~0~Decisions need plain-language meaning.','How does a larger sample size affect the test statistic (same difference)?~It increases |Z|~It decreases |Z|~No change~0~A smaller SE gives a larger Z.','Which decision is correct when Z = 1.20 at α = 0.05 (two-tailed)?~Reject H₀~Fail to reject H₀~Accept H₁ as proven~1~1.20 < 1.96.'],
+4:['What does correlation describe?~Direction and strength of a linear relationship~Sample size~The mean~0~It measures linear association of two variables.','What is the range of Pearson’s r?~0 to 1~-1 to +1~-100 to 100~1~r cannot exceed 1 in absolute value.','What does a positive r mean?~Both variables tend to increase together~One rises as the other falls~No relationship~0~Sign gives direction.','What does r near 0 suggest?~Little or no linear relationship~Perfect relationship~Negative relationship~0~Values near 0 mean weak linear association.','Which part of r indicates strength?~Its magnitude |r|~Its sign~The axis labels~0~Closer to 1 means stronger.','What does r = −0.90 show?~A strong negative relationship~A weak positive relationship~No relationship~0~Negative sign, high magnitude.','Why can’t correlation prove causation?~Another variable or chance may explain the pattern~r is always zero~It proves nothing at all~0~Association alone does not show cause.','Which variables suit Pearson’s r?~Two quantitative variables~Two names~One category~0~It needs paired numeric data.','How does a scatter plot show a strong positive r?~Points rise closely along a line~Points fall along a line~Points are scattered~0~Tight upward pattern.','What does r = 1 mean?~A perfect positive linear relationship~No relationship~A perfect negative relationship~0~All points lie on an upward line.'],
+5:['What does a scatter plot display?~Paired observations of two variables~One variable’s mean~A frequency table~0~Each point is an (x, y) pair.','What is the line of best fit?~A line summarizing the linear trend~The line through the first point~A vertical line~0~It best represents the trend.','What does m represent in Y = mx + b?~The change in Y for a one-unit increase in X~Y when X = 0~The sample size~0~m is the slope.','What does b represent?~The predicted Y when X = 0~The slope~The correlation~0~b is the intercept.','Which variable goes on the X axis?~The explanatory variable~The response variable~Either at random~0~Y is the response.','What does a negative slope mean?~Y decreases as X increases~Y increases as X increases~No change~0~Sign of m gives direction.','How do you predict Y when X = 4 in Y = 2X + 5?~Substitute: 2(4)+5 = 13~2 + 4 + 5~4/2~0~Replace X and compute.','Why is extrapolation risky?~The trend may not hold outside the observed data~It is illegal~It lowers r~0~We lack evidence beyond the range.','What happens to the line if b increases and m stays fixed?~It shifts upward~It becomes steeper~It rotates~0~The intercept moves the line vertically.','What should you check before using a line of best fit?~That the pattern looks linear~That n is odd~That Y is a name~0~Regression assumes a linear trend.']};
+Object.keys(WH).forEach(k=>WH[k]=WH[k].map(P));
+const Q6=['Which symbol denotes the null hypothesis?~H₁~H₀~α~r~1~H₀ is the null.','Rejecting a true H₀ is a~Type I error~Type II error~Correct decision~Power~0~False positive.','Failing to reject a false H₀ is a~Type I error~Type II error~Correct decision~Confidence~1~Missed effect (β).','Which H₁ matches "mean is greater than 75"?~μ = 75~μ > 75~μ < 75~μ ≠ 75~1~"Greater than" is right-tailed.','"Different from" indicates~Right-tailed~Left-tailed~Two-tailed~No test~2~H₁ uses ≠.','α is the~Probability H₀ is true~Tolerated Type I error rate~Sample size~Effect size~1~Defined before the test.','Two-tailed α = 0.05 puts in each tail~0.05~0.10~0.025~0.5~2~Split equally.','Critical Z for α = 0.05 two-tailed~±1.645~±1.96~±2.576~±1~1~Middle 95%.','Critical Z for α = 0.01 two-tailed~±1.96~±2.326~±2.576~±1.645~2~99% central.','Smaller α makes rejection~Easier~Harder~Impossible~Unchanged~1~Stronger evidence needed.','Reject H₀ when~p ≤ α~p > α~p = 1~α = 0~0~Small p is evidence against H₀.','"Fail to reject H₀" means~H₀ is proven~Not enough evidence against H₀~H₁ is proven~α = 0~1~No proof either way.','First step of a hypothesis test~Compute Z~State H₀ and H₁~Conclude~Pick p~1~Hypotheses first.','Z statistic formula~(x̄−μ₀)/(σ/√n)~(x̄−μ₀)·n~σ/√n~x̄/μ₀~0~Standardized difference.','t test is used when~σ is unknown and s is used~σ is known~n is 1~Always~0~Estimated variability.','Standard error of the mean~σ/√n~σ√n~n/σ~σ²~0~Shrinks with n.','Z = 2.00, critical 1.96 (two-tailed): decision~Reject H₀~Fail to reject~Accept H₀~No decision~0~Beyond the critical value.','Larger n (same difference) gives~Larger |Z|~Smaller |Z|~Same Z~Zero~0~Smaller SE.','Pearson’s r ranges from~0 to 1~-1 to 1~-∞ to ∞~0 to 100~1~Bounded.','r = 0.85 indicates~Weak positive~Strong positive~Strong negative~None~1~High magnitude, positive.','r = -0.10 indicates~Strong negative~Weak negative~Strong positive~Perfect~1~Small magnitude.','r near 0 suggests~Strong linear~Little linear relationship~Perfect line~Causation~1~Weak linear association.','Correlation~Proves causation~Does not prove causation~Equals slope~Equals α~1~Association only.','In a scatter plot, X is usually the~Response~Explanatory variable~Residual~Constant~1~Y is the response.','In Y = mx + b, m is the~Intercept~Slope~Correlation~Mean~1~Rate of change.','In Y = mx + b, b is~Predicted Y at X = 0~Slope~r~n~0~Intercept.','Negative m means~Y falls as X rises~Y rises as X rises~No relation~Constant Y~0~Downward trend.','For Y = 3X + 2 and X = 5, Y =~15~17~10~13~1~3(5)+2 = 17.','Predicting far outside the data range is~Extrapolation and risky~Always accurate~Required~Interpolation~0~Trend may not hold.','Best summary of a statistical result~Decision plus context conclusion~Only the number~Only Z~Only α~0~Explain what it means.'].map(P);
+const th=document.createElement('style');th.textContent='.easc-part{margin:18px 0;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.easc-part h2{color:var(--cyan2);margin:0 0 12px;font-size:16px;letter-spacing:.08em}.easc-part h3.sub2{color:var(--cyan);font-size:13px;margin:16px 0 8px}.easc-part p{line-height:1.7;font-size:13px;margin:0 0 10px}.wq{margin:12px 0;padding:12px;border:1px solid var(--line);border-radius:10px}.wq label{display:block;margin:6px 0;cursor:pointer;font-size:13px}.wfb{margin-top:8px;font-size:12px;line-height:1.6}.wfb.g{color:var(--good)}.wfb.b{color:var(--bad)}';document.head.appendChild(th);
+function qz(id,items,onDone){return `<div id="${id}">${items.map((it,i)=>`<div class="wq"><b>${i+1}. ${it.q}</b>${it.o.map((o,j)=>`<label><input type="radio" name="${id}_${i}" value="${j}"> ${String.fromCharCode(65+j)}) ${o}</label>`).join('')}<div class="wfb" id="${id}_fb${i}"></div></div>`).join('')}<button class="btn" onclick="EASC_submit('${id}')">SUBMIT</button><div class="wfb" id="${id}_res" style="font-size:14px;margin-top:10px"></div></div>`}
+const REG={};
+window.EASC_submit=function(id){const r=REG[id];let s=0;r.items.forEach((it,i)=>{const c=document.querySelector(`input[name="${id}_${i}"]:checked`);const fb=document.getElementById(`${id}_fb${i}`);const ok=c&&+c.value===it.a;if(ok)s++;fb.className='wfb '+(ok?'g':'b');fb.innerHTML=(ok?'✓ Correct. ':(c?'✗ Incorrect. ':'✗ Unanswered. '))+`Correct answer: ${String.fromCharCode(65+it.a)}) ${it.o[it.a]}. <i>${it.w}</i>`});const pct=Math.round(s/r.items.length*100);document.getElementById(id+'_res').innerHTML=`Score: ${s}/${r.items.length} (${pct}%)`;r.done&&r.done(pct)};
+const FB={};
+['checkGuideAnswer','checkComprehension'].forEach((fn,k)=>{const o=window[fn];window[fn]=function(n,i,j){(FB[n]=FB[n]||{g:{},c:{}})[k?'c':'g'][i]=j;return o.apply(this,arguments)}});
+window.EASC_feedback=function(n){const L=String.fromCharCode(97);const row=(q,ans,opts,sel)=>{const ci=q.charCodeAt?0:0;};let h='';[['Guide questions',(GRAPH_GUIDES[n]||{}).questions||[],'g'],['Comprehension check',COMPREHENSION_BANK[n]||[],'c']].forEach(([t,qs,k])=>{h+=`<h3 class="sub2">${t}</h3>`;qs.forEach((q,i)=>{const c=q[1].charCodeAt(0)-97,s=(FB[n]||{g:{},c:{}})[k][i];h+=`<p><b>${i+1}. ${q[0]}</b><br>${s===undefined?'<span style="color:var(--gold)">Not answered yet.</span>':s===c?'<span style="color:var(--good)">✓ Correct.</span>':'<span style="color:var(--bad)">✗ Your answer: '+q[2][s]+'</span>'}<br>Correct answer: ${q[2][c]}</p>`})});document.getElementById('easc_fb_'+n).innerHTML=h;renderAllMath(document.getElementById('easc_fb_'+n))};
+GRAPH_GUIDES[1]={title:'INTERACTIVE ACTIVITY GUIDE',questions:[['In "μ = 66 vs μ ≠ 66", which statement is H₀?','a',['μ = 66','μ ≠ 66','μ > 66']],['"Increases above 45 kilos" gives which H₁?','b',['μ < 45','μ > 45','μ = 45']],['"Less than 1,200 hours" gives which tail?','c',['Right','Two','Left']],['Which error is rejecting a true H₀?','a',['Type I','Type II','None']],['Which words signal a two-tailed H₁?','b',['greater than','different from','less than']]]};
+GRAPH_GUIDES[3]={title:'INTERACTIVE Z-TEST GUIDE',questions:[['What is compared with μ₀ in the Z statistic?','a',['The sample mean','The sample size','α']],['If |Z| is larger than the critical value, what is the decision?','b',['Fail to reject H₀','Reject H₀','Accept H₀']],['Increasing n while keeping the difference changes SE how?','c',['Increases it','No change','Decreases it']],['What must the conclusion include?','a',['Context of the problem','Only the number','Only α']],['Which is the critical Z for α = 0.05 two-tailed?','b',['1.645','1.96','2.576']]]};
+const VID={3:'vR2LfIhiqLc',4:'mbkamYEAF9M',5:'JkMejZZPyvo'};
+const T={1:'Hypothesis testing',2:'Level of significance',3:'Z-test',4:'Pearson correlation',5:'Scatter plot and regression'};
+function part(t,body){return `<section class="easc-part"><h2>${t}</h2>${body}</section>`}
+function reorg(n,c){
+c.style.visibility='hidden';
+const kids=[];[...c.children].forEach(k=>{if(/space-y-(4|6)/.test(k.className))kids.push(...k.children);else kids.push(k)});
+const H=e=>(e.querySelector('h3,h4,h5,.font-orbitron')?.textContent||'').trim();
+const B={disc:'',lesson:[],video:null,ex:[],act:[],guide:null,comp:null,done:null};let take='';
+kids.forEach(k=>{const t=H(k),cl=k.className||'';
+if(cl.includes('component-strip'))return;
+if(cl.includes('lesson-panel')){const st=[...k.querySelectorAll('.lesson-step')].map(s=>{const d=s.children;return `<p><b>${d[0].textContent.replace(/^\d+\.\s*/,'')}.</b> ${d[1].textContent}</p>`}).join('');B.disc=`<p>${k.querySelector('p').textContent}</p>${st}`;const f=k.querySelector('.math-display');if(f)B.lesson.push(f);const tk=[...k.querySelectorAll('div')].find(d=>/KEY TAKEAWAY/.test(d.textContent)&&!d.querySelector('div'));if(tk){take=tk.textContent.replace('KEY TAKEAWAY:','').trim();B.lesson.push(tk)}return}
+if(cl.includes('easc-video-wrap')){B.video=k;return}
+if(cl.includes('guideBlock')){B.guide=k;return}
+if(cl.includes('comprehensionBlock')){B.comp=k;return}
+if(k.tagName==='BUTTON'&&/markModuleComplete/.test(k.getAttribute('onclick')||'')){B.done=k;return}
+if(/Guide Questions/.test(t))return;
+if(/Guided Problem/.test(t)){B.ex.push(k);return}
+if(/DEFINITIONS|Decision Matrix|Lesson Overview/.test(t)){B.lesson.push(k);return}
+B.act.push(k)});
+if(!B.guide){appendInteractiveGuide(n);B.guide=c.querySelector('.guideBlock')}
+const el=(h)=>{const d=document.createElement('div');d.innerHTML=h;return d};
+const out=document.createDocumentFragment(),add=(t,inner,nodes)=>{const s=el(part(t,inner)).firstChild;(nodes||[]).forEach(x=>s.appendChild(x));out.appendChild(s);return s};
+add('PART I. LEARNING OBJECTIVES',`<ul style="padding-left:20px">${OBJ[n].map(o=>`<li style="margin:6px 0;font-size:13px">${o}</li>`).join('')}</ul>`);
+const p2=add('PART II. CONTENT',`<h3 class="sub2">1. Discussion</h3>${B.disc}<h3 class="sub2">2. Lesson</h3><div id="ls${n}"></div><h3 class="sub2">3. Video Lesson</h3><div id="vd${n}"></div><h3 class="sub2">4. Examples</h3><div id="ex${n}"></div>`);
+B.lesson.forEach(x=>p2.querySelector('#ls'+n).appendChild(x));
+if(B.video)p2.querySelector('#vd'+n).appendChild(B.video);else if(VID[n])p2.querySelector('#vd'+n).innerHTML=`<div class="easc-video-wrap"><div class="easc-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${VID[n]}?rel=0" title="Module ${n} video lesson" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><p><a target="_blank" rel="noopener" style="color:var(--cyan)" href="https://youtu.be/${VID[n]}">Open on YouTube</a></p></div>`;
+else p2.querySelector('#vd'+n).innerHTML=`<div class="easc-video-wrap"><div class="easc-video-frame" id="vf${n}"></div><p style="margin-top:8px">Paste a YouTube link for this lesson: <input id="vu${n}" style="width:60%;background:var(--bg2);color:var(--white);border:1px solid var(--line);border-radius:6px;padding:4px"> <button class="btn secondary" onclick="EASC_video(${n})">Load video</button></p><p><a target="_blank" rel="noopener" style="color:var(--cyan)" href="https://www.youtube.com/results?search_query=${encodeURIComponent(T[n]+' statistics lesson')}">Search YouTube for “${T[n]}”</a></p></div>`;
+const ex=p2.querySelector('#ex'+n);(EX[n]||[]).forEach(e=>ex.insertAdjacentHTML('beforeend',`<p><b>${e[0]}.</b> ${e[1]}</p>`));B.ex.forEach(x=>ex.appendChild(x));
+const p3=add('PART III. ACTIVITY',`<h3 class="sub2">1. Interactive activity / graphs</h3><div id="ac${n}"></div><h3 class="sub2">2. Guide questions</h3><div id="gd${n}"></div><h3 class="sub2">3. Comprehension check</h3><div id="cp${n}"></div><h3 class="sub2">4. Detailed feedback</h3><p>Answer the guide questions and comprehension check, then review your answers.</p><button class="btn secondary" onclick="EASC_feedback(${n})">Show detailed feedback</button><div id="easc_fb_${n}"></div>`);
+B.act.forEach(x=>p3.querySelector('#ac'+n).appendChild(x));if(B.guide)p3.querySelector('#gd'+n).appendChild(B.guide);if(B.comp)p3.querySelector('#cp'+n).appendChild(B.comp);
+REG['wh'+n]={items:WH[n],done:pct=>{state.progress[n].score=pct;state.progress[n].completed=pct>=70;try{updateUIProgress()}catch(e){}}};
+add('PART IV. ASSESSMENT',`<p>Answer all 10 questions. Detailed feedback appears after you submit.</p>${qz('wh'+n,WH[n])}`);
+if(B.done){const w=document.createElement('div');w.appendChild(B.done);out.appendChild(w)}
+c.innerHTML='';c.appendChild(out);renderAllMath(c);c.style.visibility='visible';
+if(n===2&&window.drawM2Curve)drawM2Curve();if(n===4&&window.drawM4Scatter)drawM4Scatter();if(n===5&&window.drawM5Regression)drawM5Regression()}
+window.EASC_video=function(n){const m=(document.getElementById('vu'+n).value||'').match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);if(!m){alert('Please paste a valid YouTube link.');return}document.getElementById('vf'+n).innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${m[1]}?rel=0" allowfullscreen loading="lazy"></iframe>`};
+const prev=window.openModule;
+window.openModule=function(n){
+if(n===6){state.currentModule=6;document.getElementById('moduleKicker').textContent='MODULE 06';document.getElementById('moduleTitle').textContent='ASSESSMENT';const c=document.getElementById('moduleContainer');document.querySelector('#moduleView .sub').textContent='30-item multiple-choice assessment';REG.q6={items:Q6,done:pct=>{state.progress[6].completed=pct>=80;state.progress[6].score=pct;try{updateUIProgress()}catch(e){}document.getElementById('q6_res').innerHTML+=pct>=80?' — PASSED':' — Below 80%. Review the modules and try again.'}};c.innerHTML=`<section class="easc-part"><h2>ASSESSMENT — 30 MULTIPLE-CHOICE ITEMS</h2><p>Choose the best answer for each item. Detailed feedback appears after you submit.</p>${qz('q6',Q6)}</section>`;showView('moduleView',null);return}
+document.querySelector('#moduleView .sub').textContent='Objectives → Content → Activity → Assessment';
+prev.call(this,n);setTimeout(()=>reorg(n,document.getElementById('moduleContainer')),200)};
 })();
 </script>
-</body>
-</html>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+/* EAS•C original look: semi-transparent glass panels over the moving background */
+:root{--panel:rgba(9,38,83,.55);--panel2:rgba(13,49,99,.55);--easc-card:rgba(8,35,74,.5);--easc-card2:rgba(7,31,65,.5)}
+html{background:#020a1c}body{background:transparent!important}
+#particles{z-index:-1;background:radial-gradient(circle at 50% -10%,#0b3b70 0,#061a3b 38%,#020a1c 100%);background-size:160% 160%;animation:bgshift 22s ease-in-out infinite alternate}
+@keyframes bgshift{from{background-position:20% 0}to{background-position:80% 100%}}
+.font-orbitron{font-family:Orbitron,Inter,Segoe UI,sans-serif!important;letter-spacing:.04em}
+.cyber-card,.lesson-panel,.easc-activity-card,.easc-part,.card,.hero,.lesson,.activity,.interact,.quizQ,.component-chip,.easc-feature-card,.wq,.certificate.unlocked{background:rgba(7,31,65,.5)!important;border:1px solid rgba(32,200,255,.32)!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 0 24px rgba(0,191,255,.08)}
+.interact,.wq{background:rgba(4,24,50,.45)!important}
+.sidebar{background:rgba(3,20,46,.62)!important;backdrop-filter:blur(14px)}
+.profile{background:rgba(8,35,74,.5)!important}
+.splashCard{background:linear-gradient(135deg,rgba(6,26,60,.6),rgba(8,41,90,.55))!important;backdrop-filter:blur(12px)}
+.bg-cyber-dark{background:rgba(3,17,43,.55)!important}
+.lesson-step{padding:10px 12px;border:1px solid rgba(32,200,255,.2);border-radius:10px;background:rgba(4,24,50,.4)}
+.math-display{padding:12px;text-align:center;border:1px solid rgba(32,200,255,.28);background:rgba(4,24,50,.45);border-radius:12px;margin:12px 0;overflow-x:auto}
+.btn-cyber{background:linear-gradient(100deg,rgba(8,169,237,.85),rgba(8,119,255,.85));border:1px solid #20c8ff;color:#fff;border-radius:10px;box-shadow:0 0 18px rgba(0,191,255,.3);transition:.2s;cursor:pointer}
+.btn-cyber:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(0,191,255,.55)}
+/* side menu highlight: hover, focus, active */
+.nav button{transition:background .18s,border-color .18s,box-shadow .18s,transform .18s;width:100%}
+.nav button:hover,.nav button:focus-visible,.nav button.active{background:rgba(32,200,255,.16)!important;border-color:#39d7ff!important;color:#fff!important;box-shadow:inset 4px 0 var(--cyan),0 0 14px rgba(32,200,255,.25)!important;outline:none}
+.nav button:hover{transform:translateX(3px)}
+.pgbar{height:10px;border-radius:99px;background:rgba(16,45,82,.8);overflow:hidden}.pgbar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#08a9ed,#35e78b);transition:width .5s}
+.pgrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(32,200,255,.15);font-size:13px}
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}@media(max-width:900px){.badges{grid-template-columns:1fr 1fr}}
+.badge-card.locked{opacity:.4;filter:grayscale(.8)}
+.certificate{background:rgba(6,26,55,.7)}
+</style>
+<script>
+(function(){
+const KEY='EASC_progress_v4';
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)Object.keys(s).forEach(k=>{if(state.progress[k])Object.assign(state.progress[k],s[k])});const nm=localStorage.getItem('EASC_cert_name');if(nm)state.userName=nm}catch(e){}
+const done=()=>[1,2,3,4,5,6].filter(i=>state.progress[i]&&state.progress[i].completed).length;
+const NAMES=['Null & Alternative Hypotheses','Level of Significance','Hypothesis Testing','Correlation Analysis','Scatter Plot & Regression','Assessment'];
+function bar(pct){return `<div class="pgbar"><i style="width:${pct}%"></i></div>`}
+function refresh(){
+try{localStorage.setItem(KEY,JSON.stringify(state.progress))}catch(e){}
+const pct=Math.round(done()/6*100);
+const set=(id,h)=>{const e=document.getElementById(id);if(e)e.innerHTML=h};
+set('pgTop',`<div class="progressRow"><span>Overall progress</span><b>${pct}%</b></div>${bar(pct)}<div class="progressRow" style="margin-top:6px"><span>${done()} of 6 modules completed</span></div>`);
+set('pgSide',`<div style="margin-top:8px">${bar(pct)}<span>${pct}% complete</span></div>`);
+set('pgList',NAMES.map((n,i)=>{const p=state.progress[i+1];return `<div class="pgrow"><span>Module ${String(i+1).padStart(2,'0')} — ${n}</span><span style="color:${p.completed?'var(--good)':'var(--muted)'}">${p.completed?'✓ Completed':'In progress'}${p.score?` · ${p.score}%`:''}</span></div>`}).join(''));
+try{renderBadges()}catch(e){}
+const ok=state.progress[6].score>=80;const lock=document.getElementById('certLock'),box=document.getElementById('certBox');
+if(lock&&box){lock.style.display=ok?'none':'block';box.style.display=ok?'block':'none';document.getElementById('certStudentName').textContent=state.userName;document.getElementById('certScore').textContent=state.progress[6].score+'%';document.getElementById('certDate').textContent=new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'})}
+}
+window.updateUIProgress=refresh;window.EASC_refresh=refresh;
+window.markModuleComplete=function(n){state.progress[n].completed=true;refresh();alertBox(`Module ${String(n).padStart(2,'0')} marked complete.`)};
+window.EASC_certName=function(v){state.userName=v.trim()||'Student Learner';try{localStorage.setItem('EASC_cert_name',state.userName)}catch(e){}document.getElementById('certStudentName').textContent=state.userName};
+window.EASC_print=function(){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('certificate').classList.add('active');window.print()};
+/* nav, pages, progress widgets */
+const nav=document.querySelector('.nav');
+nav.insertAdjacentHTML('beforeend',`<button onclick="showView('badges',this)">🏅 &nbsp; Badges</button><button onclick="showView('certificate',this)">🎓 &nbsp; Certificate</button>`);
+const main=document.querySelector('.main');
+main.insertAdjacentHTML('beforeend',`<section id="badges" class="page"><div class="top"><div><div class="kicker">EAS•C Achievements</div><h2>Badges</h2><div class="sub">Complete modules and assessments to unlock badges.</div></div></div><div class="badges" id="badgeGrid"></div></section>
+<section id="certificate" class="page certificatePage"><div class="top"><div><div class="kicker">EAS•C Certificate</div><h2>Certificate of Completion</h2><div class="sub">Score 80% or higher on the Module 6 assessment to unlock your certificate.</div></div></div>
+<div id="certLock" class="cyber-card" style="padding:24px;border-radius:16px">🔒 Certificate locked. Pass the Module 6 assessment with at least 80%.</div>
+<div id="certBox" style="display:none"><p><label class="sub">Name on certificate: <input class="easc-input" style="max-width:320px" value="${state.userName.replace(/"/g,'&quot;')}" oninput="EASC_certName(this.value)"></label></p>
+<div class="certificate unlocked" style="padding:45px;text-align:center;border-radius:22px"><div class="kicker">EAS•C — Enhancing Activities in Statistics Courseware</div><h1 class="font-orbitron">CERTIFICATE OF COMPLETION</h1><p>This certifies that</p><div class="name font-orbitron" id="certStudentName"></div><p>has successfully completed the EAS•C statistics courseware with a final assessment score of <b id="certScore"></b>.</p><p class="sub" id="certDate"></p></div>
+<p style="margin-top:14px"><button class="btn" onclick="EASC_print()">Print / Save as PDF</button></p></div></section>`);
+document.querySelector('#dashboard .top').insertAdjacentHTML('beforeend','<div class="progressBox" id="pgTop"></div>');
+document.querySelector('#dashboard').insertAdjacentHTML('beforeend','<div class="section"><h3>Module Progress</h3><div class="cyber-card" style="padding:18px;border-radius:16px" id="pgList"></div></div>');
+document.querySelector('.profile').insertAdjacentHTML('beforeend','<div id="pgSide"></div>');
+/* active highlight for module + lab buttons */
+window.showView=function(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');else if(id==='moduleView'){const m=document.querySelectorAll('#moduleNav button')[state.currentModule-1];if(m)m.classList.add('active')}window.scrollTo(0,0);refresh()};
+document.querySelectorAll('.nav button').forEach(b=>{if(b.getAttribute('onclick')&&b.getAttribute('onclick').indexOf("showView('stats'")===0)b.setAttribute('onclick',"showView('stats',this)")});
+refresh();
+})();
+</script>
+
+</body></html>
