@@ -2036,7 +2036,7 @@ try{localStorage.setItem(KEY,JSON.stringify(state.progress))}catch(e){}
 const pct=Math.round(done()/6*100);
 const set=(id,h)=>{const e=document.getElementById(id);if(e)e.innerHTML=h};
 set('pgTop',`<div class="progressRow"><span>Overall progress</span><b>${pct}%</b></div>${bar(pct)}<div class="progressRow" style="margin-top:6px"><span>${done()} of 6 modules completed</span></div>`);
-set('pgSide',`<div style="margin-top:8px">${bar(pct)}<span>${pct}% complete</span></div>`);
+
 set('pgList',NAMES.map((n,i)=>{const p=state.progress[i+1];return `<div class="pgrow"><span>Module ${String(i+1).padStart(2,'0')} — ${n}</span><span style="color:${p.completed?'var(--good)':'var(--muted)'}">${p.completed?'✓ Completed':'In progress'}${p.score?` · ${p.score}%`:''}</span></div>`}).join(''));
 try{renderBadges()}catch(e){}
 const ok=state.progress[6].score>=80;const lock=document.getElementById('certLock'),box=document.getElementById('certBox');
@@ -2058,7 +2058,7 @@ main.insertAdjacentHTML('beforeend',`<section id="badges" class="page"><div clas
 <p style="margin-top:14px"><button class="btn" onclick="EASC_print()">Print / Save as PDF</button></p></div></section>`);
 document.querySelector('#dashboard .top').insertAdjacentHTML('beforeend','<div class="progressBox" id="pgTop"></div>');
 document.querySelector('#dashboard').insertAdjacentHTML('beforeend','<div class="section"><h3>Module Progress</h3><div class="cyber-card" style="padding:18px;border-radius:16px" id="pgList"></div></div>');
-document.querySelector('.profile').insertAdjacentHTML('beforeend','<div id="pgSide"></div>');
+
 /* active highlight for module + lab buttons */
 window.showView=function(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');else if(id==='moduleView'){const m=document.querySelectorAll('#moduleNav button')[state.currentModule-1];if(m)m.classList.add('active')}window.scrollTo(0,0);refresh()};
 document.querySelectorAll('.nav button').forEach(b=>{if(b.getAttribute('onclick')&&b.getAttribute('onclick').indexOf("showView('stats'")===0)b.setAttribute('onclick',"showView('stats',this)")});
@@ -2120,7 +2120,7 @@ body{-webkit-text-size-adjust:100%}
 .sidebar .logo{padding:0 2px 12px}
 .sidebar .logo span{font-size:13px}
 .sidebar .logo small{font-size:9px}
-.profile{padding:10px!important;font-size:11px}
+.profile{padding:10px!important;font-size:11px}.profile #pgSide{display:none!important}
 .nav{display:flex;flex-direction:column;gap:5px;width:100%;flex:1 1 auto}
 .nav button{width:100%;flex:none;padding:9px 8px;font-size:11.5px;text-align:left;white-space:normal;line-height:1.3;word-break:break-word}
 .nav button small{font-size:9px;display:block}
@@ -2162,6 +2162,31 @@ input,select,textarea{font-size:15px!important}
   .hero{grid-template-columns:1.3fr .7fr!important}
   .splashCard{grid-template-columns:1fr 1fr!important}
 }
+
+/* FIX: keep the profile card out of the module navigation area.
+   The module list gets its own vertical scroll instead of being covered. */
+.sidebar{
+  overflow:hidden!important;
+}
+.sidebar .nav{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  padding-right:3px;
+  scrollbar-width:thin;
+}
+.sidebar .profile{
+  position:static!important;
+  left:auto!important;
+  right:auto!important;
+  bottom:auto!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  margin:12px 0 0!important;
+  z-index:auto!important;
+}
+
 </style>
 
 </body></html>
