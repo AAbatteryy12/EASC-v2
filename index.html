@@ -58,11 +58,11 @@ body{font-size:16px}.main{padding-top:28px}.moduleShell{max-width:1200px;margin:
 </head>
 <body class="easc-theme-dark">
 <div id="particles"></div>
-<section class="splash" id="welcome"><div class="splashCard"><div class="splashText"><div class="brand"><div class="mark">Σ</div><div><b>EAS•C</b><small>ENHANCING ACTIVITIES IN STATISTICS COURSEWARE</small></div></div><div class="kicker">Interactive Statistics Learning</div><h1>Welcome to <span>EAS•C</span></h1><p>All six EAS•C modules are available from the start. Each module follows the same structure: Objectives → Content → Activity → Assessment.</p><button class="btn" onclick="enterCourse()">Start Learning →</button></div><div class="splashArt"><div class="curveLabel">STATISTICS • μ • σ • r</div><svg class="curve" viewBox="0 0 520 300" fill="none"><path d="M35 250 C115 250 145 247 180 225 C215 202 220 62 260 50 C300 62 305 202 340 225 C375 247 405 250 485 250" stroke="#43dcff" stroke-width="5"/><path d="M35 250H485" stroke="#27638e" stroke-width="2"/><path d="M260 50V250" stroke="#2a8dbb" stroke-dasharray="7 8" stroke-width="2"/></svg></div></div></section>
+<section class="splash" id="welcome"><div class="splashCard"><div class="splashText"><div class="brand"><div class="mark">Σ</div><div><b>EAS•C</b><small>ENHANCING ACTIVITIES IN STATISTICS COURSEWARE</small></div></div><div class="kicker">Interactive Statistics Learning</div><h1>Welcome to <span>EAS•C</span></h1><p>All five EAS•C modules are available from the start, plus a separate 30-item Assessment. Each module follows the same structure: Objectives → Content → Activity → Assessment.</p><button class="btn" onclick="enterCourse()">Start Learning →</button></div><div class="splashArt"><div class="curveLabel">STATISTICS • μ • σ • r</div><svg class="curve" viewBox="0 0 520 300" fill="none"><path d="M35 250 C115 250 145 247 180 225 C215 202 220 62 260 50 C300 62 305 202 340 225 C375 247 405 250 485 250" stroke="#43dcff" stroke-width="5"/><path d="M35 250H485" stroke="#27638e" stroke-width="2"/><path d="M260 50V250" stroke="#2a8dbb" stroke-dasharray="7 8" stroke-width="2"/></svg></div></div></section>
 <div class="app" id="app">
 <aside class="sidebar"><div class="logo"><div class="mark">Σ</div><div><b>EAS•C</b><small>Enhancing Activities in Statistics Courseware</small></div></div><div class="nav"><button id="navDash" class="active" onclick="showView('dashboard',this)">⌂ &nbsp; Dashboard</button><div class="module-nav" id="moduleNav"></div><button onclick="showView('stats',this)">⚗ &nbsp; Stats Lab</button></div><div class="profile"><b>EAS•C COURSEWARE</b><span>All six modules unlocked.</span></div></aside>
 <main class="main">
-<section id="dashboard" class="page active"><div class="top"><div><div class="kicker">EAS•C Dashboard</div><h2>Statistics Learning Path</h2><div class="sub">Six modules are available immediately. Progress is recorded for learning evidence, not for locking modules.</div></div></div><div class="hero"><div><div class="kicker">Enhancing Activities in Statistics Courseware</div><h3>Objectives → Content → Activity → Assessment</h3><p>Study each module using the same Module 1 courseware format. The Statistics Lab provides the requested inferential tools separately.</p><button class="btn" onclick="openModule(1)">Open Module 1 →</button></div><div class="statsVector"><svg viewBox="0 0 300 220" fill="none"><path d="M25 190H280M40 190V35" stroke="#27628e" stroke-width="2"/><path d="M45 178C75 178 95 170 118 135C140 100 148 48 165 43C182 48 190 100 212 135C235 170 255 178 275 178" stroke="#42d9ff" stroke-width="5"/><path d="M55 180L90 145L120 160L150 112L180 130L215 80L260 100" stroke="#087eff" stroke-width="3" opacity=".8"/></svg></div></div><div class="section"><h3>Module Components</h3><div class="cards"><div class="card"><div class="icon">🎯</div><h4>Objectives</h4><p>What learners should know or do after the module.</p></div><div class="card"><div class="icon">📘</div><h4>Content</h4><p>Lesson, examples, explanations, formulas, and discussion.</p></div><div class="card"><div class="icon">🧪</div><h4>Activity & Assessment</h4><p>Interactive practice and assessment for evidence of learning.</p></div></div></div></section>
+<section id="dashboard" class="page active"><div class="top"><div><div class="kicker">EAS•C Dashboard</div><h2>Statistics Learning Path</h2><div class="sub">Five modules and a final Assessment are available immediately. Progress is recorded for learning evidence, not for locking modules.</div></div></div><div class="hero"><div><div class="kicker">Enhancing Activities in Statistics Courseware</div><h3>Objectives → Content → Activity → Assessment</h3><p>Study each module using the same Module 1 courseware format. The Statistics Lab provides the requested inferential tools separately.</p><button class="btn" onclick="openModule(1)">Open Module 1 →</button></div><div class="statsVector"><svg viewBox="0 0 300 220" fill="none"><path d="M25 190H280M40 190V35" stroke="#27628e" stroke-width="2"/><path d="M45 178C75 178 95 170 118 135C140 100 148 48 165 43C182 48 190 100 212 135C235 170 255 178 275 178" stroke="#42d9ff" stroke-width="5"/><path d="M55 180L90 145L120 160L150 112L180 130L215 80L260 100" stroke="#087eff" stroke-width="3" opacity=".8"/></svg></div></div><div class="section"><h3>Module Components</h3><div class="cards"><div class="card"><div class="icon">🎯</div><h4>Objectives</h4><p>What learners should know or do after the module.</p></div><div class="card"><div class="icon">📘</div><h4>Content</h4><p>Lesson, examples, explanations, formulas, and discussion.</p></div><div class="card"><div class="icon">🧪</div><h4>Activity & Assessment</h4><p>Interactive practice and assessment for evidence of learning.</p></div></div></div></section>
 <section id="moduleView" class="page"><div class="backBtn"><button class="btn secondary" onclick="showView('dashboard',document.getElementById('navDash'))">← Dashboard</button></div><div class="moduleShell"><div class="top"><div><div class="kicker" id="moduleKicker">MODULE 01</div><h2 id="moduleTitle">Module</h2><div class="sub">Objectives → Content → Activity → Assessment</div></div></div><div id="moduleContainer"></div></div></section>
 <section id="stats" class="page"><div class="top"><div><div class="kicker">EAS•C Statistics Lab</div><h2>Stats Lab</h2><div class="sub">Six interactive statistical tools.</div></div></div><div class="cards"><button class="easc-feature-card" onclick="openEascFeature('zknown')"><div class="icon">Zσ</div><div class="easc-feature-title">Z-TEST FOR KNOWN SD</div><div class="easc-feature-desc">Test a population mean when σ is known.</div></button><button class="easc-feature-card" onclick="openEascFeature('zunknown')"><div class="icon">Zs</div><div class="easc-feature-title">Z-TEST FOR UNKNOWN SD</div><div class="easc-feature-desc">Explore the sample-SD version.</div></button><button class="easc-feature-card" onclick="openEascFeature('onesamplet')"><div class="icon">t₁</div><div class="easc-feature-title">ONE-SAMPLE T-TEST</div><div class="easc-feature-desc">Compare a sample mean with μ₀.</div></button><button class="easc-feature-card" onclick="openEascFeature('indttest')"><div class="icon">t₂</div><div class="easc-feature-title">INDEPENDENT-SAMPLE T-TEST</div><div class="easc-feature-desc">Compare two independent groups.</div></button><button class="easc-feature-card" onclick="openEascFeature('pairedt')"><div class="icon">tₚ</div><div class="easc-feature-title">PAIRED-SAMPLE T-TEST</div><div class="easc-feature-desc">Analyze matched observations.</div></button><button class="easc-feature-card" onclick="openEascFeature('pearson')"><div class="icon">r</div><div class="easc-feature-title">PEARSON r CORRELATION</div><div class="easc-feature-desc">Calculate r and construct a scatterplot.</div></button></div></section>
 </main></div>
@@ -74,7 +74,7 @@ function playSound(){} function alertBox(msg){alert(msg)}
 function renderAllMath(root=document.body){const run=()=>{if(typeof renderMathInElement!=='function')return;try{renderMathInElement(root,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false,strict:false})}catch(e){}}; if(typeof renderMathInElement==='function')requestAnimationFrame(run); else window.addEventListener('load',run,{once:true})}
 function enterCourse(){document.getElementById('welcome').style.display='none';document.getElementById('app').style.display='flex';buildModuleNav();showView('dashboard',document.getElementById('navDash'));}
 function showView(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav>button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');window.scrollTo(0,0);}
-function buildModuleNav(){const nav=document.getElementById('moduleNav');const names=['NULL & ALTERNATIVE HYPOTHESES','LEVEL OF SIGNIFICANCE','HYPOTHESIS TESTING','CORRELATION ANALYSIS','SCATTER PLOT & REGRESSION','ASSESSMENT'];nav.innerHTML=names.map((n,i)=>`<button onclick="openModule(${i+1});this.classList.add('active')">▣ &nbsp; Module ${String(i+1).padStart(2,'0')}<br><small style="color:#72e7ff">${n}</small></button>`).join('')}
+function buildModuleNav(){const nav=document.getElementById('moduleNav');const names=['NULL & ALTERNATIVE HYPOTHESES','LEVEL OF SIGNIFICANCE','HYPOTHESIS TESTING','CORRELATION ANALYSIS','SCATTER PLOT & REGRESSION'];nav.innerHTML=names.map((n,i)=>`<button onclick="openModule(${i+1});this.classList.add('active')">▣ &nbsp; Module ${String(i+1).padStart(2,'0')}<br><small style="color:#72e7ff">${n}</small></button>`).join('')+`<button onclick="openModule(6);this.classList.add('active')">✎ &nbsp; Assessment<br><small style="color:#72e7ff">30-item final quiz</small></button>`}
 function updateUIProgress(){} function updateModuleLocks(){} function moduleIsUnlocked(){return true}
 </script>
 <script>
@@ -438,7 +438,7 @@ function renderModule1(container) {
 <div id="module1VideoLesson" class="easc-video-wrap">
   <div class="cyber-card rounded-xl p-4 border border-cyan-500/30">
     <div class="flex items-center justify-between gap-3 mb-3">
-      <div><h3 class="font-orbitron text-cyan-300 font-bold text-sm md:text-base">🎬 VIDEO LESSON — MODULE 1</h3><p class="text-xs text-cyan-200/75 mt-1">Watch the lesson directly inside EAS•C.</p></div>
+      <div><h3 class="font-orbitron text-cyan-300 font-bold text-sm md:text-base">VIDEO LESSON — MODULE 1</h3><p class="text-xs text-cyan-200/75 mt-1">Watch the lesson directly inside EAS•C.</p></div>
       <span class="text-[10px] uppercase tracking-widest text-cyan-400/70">YouTube</span>
     </div>
     <div class="easc-video-frame">
@@ -450,9 +450,9 @@ function renderModule1(container) {
 </div>
 
     </div>
-    <div class="easc-video-status">▶ The video plays inside EAS•C. Internet access is required for YouTube streaming.</div>
+    <div class="easc-video-status">The video plays inside EAS•C. Internet access is required for YouTube streaming.</div>
     <div class="mt-4">
-      <div class="flex items-center justify-between mb-2"><h4 class="font-orbitron text-cyan-300 font-bold text-xs">💡 SUGGESTED VIDEOS</h4><span class="text-[10px] text-cyan-400/60">Inside the player</span></div>
+      <div class="flex items-center justify-between mb-2"><h4 class="font-orbitron text-cyan-300 font-bold text-xs">SUGGESTED VIDEOS</h4><span class="text-[10px] text-cyan-400/60">Inside the player</span></div>
       <div class="easc-video-suggestions">
         <div class="easc-video-suggestion"><div class="sv-icon">🧪</div><div class="sv-title">Hypothesis Testing</div><div class="sv-note">Current Module 1 video</div></div>
         <div class="easc-video-suggestion"><div class="sv-icon">H₀ / H₁</div><div class="sv-title">Null &amp; Alternative Hypothesis</div><div class="sv-note">Related YouTube videos appear in the player</div></div>
@@ -719,7 +719,7 @@ function renderModule1(container) {
         }
 
         function renderModule2(container) {
-            container.innerHTML = detailedLesson(2) + funActivityCard(2) + `<div id="module2VideoLesson" class="easc-video-wrap"><div class="cyber-card rounded-xl p-4 border border-cyan-500/30"><div class="flex items-center justify-between gap-3 mb-3"><div><h3 class="font-orbitron text-cyan-300 font-bold text-sm md:text-base">🎬 VIDEO LESSON — MODULE 2</h3><p class="text-xs text-cyan-200/75 mt-1">Level of Significance, α and Critical Regions</p></div><span class="text-[10px] uppercase tracking-widest text-cyan-400/70">YouTube</span></div><div class="easc-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/D3qFmPn1pgM?rel=0" title="Module 2 — Level of Significance" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="easc-video-status">▶ Plays inside EAS•C. Internet access is required for YouTube streaming.</div></div></div>
+            container.innerHTML = detailedLesson(2) + funActivityCard(2) + `<div id="module2VideoLesson" class="easc-video-wrap"><div class="cyber-card rounded-xl p-4 border border-cyan-500/30"><div class="flex items-center justify-between gap-3 mb-3"><div><h3 class="font-orbitron text-cyan-300 font-bold text-sm md:text-base">VIDEO LESSON — MODULE 2</h3><p class="text-xs text-cyan-200/75 mt-1">Level of Significance, α and Critical Regions</p></div><span class="text-[10px] uppercase tracking-widest text-cyan-400/70">YouTube</span></div><div class="easc-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/D3qFmPn1pgM?rel=0" title="Module 2 — Level of Significance" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="easc-video-status">Plays inside EAS•C. Internet access is required for YouTube streaming.</div></div></div>
                 <div class="space-y-4">
                     <div class="p-4 rounded-xl bg-cyan-950/20 border border-cyan-500/30">
                         <h4 class="font-orbitron text-cyan-300 font-bold mb-2">Lesson Overview: Significance Level ($\\alpha$) & Critical Regions</h4>
@@ -1377,7 +1377,7 @@ function renderModule1(container) {
             {id:'correlation', icon:'fa-project-diagram', name:'CORRELATION PRO', desc:'Complete Module 04.', rule:s=>s.progress[4].completed},
             {id:'regression', icon:'fa-chart-line', name:'REGRESSION BUILDER', desc:'Complete Module 05.', rule:s=>s.progress[5].completed},
             {id:'perfect', icon:'fa-star', name:'ASSESSMENT ACE', desc:'Score 100% on Module 06.', rule:s=>s.progress[6].score===100},
-            {id:'master', icon:'fa-trophy', name:'EAS•C MASTER', desc:'Complete all six modules.', rule:s=>[1,2,3,4,5,6].every(i=>s.progress[i].completed)}
+            {id:'master', icon:'fa-trophy', name:'EAS•C MASTER', desc:'Complete all five modules and the Assessment.', rule:s=>[1,2,3,4,5,6].every(i=>s.progress[i].completed)}
         ];
         function renderBadges() {
             const grid=document.getElementById('badgeGrid');
@@ -1924,6 +1924,28 @@ window.addEventListener('DOMContentLoaded',()=>{buildModuleNav();renderAllMath()
 /* EAS•C v4 — Modules 1–5: Part I–IV layout; Module 6: assessment only; dark default */
 (function(){
 const P=s=>{const a=s.split('~');return{q:a[0],o:a.slice(1,-2),a:+a[a.length-2],w:a[a.length-1]}};
+const DISC={
+1:`<p>Every empirical investigation in statistics begins with a claim that can be examined against evidence. A <b>hypothesis</b> is a precise, testable statement about a population parameter — a quantity such as a mean, a proportion, or a standard deviation that describes an entire population rather than a single sample. Because populations are usually too large to measure in full, researchers instead collect a sample and use <b>hypothesis testing</b>, a structured decision-making procedure that weighs sample evidence against a stated claim and produces a defensible conclusion about the population.</p>
+<p>Every hypothesis test begins with two competing statements. The <b>null hypothesis (H₀)</b> is the default position: it asserts that there is no effect, no difference, or no relationship beyond what random chance would produce, and it is treated as true until the evidence collected is strong enough to overturn it. The <b>alternative hypothesis (H₁)</b> is the claim the researcher actually suspects — that a real difference, effect, or relationship exists. These two statements are written before any data are examined, which keeps the eventual decision objective rather than shaped after the fact to fit the result.</p>
+<p>The wording of a research problem determines the mathematical form of H₁. A claim of "no change" or "is different from" produces a two-tailed hypothesis, written with the ≠ symbol, because the deviation could occur in either direction. A claim that a value has specifically increased or is "greater than" a benchmark produces a one-tailed hypothesis using the > symbol, while a claim of decrease or "less than" uses the < symbol. Learning to translate everyday research language into the correct symbolic hypothesis is the foundational skill of this module, since every later step of a hypothesis test depends on having stated H₀ and H₁ correctly at the outset.</p>
+<p>Because a decision is being made from incomplete information, two kinds of mistakes are possible, and statisticians give each a formal name. A <b>Type I error</b> occurs when a true null hypothesis is incorrectly rejected — concluding an effect exists when it does not. A <b>Type II error</b> occurs when a false null hypothesis is incorrectly retained — failing to detect an effect that is genuinely present. Neither error can be eliminated entirely; every hypothesis test involves a trade-off between the risk of one and the risk of the other, and recognizing which error carries the more serious real-world consequence is itself an important part of designing a sound study.</p>`,
+2:`<p>Once H₀ and H₁ have been stated, a researcher must decide in advance how much risk of error is acceptable. This tolerance is called the <b>level of significance</b>, denoted α (alpha), and it represents the maximum probability the researcher is willing to accept of committing a Type I error — that is, of rejecting a true null hypothesis. Common choices are α = 0.10, α = 0.05, and α = 0.01, corresponding to a 10%, 5%, or 1% tolerance for a false-positive conclusion. The choice of α is made before the data are analyzed, precisely so that the standard of evidence cannot be adjusted after the fact to produce a more convenient result.</p>
+<p>The value of α also defines the <b>rejection region</b>: the range of test-statistic values considered too extreme to be explained by chance alone under H₀. Where this region falls on the sampling distribution depends on the form of H₁. A right-tailed alternative (>) places the entire rejection region in the upper tail; a left-tailed alternative (<) places it in the lower tail; and a two-tailed alternative (≠) splits it evenly between both tails, with α/2 in each. At α = 0.05 two-tailed, for instance, the critical Z-values are ±1.96, meaning any computed statistic beyond that boundary falls into the 5% of outcomes considered too unusual to attribute to random variation.</p>
+<p>In practice, a decision can be reached in two equivalent ways. The <b>critical-value method</b> compares the computed test statistic directly against the boundary values that mark the rejection region. The <b>p-value method</b> instead computes the exact probability of observing a result at least as extreme as the sample data, assuming H₀ is true, and compares that probability directly to α: whenever p ≤ α, the result is declared statistically significant and H₀ is rejected. Both methods will always agree on the final decision, because they are simply two ways of asking the same underlying question.</p>
+<p>A final point of precision matters for how conclusions are worded. Failing to reject H₀ is not the same as proving H₀ true — it only means the sample did not provide strong enough evidence to overturn the default assumption. For this reason, careful statistical writing always says "fail to reject H₀," never "accept H₀," a distinction that reflects the fact that absence of evidence is not evidence of absence.</p>`,
+3:`<p>With the hypotheses and the level of significance established, the researcher is ready to carry out the mechanics of a hypothesis test. The general procedure follows a fixed sequence: state H₀ and H₁, choose α and identify the rejection region, compute a test statistic from the sample data, compare that statistic against the rejection region or its associated p-value, and finally write a conclusion that answers the original research question in plain language. Each step depends on the one before it, which is why hypothesis testing is best understood as a disciplined sequence rather than a single calculation.</p>
+<p>When the population standard deviation σ is known, or when the sample size is large, the appropriate test statistic is the <b>Z-statistic</b>, computed as Z = (x̄ − μ₀) / (σ/√n), where x̄ is the sample mean, μ₀ is the value claimed under H₀, and σ/√n is the standard error of the mean — the typical amount by which a sample mean is expected to differ from the true population mean due to random sampling variation. When σ is unknown and must be estimated from the sample using s, a <b>t-statistic</b> is used instead, following the same logic but drawing critical values from the t-distribution to account for the extra uncertainty introduced by estimating σ.</p>
+<p>The standard error plays a central role in how sensitive a test is to a real difference. Because SE = σ/√n, increasing the sample size n shrinks the standard error, which in turn inflates the magnitude of Z for the same observed difference between x̄ and μ₀. This is why studies with larger samples are able to detect smaller true effects: the same raw difference becomes statistically more significant as sampling variability is reduced.</p>
+<p>The final step — writing the conclusion — is often the most neglected but most important part of the process. A complete conclusion states the statistical decision (reject or fail to reject H₀) and immediately translates that decision into the language of the original problem, so that a reader unfamiliar with the mechanics of the test can still understand what was learned about the population. A bare statement such as "reject H₀" is technically correct but practically incomplete without this translation back into context.</p>`,
+4:`<p>Many research questions ask not whether a population parameter equals some value, but whether two variables move together in a predictable way. <b>Correlation</b> describes the direction and strength of a linear relationship between two quantitative variables, and the most widely used measure of correlation is the <b>Pearson correlation coefficient</b>, denoted r. The value of r always falls between −1 and +1, inclusive, with the sign indicating direction and the magnitude indicating strength.</p>
+<p>A positive value of r means the two variables tend to increase together: as one rises, the other tends to rise as well. A negative value of r means the variables move in opposite directions: as one rises, the other tends to fall. The closer |r| is to 1, the more tightly the paired observations cluster around a straight line, indicating a stronger linear relationship; values of r close to 0 indicate little or no linear association, though a strong non-linear pattern could still be present even when r is small, since Pearson's r specifically measures linear association and can understate a relationship that follows a curve.</p>
+<p>Perhaps the single most important caution in this module is that <b>correlation does not imply causation</b>. Two variables can be strongly correlated because one causes the other, because both are influenced by a third, unmeasured variable — a <b>confounding variable</b> — or simply by coincidence. A classic example is the correlation between ice cream sales and drowning incidents, both of which rise in summer: the true driver is warm weather, not a causal link between the two. Recognizing this distinction is essential for interpreting statistical findings responsibly, both in academic research and in everyday claims encountered in the media.</p>
+<p>Visually, correlation is often first assessed using a scatter plot, in which each point represents one paired observation. A tight, ascending cluster of points suggests a strong positive r; a tight, descending cluster suggests a strong negative r; and a diffuse cloud with no discernible pattern suggests r near 0. This visual step is a valuable first check before computing r numerically, since it can reveal non-linear patterns, outliers, or subgroups that a single correlation coefficient would not fully capture.</p>`,
+5:`<p>Once a linear relationship between two variables has been established, the next natural question is how to use that relationship to make predictions. A <b>scatter plot</b> displays each paired observation (X, Y) as a point on a coordinate plane, with the <b>explanatory variable</b> — the one used to make a prediction — placed on the horizontal axis, and the <b>response variable</b> — the one being predicted — placed on the vertical axis. When the scattered points suggest a linear trend, a single straight line, the <b>line of best fit</b>, can be drawn or computed to summarize that trend as closely as possible.</p>
+<p>The line of best fit is expressed in the familiar slope-intercept form, Y = mX + b. The <b>slope, m,</b> describes the predicted change in Y for each one-unit increase in X: a positive slope indicates Y is expected to rise as X rises, while a negative slope indicates Y is expected to fall as X rises. The <b>intercept, b,</b> gives the predicted value of Y when X equals zero, anchoring the line's vertical position. Together, m and b allow a predicted Y to be calculated for any given value of X simply by substitution.</p>
+<p>Using this line for prediction, however, carries an important limitation. <b>Interpolation</b> — predicting Y for an X-value that falls within the range of the original data — is generally reliable, because the fitted line was built from evidence spanning that range. <b>Extrapolation</b> — predicting Y for an X-value far outside that range — is considerably riskier, because there is no evidence that the same linear trend continues beyond the observed data; the true relationship could level off, reverse, or become non-linear in ways the fitted line cannot anticipate.</p>
+<p>Finally, a line of best fit is only a meaningful summary when the underlying relationship is genuinely linear. Before relying on a fitted line for prediction, it is good practice to examine the scatter plot for a clear straight-line trend; a curved or otherwise non-linear pattern signals that a linear model may misrepresent the true relationship, even if a line can still technically be computed.</p>`,
+};
 const OBJ={
 1:['Define hypothesis testing and a hypothesis about a population parameter.','State the null (H₀) and alternative (H₁) hypotheses from a research problem.','Distinguish Type I (α) and Type II (β) errors.'],
 2:['Explain the level of significance (α) and its common values.','Locate rejection regions for two-tailed, right-tailed and left-tailed tests.','Use critical values or p-values to decide about H₀.'],
@@ -1973,9 +1995,9 @@ if(/DEFINITIONS|Decision Matrix|Lesson Overview/.test(t)){B.lesson.push(k);retur
 B.act.push(k)});
 if(!B.guide){appendInteractiveGuide(n);B.guide=c.querySelector('.guideBlock')}
 const el=(h)=>{const d=document.createElement('div');d.innerHTML=h;return d};
-const out=document.createDocumentFragment(),add=(t,inner,nodes)=>{const s=el(part(t,inner)).firstChild;(nodes||[]).forEach(x=>s.appendChild(x));out.appendChild(s);return s};
+const pages=[],add=(t,inner,nodes)=>{const s=el(part(t,inner)).firstChild;(nodes||[]).forEach(x=>s.appendChild(x));pages.push(s);return s};
 add('PART I. LEARNING OBJECTIVES',`<ul style="padding-left:20px">${OBJ[n].map(o=>`<li style="margin:6px 0;font-size:13px">${o}</li>`).join('')}</ul>`);
-const p2=add('PART II. CONTENT',`<h3 class="sub2">1. Discussion</h3>${B.disc}<h3 class="sub2">2. Lesson</h3><div id="ls${n}"></div><h3 class="sub2">3. Video Lesson</h3><div id="vd${n}"></div><h3 class="sub2">4. Examples</h3><div id="ex${n}"></div>`);
+const p2=add('PART II. CONTENT',`<h3 class="sub2">1. Discussion</h3>${DISC[n]||B.disc}<h3 class="sub2">2. Lesson</h3><div id="ls${n}"></div><h3 class="sub2">3. Video Lesson</h3><div id="vd${n}"></div><h3 class="sub2">4. Examples</h3><div id="ex${n}"></div>`);
 B.lesson.forEach(x=>p2.querySelector('#ls'+n).appendChild(x));
 if(B.video)p2.querySelector('#vd'+n).appendChild(B.video);else if(VID[n])p2.querySelector('#vd'+n).innerHTML=`<div class="easc-video-wrap"><div class="easc-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${VID[n]}?rel=0" title="Module ${n} video lesson" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><p><a target="_blank" rel="noopener" style="color:var(--cyan)" href="https://youtu.be/${VID[n]}">Open on YouTube</a></p></div>`;
 else p2.querySelector('#vd'+n).innerHTML=`<div class="easc-video-wrap"><div class="easc-video-frame" id="vf${n}"></div><p style="margin-top:8px">Paste a YouTube link for this lesson: <input id="vu${n}" style="width:60%;background:var(--bg2);color:var(--white);border:1px solid var(--line);border-radius:6px;padding:4px"> <button class="btn secondary" onclick="EASC_video(${n})">Load video</button></p><p><a target="_blank" rel="noopener" style="color:var(--cyan)" href="https://www.youtube.com/results?search_query=${encodeURIComponent(T[n]+' statistics lesson')}">Search YouTube for “${T[n]}”</a></p></div>`;
@@ -1983,14 +2005,39 @@ const ex=p2.querySelector('#ex'+n);(EX[n]||[]).forEach(e=>ex.insertAdjacentHTML(
 const p3=add('PART III. ACTIVITY',`<h3 class="sub2">1. Interactive activity / graphs</h3><div id="ac${n}"></div><h3 class="sub2">2. Guide questions</h3><div id="gd${n}"></div><h3 class="sub2">3. Comprehension check</h3><div id="cp${n}"></div><h3 class="sub2">4. Detailed feedback</h3><p>Answer the guide questions and comprehension check, then review your answers.</p><button class="btn secondary" onclick="EASC_feedback(${n})">Show detailed feedback</button><div id="easc_fb_${n}"></div>`);
 B.act.forEach(x=>p3.querySelector('#ac'+n).appendChild(x));if(B.guide)p3.querySelector('#gd'+n).appendChild(B.guide);if(B.comp)p3.querySelector('#cp'+n).appendChild(B.comp);
 REG['wh'+n]={items:WH[n],done:pct=>{state.progress[n].score=pct;state.progress[n].completed=pct>=70;try{updateUIProgress()}catch(e){}}};
-add('PART IV. ASSESSMENT',`<p>Answer all 10 questions. Detailed feedback appears after you submit.</p>${qz('wh'+n,WH[n])}`);
-if(B.done){const w=document.createElement('div');w.appendChild(B.done);out.appendChild(w)}
-c.innerHTML='';c.appendChild(out);renderAllMath(c);c.style.visibility='visible';
+const p4=add('PART IV. ASSESSMENT',`<p>Answer all 10 questions. Detailed feedback appears after you submit.</p>${qz('wh'+n,WH[n])}`);
+if(B.done)p4.appendChild(B.done);
+const wrap=document.createElement('div');wrap.className='partPager';
+const track=document.createElement('div');track.id='pagerTrack'+n;
+pages.forEach(p=>track.appendChild(p));
+wrap.appendChild(track);
+const stepper=document.createElement('div');stepper.className='pagerSteps';stepper.id='pagerSteps'+n;
+wrap.appendChild(stepper);
+const controls=document.createElement('div');controls.className='pagerControls';
+controls.innerHTML=`<button class="btn secondary" id="pagerBack${n}" onclick="EASC_gotoPart(${n},PARTIDX[${n}]-1)">← Back</button><span class="pagerLabel" id="pagerLabel${n}"></span><button class="btn" id="pagerNext${n}" onclick="EASC_gotoPart(${n},PARTIDX[${n}]+1)">Next →</button>`;
+wrap.appendChild(controls);
+c.innerHTML='';c.appendChild(wrap);
+window.PARTIDX=window.PARTIDX||{};PARTIDX[n]=0;
+window.EASC_gotoPart=function(mn,idx){
+  const tr=document.getElementById('pagerTrack'+mn);if(!tr)return;
+  const kids=[...tr.children];idx=Math.max(0,Math.min(kids.length-1,idx));PARTIDX[mn]=idx;
+  kids.forEach((k,i)=>k.style.display=i===idx?'block':'none');
+  const back=document.getElementById('pagerBack'+mn),next=document.getElementById('pagerNext'+mn),lab=document.getElementById('pagerLabel'+mn);
+  if(back)back.disabled=idx===0;if(back)back.style.opacity=idx===0?'.4':'1';
+  if(next)next.textContent=idx===kids.length-1?'Finish ✓':'Next →';
+  if(lab)lab.textContent=`Part ${idx+1} of ${kids.length}`;
+  const st=document.getElementById('pagerSteps'+mn);
+  if(st)st.innerHTML=kids.map((k,i)=>`<span class="pagerDot ${i===idx?'on':''} ${i<idx?'done':''}" onclick="EASC_gotoPart(${mn},${i})"></span>`).join('');
+  const mc=document.getElementById('moduleContainer');if(mc)mc.scrollIntoView({block:'start'});window.scrollTo({top:0,behavior:'instant'in window?'instant':'auto'});
+  renderAllMath(tr.children[idx]);
+};
+EASC_gotoPart(n,0);
+renderAllMath(c);c.style.visibility='visible';
 if(n===2&&window.drawM2Curve)drawM2Curve();if(n===4&&window.drawM4Scatter)drawM4Scatter();if(n===5&&window.drawM5Regression)drawM5Regression()}
 window.EASC_video=function(n){const m=(document.getElementById('vu'+n).value||'').match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);if(!m){alert('Please paste a valid YouTube link.');return}document.getElementById('vf'+n).innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${m[1]}?rel=0" allowfullscreen loading="lazy"></iframe>`};
 const prev=window.openModule;
 window.openModule=function(n){
-if(n===6){state.currentModule=6;document.getElementById('moduleKicker').textContent='MODULE 06';document.getElementById('moduleTitle').textContent='ASSESSMENT';const c=document.getElementById('moduleContainer');document.querySelector('#moduleView .sub').textContent='30-item multiple-choice assessment';REG.q6={items:Q6,done:pct=>{state.progress[6].completed=pct>=80;state.progress[6].score=pct;try{updateUIProgress()}catch(e){}document.getElementById('q6_res').innerHTML+=pct>=80?' — PASSED':' — Below 80%. Review the modules and try again.'}};c.innerHTML=`<section class="easc-part"><h2>ASSESSMENT — 30 MULTIPLE-CHOICE ITEMS</h2><p>Choose the best answer for each item. Detailed feedback appears after you submit.</p>${qz('q6',Q6)}</section>`;showView('moduleView',null);return}
+if(n===6){state.currentModule=6;document.getElementById('moduleKicker').textContent='FINAL ASSESSMENT';document.getElementById('moduleTitle').textContent='Assessment';const c=document.getElementById('moduleContainer');document.querySelector('#moduleView .sub').textContent='30-item multiple-choice assessment';REG.q6={items:Q6,done:pct=>{state.progress[6].completed=pct>=80;state.progress[6].score=pct;try{updateUIProgress()}catch(e){}document.getElementById('q6_res').innerHTML+=pct>=80?' — PASSED':' — Below 80%. Review the modules and try again.'}};c.innerHTML=`<section class="easc-part"><h2>ASSESSMENT — 30 MULTIPLE-CHOICE ITEMS</h2><p>Choose the best answer for each item. Detailed feedback appears after you submit.</p>${qz('q6',Q6)}</section>`;showView('moduleView',null);return}
 document.querySelector('#moduleView .sub').textContent='Objectives → Content → Activity → Assessment';
 prev.call(this,n);setTimeout(()=>reorg(n,document.getElementById('moduleContainer')),200)};
 })();
@@ -2028,16 +2075,16 @@ html{background:#020a1c}body{background:transparent!important}
 (function(){
 const KEY='EASC_progress_v4';
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)Object.keys(s).forEach(k=>{if(state.progress[k])Object.assign(state.progress[k],s[k])});const nm=localStorage.getItem('EASC_cert_name');if(nm)state.userName=nm}catch(e){}
-const done=()=>[1,2,3,4,5,6].filter(i=>state.progress[i]&&state.progress[i].completed).length;
-const NAMES=['Null & Alternative Hypotheses','Level of Significance','Hypothesis Testing','Correlation Analysis','Scatter Plot & Regression','Assessment'];
+const done=()=>[1,2,3,4,5].filter(i=>state.progress[i]&&state.progress[i].completed).length;
+const NAMES=['Null & Alternative Hypotheses','Level of Significance','Hypothesis Testing','Correlation Analysis','Scatter Plot & Regression'];
 function bar(pct){return `<div class="pgbar"><i style="width:${pct}%"></i></div>`}
 function refresh(){
 try{localStorage.setItem(KEY,JSON.stringify(state.progress))}catch(e){}
-const pct=Math.round(done()/6*100);
+const pct=Math.round(done()/5*100);
 const set=(id,h)=>{const e=document.getElementById(id);if(e)e.innerHTML=h};
-set('pgTop',`<div class="progressRow"><span>Overall progress</span><b>${pct}%</b></div>${bar(pct)}<div class="progressRow" style="margin-top:6px"><span>${done()} of 6 modules completed</span></div>`);
-
-set('pgList',NAMES.map((n,i)=>{const p=state.progress[i+1];return `<div class="pgrow"><span>Module ${String(i+1).padStart(2,'0')} — ${n}</span><span style="color:${p.completed?'var(--good)':'var(--muted)'}">${p.completed?'✓ Completed':'In progress'}${p.score?` · ${p.score}%`:''}</span></div>`}).join(''));
+set('pgTop',`<div class="progressRow"><span>Overall progress</span><b>${pct}%</b></div>${bar(pct)}<div class="progressRow" style="margin-top:6px"><span>${done()} of 5 modules completed · Assessment ${state.progress[6].completed?('passed at '+state.progress[6].score+'%'):(state.progress[6].score?('attempted, '+state.progress[6].score+'%'):'not yet attempted')}</span></div>`);
+set('pgSide',`<div style="margin-top:8px">${bar(pct)}<span>${pct}% complete</span></div>`);
+set('pgList',NAMES.map((n,i)=>{const p=state.progress[i+1];return `<div class="pgrow"><span>Module ${String(i+1).padStart(2,'0')} — ${n}</span><span style="color:${p.completed?'var(--good)':'var(--muted)'}">${p.completed?'✓ Completed':'In progress'}${p.score?` · ${p.score}%`:''}</span></div>`}).join('')+`<div class="pgrow"><span>Final Assessment — 30 items</span><span style="color:${state.progress[6].completed?'var(--good)':'var(--muted)'}">${state.progress[6].completed?'✓ Passed':(state.progress[6].score?'Attempted':'Not started')}${state.progress[6].score?` · ${state.progress[6].score}%`:''}</span></div>`);
 try{renderBadges()}catch(e){}
 const ok=state.progress[6].score>=80;const lock=document.getElementById('certLock'),box=document.getElementById('certBox');
 if(lock&&box){lock.style.display=ok?'none':'block';box.style.display=ok?'block':'none';document.getElementById('certStudentName').textContent=state.userName;document.getElementById('certScore').textContent=state.progress[6].score+'%';document.getElementById('certDate').textContent=new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'})}
@@ -2058,7 +2105,7 @@ main.insertAdjacentHTML('beforeend',`<section id="badges" class="page"><div clas
 <p style="margin-top:14px"><button class="btn" onclick="EASC_print()">Print / Save as PDF</button></p></div></section>`);
 document.querySelector('#dashboard .top').insertAdjacentHTML('beforeend','<div class="progressBox" id="pgTop"></div>');
 document.querySelector('#dashboard').insertAdjacentHTML('beforeend','<div class="section"><h3>Module Progress</h3><div class="cyber-card" style="padding:18px;border-radius:16px" id="pgList"></div></div>');
-
+document.querySelector('.profile').insertAdjacentHTML('beforeend','<div id="pgSide"></div>');
 /* active highlight for module + lab buttons */
 window.showView=function(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');else if(id==='moduleView'){const m=document.querySelectorAll('#moduleNav button')[state.currentModule-1];if(m)m.classList.add('active')}window.scrollTo(0,0);refresh()};
 document.querySelectorAll('.nav button').forEach(b=>{if(b.getAttribute('onclick')&&b.getAttribute('onclick').indexOf("showView('stats'")===0)b.setAttribute('onclick',"showView('stats',this)")});
@@ -2120,7 +2167,7 @@ body{-webkit-text-size-adjust:100%}
 .sidebar .logo{padding:0 2px 12px}
 .sidebar .logo span{font-size:13px}
 .sidebar .logo small{font-size:9px}
-.profile{padding:10px!important;font-size:11px}.profile #pgSide{display:none!important}
+.profile{padding:10px!important;font-size:11px}
 .nav{display:flex;flex-direction:column;gap:5px;width:100%;flex:1 1 auto}
 .nav button{width:100%;flex:none;padding:9px 8px;font-size:11.5px;text-align:left;white-space:normal;line-height:1.3;word-break:break-word}
 .nav button small{font-size:9px;display:block}
@@ -2162,31 +2209,17 @@ input,select,textarea{font-size:15px!important}
   .hero{grid-template-columns:1.3fr .7fr!important}
   .splashCard{grid-template-columns:1fr 1fr!important}
 }
-
-/* FIX: keep the profile card out of the module navigation area.
-   The module list gets its own vertical scroll instead of being covered. */
-.sidebar{
-  overflow:hidden!important;
-}
-.sidebar .nav{
-  flex:1 1 auto!important;
-  min-height:0!important;
-  overflow-y:auto!important;
-  overflow-x:hidden!important;
-  padding-right:3px;
-  scrollbar-width:thin;
-}
-.sidebar .profile{
-  position:static!important;
-  left:auto!important;
-  right:auto!important;
-  bottom:auto!important;
-  flex:0 0 auto!important;
-  width:100%!important;
-  margin:12px 0 0!important;
-  z-index:auto!important;
-}
-
+/* ---- Part pager (Next/Back paging per module) ---- */
+.partPager{display:flex;flex-direction:column;gap:0}
+.pagerSteps{display:flex;justify-content:center;gap:8px;margin:6px 0 14px}
+.pagerDot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18);border:1px solid var(--easc-border);cursor:pointer;transition:.2s}
+.pagerDot.on{background:linear-gradient(100deg,var(--p-plasma1),var(--p-plasma2));box-shadow:0 0 10px rgba(0,229,255,.6);transform:scale(1.25)}
+.pagerDot.done{background:var(--good);border-color:var(--good)}
+.pagerControls{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;padding-top:14px;border-top:1px solid var(--easc-border)}
+.pagerControls .btn,.pagerControls .btn.secondary{flex:0 0 auto;padding:11px 18px;font-size:13.5px}
+.pagerControls .btn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none!important}
+.pagerLabel{font-size:12px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+@media(max-width:480px){.pagerControls .btn,.pagerControls .btn.secondary{padding:10px 12px;font-size:12.5px}.pagerLabel{font-size:10.5px}}
 </style>
 
 </body></html>
